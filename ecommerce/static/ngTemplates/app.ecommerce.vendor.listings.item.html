@@ -1,0 +1,39 @@
+<div class="col-md-6" ng-controller="businessManagement.ecommerce.listings.item" style="margin-bottom:20px;">
+
+  <div class="container-fluid card" style="padding-bottom:10px;">
+    <div class="row" style="border-bottom: 1px solid #dedede;">
+      <div class="col-md-2" style="padding:0px;">
+        <img style="width: 100% " class="img" ng-src="{{data.files[0].attachment}}" >
+      </div>
+      <div class="col-md-5" style="position:relative;display:block;">
+        <div class="row" style="padding-left:10px;">
+          <!-- <span class="text-muted" style="position:absolute; top:10px;right:10px;">
+            <i class="fa fa-hashtag"></i> <span style="font-size:20px;">{{data.pk}}</span>
+          </span><br> -->
+          <h3>{{data.product.name}}</h3>
+        </div>
+      </div>
+      <div class="col-md-5" style="position:relative;display:block;">
+        <div class="row" style="padding-left:10px;">
+          <h4><strong>SKU : </strong>{{data.product.serialNo}}</h4>
+          <h4><strong>Price : </strong>{{data.product.price}}</h4>
+          <h4><strong>Discount : </strong>{{data.product.discount}}%</h4>
+          <h4><strong>Unit : </strong>{{data.product.unit}}</h4>
+        </div>
+
+      </div>
+    </div>
+    <div class="row container-fluid" style="padding-top:10px;">
+
+      <div class = "col-md-12" style="padding-right:0px;">
+        <span class="pull-left" style="cursor:pointer;"  mwl-confirm title="Approve" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="rowActionClicked('delete')" confirm-button-type="default" cancel-button-type="default" >
+          <i class="fa fa-trash fa-lg" style="margin-top:20px;"></i> &nbsp;Delete
+        </span>
+        <span class="pull-right" style="cursor:pointer;" ng-click = "rowActionClicked('edit')">
+          <i class="fa fa-pencil fa-lg" style="margin-top:20px;"></i> &nbsp;Edit
+        </span>
+
+      </div>
+    </div>
+  </div>
+</div>

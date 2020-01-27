@@ -1,0 +1,43 @@
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-md-12  hidden-xs hidden-sm  anim-in-out anim-zoom-out" style="padding-right:0px;padding-left:0px;margin-bottom:20px;border-bottom: solid 4px #eeeeee;overflow:hidden;height:400px;background-size: cover;">
+      <img ng-if="genericImage.blogPageImage" src={{genericImage.blogPageImage}} style="height: 100%;width:100%;" class="img" alt="Blog Image">
+      <img ng-if="!genericImage.blogPageImage" src="/static/images/blog_banner.jpg" style="height: 100%;width:100%;" class="img" alt="Blog Image">
+    </div>
+    <div class="col-xs-12 col-sm-12 hidden-md hidden-lg  anim-in-out anim-zoom-out" style="padding-left:0px;padding-right:0px;margin-bottom:20px">
+      <!-- <img style="width: 100%;height:45vh;" class="img" src="/static/images/blog_banner.jpg"> -->
+      <img ng-if="genericImage.blogPageImage" src={{genericImage.blogPageImage}} style="width: 100%;" class="img" alt="Blog Image">
+      <img ng-if="!genericImage.blogPageImage" src="/static/images/blog_banner.jpg" style="width: 100%;" class="img" alt="Blog Image">
+    </div>
+  </div>
+
+  <div class="row" style="margin:0px">
+    <div class="col-md-12 bg-white" style="padding-left:20px;padding-right:20px;">
+      <div class="row" style="padding:0px 10px;">
+        <div class="row text-center" ng-if="blogData.length==0">
+          <h3>No blog posts , Please visit again.</h3>
+        </div>
+        <div class="row" ng-repeat="blog in blogData" ng-if="blogData.length>0">
+          <div class="container-fluid" style="{{$index%2==0?'':'background:#eeeeee'}};margin-bottom:20px;">
+            <div class="col-md-12 text-left" style="margin-left: 10px;margin-right: 10px">
+              <h2 style="font-size:22px;cursor:pointer" class="text-primary"> <span ng-click="$state.go('pages' , {title : blog.shortUrl.split(' ').join('-').toLowerCase()})">{{blog.title}} </span></h2>By <span ng-repeat="u in blog.users">{{u | getName}}</span><span style="margin-left: 5px;"> | </span><span style="margin-left: 5px;">{{blog.created | date : 'MMM. dd, yyyy, HH:MM a'}}</span>
+            </div>
+            <div class="col-md-12" style="margin-left:30px;padding-right: 40px;margin-top:15px;">
+              <span ng-bind-html="blog.header"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <ul class="pager">
+        <li><span ng-click="change('prev')" ng-show="showPrev" style="cursor:pointer;"><i class="fa fa-chevron-left"></i> Previous</span></li>
+        <li><span ng-click="change('nxt')" ng-show="showNext" style="cursor:pointer;">Next <i class="fa fa-chevron-right"></i></span></li>
+      </ul>
+    </div>
+  </div>
+</div>

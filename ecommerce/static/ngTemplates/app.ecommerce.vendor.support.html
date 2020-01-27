@@ -1,0 +1,34 @@
+<breadcrumb></breadcrumb>
+<div class="container-fluid">
+
+  <uib-tabset>
+    <uib-tab>
+      <uib-tab-heading>
+        Request
+      </uib-tab-heading>
+      <generic-Table data="data.tableCreatedData" config-Obj="{{requestconfig}}" callback-Fn="tableCreatedAction"></generic-Table>
+    </uib-tab>
+    <uib-tab>
+      <uib-tab-heading>
+        Resolved
+      </uib-tab-heading>
+      <generic-Table data="data.tableResolvedData" config-Obj="{{resolvedConfig}}" callback-Fn="tableResolvedAction"></generic-Table>
+    </uib-tab>
+
+    <uib-tab ng-repeat="tab in tabs" active="tab.active" disable="tab.disabled">
+      <uib-tab-heading>
+        {{tab.title}}
+        <i ng-if="tab.cancel" class="fa fa-close" ng-click="closeTab($index);"></i>
+      </uib-tab-heading>
+      <div ng-if="tab.app == 'requestInfo'">
+          <div ng-include="'/static/ngTemplates/app.ecommerce.vendor.support.request.explore.html'"></div>
+      </div>
+      <!-- <div ng-if="tab.app == 'editproduct'">
+          <div ng-include="'/static/ngTemplates/app.ecommerce.vendor.modal.html'"></div>
+      </div> -->
+      <div ng-if="tab.app == 'resolvedInfo'">
+          <div ng-include="'/static/ngTemplates/app.ecommerce.vendor.support.resolved.explore.html'"></div>
+      </div>
+    </uib-tab>
+  </uib-tabset>
+</div>

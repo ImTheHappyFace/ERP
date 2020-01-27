@@ -1,0 +1,45 @@
+
+    <!-- <div class="col-md-4">
+      <h3 ng-if="configureForm.pk">Edit Product Meta : {{configureForm.description}}</h3>
+      <h3 ng-if="!configureForm.pk">Create Product Meta</h3>
+      <div class="form-group">
+        <label>Description</label>
+        <input type="text" class="form-control" ng-model="configureForm.description">
+      </div>
+      <div class="form-group">
+        <label>Tax Type</label><br>
+        <input type="radio" name="taxType{{configureForm.pk}}" ng-model="configureForm.typ" ng-value="'HSN'">
+        <span>HSN</span>
+        <input type="radio" name="taxType{{configureForm.pk}}" ng-model="configureForm.typ" ng-value="'SAC'">
+        <span>SAC</span>
+      </div>
+      <div class="form-group">
+        <label>Tax Code</label>
+        <input type="num" class="form-control" ng-model="configureForm.code">
+      </div>
+      <div class="form-group">
+        <label>Tax Rate</label>
+        <input type="num" class="form-control" ng-model="configureForm.taxRate">
+      </div>
+      <div class="btn-group btn-group-sm">
+        <button type="button" class="btn btn-success" ng-click="saveproductMeta()">Save</button>
+        <button type="button" class="btn btn-danger" ng-click="resetForm()">Reset</button>
+      </div>
+    </div> -->
+
+
+    <div class="container-fluid">
+  <uib-tabset>
+
+    <uib-tab active="searchTabActive">
+      <uib-tab-heading>
+        Browse
+        <i class="fa fa-list-ul"></i>
+      </uib-tab-heading>
+      <div class="container-fluid">
+        <generic-Table data="data.productMetatableData" config-Obj="{{configProductMeta}}" callback-Fn="tableActionProductMeta"></generic-Table>
+      </div>
+    </uib-tab>
+
+  </uib-tabset>
+</div>

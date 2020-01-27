@@ -1,0 +1,22 @@
+<div class="col-md-6">
+  <div class="cards" style="border:0.5px solid green;box-shadow:0 2px 8px rgba(26,24,20,0.2);margin-bottom: 25px;height:15vh">
+    <div class="row" style="padding: 12px;min-height:100px;" ng-mouseenter="hover = true;" ng-mouseleave="hover = false;">
+      <div class="col-md-9">
+        <h3 >{{data.name}}</h3>
+        <span><strong>Email : </strong>{{data.email}}</span><br>
+        <span><strong>Mobile : </strong>{{data.mobile}}</span><br>
+        <span><strong>Company Name : </strong> {{data.company}}</span><br>
+      </div>
+      <div class="col-md-2 text-right" ng-if="hover" style="padding-top:20px">
+        <div class="row">
+          <span><i class="fa fa-info" style="color: green;font-size: 20px;cursor:pointer;" ng-click="rowActionClicked('info')"></i>
+          </span>
+        </div>
+        <div class="row" style="margin-top:10px;">
+          <span><i class="fa fa-pencil" style="color: green;font-size: 20px;cursor:pointer;" ng-click="rowActionClicked('edit')"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

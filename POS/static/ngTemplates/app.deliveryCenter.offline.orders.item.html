@@ -1,0 +1,34 @@
+<div class="col-md-6">
+  <div class="cards" style="border:0.5px solid #4192cd;box-shadow:0 2px 8px rgba(26,24,20,0.2);margin-bottom: 25px;padding-bottom:10px;height:15vh;background-color:{{data.status=='Completed'?'white':'#a3d292'}}" ng-controller="businessManagement.deliveryCenter.offline.item">
+    <div class="row" ng-mouseenter="hover = true;" ng-mouseleave="hover = false;">
+      <div class="col-md-2 text-center" style="padding-top: 20px;">
+        <span style="font-size: 30px;">{{data.pk}}</span>
+      </div>
+      <div class="col-md-8" style="margin-top:10px;">
+        <div class="row col-md-11">
+          <span>{{data.customer.name}}</span>
+        </div>
+        <div class="row" style="font-size: 12px;">
+          <div class="col-md-12">
+            <!-- <span style="font-size: 18px;">{{data.customer.name}}</span><br> -->
+            <span><strong>Due Date : </strong>{{data.duedate | date:'dd MMM yyyy'}}</span><br>
+            <span><strong>Recieved : </strong>{{data.amountRecieved}}</span><br>
+            <span><strong>Payment Mode : </strong>{{data.modeOfPayment}}</span><br>
+            <span><strong>Total Amount : </strong>{{data.grandTotal}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2 text-center" ng-if="hover" style="padding-top:20px;">
+        <div class="row">
+          <span><i class="fa fa-info" style="color: rgb(24, 108, 219);font-size: 20px;cursor:pointer;" ng-click="rowActionClicked('info')"></i>
+          </span>
+        </div>
+        <div class="row" style="margin-top:10px;">
+          <span>
+            <i class="fa fa-pencil" style="color: rgb(24, 108, 219);font-size: 20px;cursor:pointer;" ng-click="rowActionClicked('edit')"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

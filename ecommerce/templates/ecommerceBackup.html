@@ -1,0 +1,545 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html ng-app="app" ng-controller="ecommerce.main" id="main" >
+  <head>
+    <meta charset="utf-8">
+    <title>{{data.seoDetails.title}}</title>
+
+    <base href="/">
+    <meta name="theme-color" content="#d47921">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{data.seoDetails.description}}"/>
+    <link rel="canonical" href="{{data.seoDetails.url}}" />
+    <link rel="publisher" href="{{data.seoDetails.publisher}}"/>
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{data.seoDetails.title}}" />
+    <meta property="og:description" content="{{data.seoDetails.description}}" />
+    <meta property="og:url" content="{{data.seoDetails.url}}" />
+    <meta property="og:site_name" content="{{data.seoDetails.site_name}}" />
+    <meta property="og:updated_time" content="2018-08-02T07:17:53+00:00" />
+    <meta property="og:image" content="https://{{ request.get_host }}{{data.seoDetails.image}}" />
+    <meta property="og:image:secure_url" content="https://{{ request.get_host }}{{data.seoDetails.image}}" />
+    <meta property="og:image:width" content="{{data.seoDetails.width}}" />
+    <meta property="og:image:height" content="{{data.seoDetails.height}}" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:description" content="{{data.seoDetails.description}}" />
+    <meta name="twitter:title" content="{{data.seoDetails.title}}" />
+    <meta name="twitter:site" content="{{data.seoDetails.site_name}}" />
+    <meta name="twitter:image" content="https://{{ request.get_host }}{{data.seoDetails.image}}" />
+    <meta name="twitter:creator" content="{{data.seoDetails.twitter_creator}}" />
+    <meta property="article:author" content="{{data.seoDetails.author}}" />
+
+    {% if useCDN %}
+      <link rel="stylesheet" href="https://bootswatch.com/paper/bootstrap.min.css" charset="utf-8">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" charset="utf-8">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/animatecss/3.5.1/animate.min.css" charset="utf-8">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-slider/6.4.0/rzslider.min.css" charset="utf-8">
+    {% else %}
+      <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" charset="utf-8">
+      <link rel="stylesheet" href="{% static 'css/bootstrap.paper.min.css' %}" charset="utf-8">
+      <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" charset="utf-8">
+      <link rel="stylesheet" href="{% static 'css/animate.css' %}" charset="utf-8">
+      <link rel="stylesheet" href="{% static 'css/rzslider.min.css' %}" charset="utf-8">
+    {% endif %}
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,800,300" rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static 'css/datetimepicker.css' %}" charset="utf-8">
+    <link rel="stylesheet" href="{% static 'css/angular-aside.min.css' %}" charset="utf-8">
+    <link rel="stylesheet" href="{% static 'css/ng-tags-input.min.css' %}" charset="utf-8">
+    <link rel="stylesheet" href="{% static 'css/anim-in-out.css' %}" charset="utf-8">
+
+
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}" charset="utf-8">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.css' %}" charset="utf-8">
+
+    <link rel="stylesheet" href="{% static 'css/custom/base.css' %}" charset="utf-8">
+    <link rel="stylesheet" href="{% static 'css/ecommercenext.css' %}" charset="utf-8">
+
+    <style media="screen">
+      :root {--fontStyle: {{data.font}};--themeColor: {{data.color}};}
+    </style>
+
+
+
+  </head>
+  <body   style="background-color:white;" >
+
+    {%  verbatim %}
+    <div class="row text-center" style="margin:5em;" ng-hide="!preloader" class="ng-cloak">
+      <img  style=" height:10vh;" class="img" src="/static/images/ZNeT.gif">
+      <h1  class="text-center text-muted">Loading...</h1>
+    </div>
+    <div ng-show="!preloader" class="ng-cloak">
+    <div flash-message="4000" style="position:fixed;top:70px;right:10px;z-index:9999;min-width:300px;"></div>
+    <!-- <div ng-include="headerUrl"></div> -->
+    <div>
+        <div class="container">
+          <div class="row" style="z-index: 100">
+            <div class="col-lg-3 col-sm-3 col-md-3 " >
+              <div style="height:175px;width:100%">
+                <div  class="vertical_center"><a href="#" style="font-size: 36px;font-weight: 600;color: #0e8ce4;text-decoration: none;">Happypockets</a></div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-6 col-md-6 " >
+              <div style="height:175px;width:100%;">
+                <div class="vertical_center" style="text-align: center;width: 90%;left: 5%;">
+                  <form>
+
+                    <div class="input-group">
+                     <input type="text" class="form-control" placeholder="Search the products..">
+                     <div class="input-group-btn">
+                       <div class="dropdown">
+                         <button class=" btn btn-default dropdown-toggle" data-toggle="dropdown" style="font-size:13px;height:35px">Dropdown <span class="caret"></span></button>
+                         <ul class="dropdown-menu" style="top:20px">
+                           <li><a href="#">Link 1</a></li>
+                           <li><a href="#">Link 1</a></li>
+                           <li><a href="#">Link 1</a></li>
+                         </ul>
+                       </div>
+                     </div>
+                     <div class="input-group-btn">
+                       <button class="btn btn-primary"  ><i class="fa fa-search "   ></i></button>
+                     </div>
+                    </div>
+
+                   </form>
+
+                    <!-- <div class="input-group" style="width:100%">
+                      <span  style="width:40%;display: inline;height:30px">
+                        <input  type="search" class=" inputStyle" style=""  placeholder="Search for products...">
+                      </span>
+                      <span class="dropdown "  style="width:35%;height:30px;padding: 5px 10px 5px 10px;">
+                       <button class="  dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
+                       <span class="caret"></span></button>
+                       <ul class="dropdown-menu">
+                         <li><a href="#">HTML</a></li>
+                         <li><a href="#">CSS</a></li>
+                         <li><a href="#">JavaScript</a></li>
+                       </ul>
+                      </span>
+                      <span class="input-group-addon" style="width:15%;display: inline;height:30px;padding: 5px 10px 5px 10px;">
+                        <button class="btn btn-primary"  ><i class="fa fa-search " style="font-size:22px"  ></i></button>
+                      </span>
+                    </div> -->
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-3 col-md-3 " >
+              <div style="height:175px;width:100%">
+                <div class="vertical_center"></div>
+              </div>
+            </div>
+
+        </div>
+
+    </div>
+    <nav class="main_nav">
+      <div class="container">
+        <div class="row" style="height:60px;width:100%;">
+          <div style="display:inline;float:left">
+            <div class="dropdown1">
+              <button class="dropbtn btn btn-primary" style="height:60px;min-width:160px;font-size:16px"><i class="fa fa-bars"></i> Dropdown</button>
+              <div class="dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+              </div>
+            </div>
+          </div>
+          <div style="display:inline;float:right" class="vertical_center_menu">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right menuu">
+                <li>
+                  <a href="/contacts"> <i class="fa fa-phone"></i> Contacts</a>
+                </li>
+                <li>
+                  <a href="/blog"> <i class="fa fa-copy"></i> Blog</a>
+                </li>
+                <li>
+                  <a href="/login"> <i class="fa fa-sign-in"></i> Login</a>
+                </li>
+                <!-- <li>
+                  <a href="/login"><i class="fa fa-lock"></i> Account</a>
+                </li> -->
+              </ul>
+            </div>
+            </div>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid no-padding" >
+      <div class="banner">
+        <div class="container">
+
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid no-padding" >
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12" style="margin-top:3em">
+              <!-- box-shadow:0 5px 20px rgba(0,0,0,.1);width:100%;height:auto -->
+            <div class="col-md-3 col-xs-12 col-sm-12 card" style="padding:0 20px 0 20px;margin: 0 30px 0 0px;max-width: calc(25% - 30px);" >
+              <div >
+                <div class="col-md-3 " style="margin:15px 0px 15px 0px">
+
+                </div>
+                <div class="col-md-9 " style="margin:15px 0px 15px 0px">
+                  <div style="font-size: 14px;font-weight: 500;color: #000;">Free Delivery</div>
+                  <div style="font-size: 12px;font-weight: 400;color: rgba(0,0,0,.5);margin-top: 3px;">from $50</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 col-xs-12 col-sm-12 card" style="padding:0 20px 0 20px;margin: 0 30px 0 0;max-width: calc(25% - 30px);">
+              <div >
+                <div class="col-md-3" style="margin:15px 0px 15px 0px">
+
+                </div>
+                <div class="col-md-9" style="margin:15px 0px 15px 0px">
+                  <div style="font-size: 14px;font-weight: 500;color: #000;">Free Delivery</div>
+                  <div style="font-size: 12px;font-weight: 400;color: rgba(0,0,0,.5);margin-top: 3px;">from $50</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 col-xs-12 col-sm-12 card" style="padding:0 20px 0 20px;margin: 0 30px 0 0;max-width: calc(25% - 30px);">
+              <div >
+                <div class="col-md-3" style="margin:15px 0px 15px 0px">
+
+                </div>
+                <div class="col-md-9" style="margin:15px 0px 15px 0px">
+                  <div style="font-size: 14px;font-weight: 500;color: #000;">Free Delivery</div>
+                  <div style="font-size: 12px;font-weight: 400;color: rgba(0,0,0,.5);margin-top: 3px;">from $50</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 col-xs-12 col-sm-12 card" style="padding:0 20px 0 20px;margin: 0 30px 0 0;max-width: calc(25% - 30px);" >
+              <div >
+                <div class="col-md-3" style="margin:15px 0px 15px 0px">
+
+                </div>
+                <div class="col-md-9" style="margin:15px 0px 15px 0px">
+                  <div style="font-size: 14px;font-weight: 500;color: #000;">Free Delivery</div>
+                  <div style="font-size: 12px;font-weight: 400;color: rgba(0,0,0,.5);margin-top: 3px;">from $50</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-top:3em;">
+          <div class="col-md-12" style="margin-top:3em;">
+            <div style="">
+              <div class="col-md-4 col-xs-12 col-sm-12" style="padding:0 20px 0 20px;margin: 0 0 30px 0;box-shadow:0 5px 20px rgba(0,0,0,.1);min-height:600px">
+                <div style="margin-top:3em;min-height:40px;width:100%" class="col-md-12 ">
+                  <div class="col-md-8 vertical_center">
+                    <span style="font-size: 1.3em;font-weight: 600;line-height: 1.5;color: #212529;text-align: left;">Deals of the Week</span>
+                  </div>
+                  <div class="col-md-4 vertical_center">
+                    <span class="pull-right" >
+                      <span style="margin-right:30px"><i class="fa fa-angle-left" style="font-size:2em;font-weight: 600;line-height: 1.5;color: #666666;"></i></span><span ><i class="fa fa-angle-right" style="font-size:2em;font-weight: 600;line-height: 1.5;color: #666666;"></i></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-8 col-xs-12 col-sm-12 " style="padding:0 20px 0 20px;margin: 0 0 0 0;">
+                <div style="margin:3em 0 0 3em">
+                  <ul class="nav nav-tabs tabfont" style="width:100%">
+                    <li class="active"><a href="#home">Featured</a></li>
+                    <li><a href="#menu1">On Sale</a></li>
+                    <li><a href="#menu2">Best Rated</a></li>
+                  </ul>
+
+                  <div class="tab-content">
+                     <div id="home" class="tab-pane fade in active">
+                        <div class="col-md-3 item text-center" ng-repeat="a in [0,1,2,3,4,5,6,7,] track by $index" style="border-right: {{($index+1)%4 == 0?'0':'2px solid #f2f2f2'}};"  >
+                          <img  src="/static/images/cart.png" style="cursor:pointer;width:100px;height:100px;margin-top:20px" alt="" >
+                        </div>
+                     </div>
+                     <div id="menu1" class="tab-pane fade">
+                       <h3>Menu 1</h3>
+                       <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                     </div>
+                     <div id="menu2" class="tab-pane fade">
+                       <h3>Menu 2</h3>
+                       <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                     </div>
+                   </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" >
+          <div class="col-md-12" style="margin-top:9em;">
+            <div style="width:100%;height:auto" >
+              <div class="col-md-3 col-xs-12 col-sm-12" style="padding:0 20px 0 0;">
+                <div class="col-md-10 vertical_center">
+                  <div style="font-size: 1.5em;font-weight: 600;line-height: 1.5;color: #212529;text-align: left;">Popular Categories
+                  </div>
+                  <span class="" style="margin-top:3em;">
+                    <span style="margin-right:30px"><i class="fa fa-angle-left" style="font-size:2em;font-weight: 600;line-height: 1.5;color: #666666;"></i></span><span ><i class="fa fa-angle-right" style="font-size:2em;font-weight: 600;line-height: 1.5;color: #666666;"></i></span>
+                  </span>
+                  <div><a href="#">Full Catelog</a></div>
+                </div>
+              </div>
+              <div class="col-md-9 col-xs-12 col-sm-12 vertical_center" style="padding:0 20px 0 20px;">
+                <div class="col-md-3 col-xs-12 col-sm-12 text-center" >
+                  <img  src="/static/images/cart.png" style="cursor:pointer;width:100px;height:100px;" alt="" >
+                  <div style="margin-top:2em">Video Games & Consoles</div>
+                </div>
+                <div class="col-md-3 col-xs-12 col-sm-12 text-center" style="background-color: #eff6fa" >
+                  <img  src="/static/images/cart.png" style="cursor:pointer;width:100px;height:100px;" alt="" >
+                  <div style="margin-top:2em">Accessories</div>
+                </div>
+                <div class="col-md-3 col-xs-12 col-sm-12 text-center" >
+                  <img  src="/static/images/cart.png" style="cursor:pointer;width:100px;height:100px;" alt="" >
+                  <div style="margin-top:2em">Video Games & Consoles</div>
+                </div>
+                <div class="col-md-3 col-xs-12 col-sm-12 text-center" style="background-color: #eff6fa">
+                  <img  src="/static/images/cart.png" style="cursor:pointer;width:100px;height:100px;" alt="" >
+                  <div style="margin-top:2em">Gadgets</div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+
+    <!-- <div class="row"   style="margin:0px;{{!$state.includes('ecommerce') ?  'padding-top:'+ paddingTop  :'padding-top:10px'}};" ng-controller="ecommerce.body" >
+
+      <div class="col-md-{{ inCart.length > 0 && !$state.is('checkout') && !$state.includes('account') && isCartView ?  '10':'12'}}" style="padding:0px;transition:0.5s" ng-if="me.pk">
+        <div ui-view class="anim-in-out anim-fade" data-anim-speed="600" ></div>
+      </div>
+      <div class="col-md-{{ addToCart.length > 0 && !$state.is('checkout') && !$state.includes('account') && isCartView ?  '10':'12'}}" style="padding:0px;transition:0.5s" ng-if="!me.pk">
+        <div ui-view class="anim-in-out anim-fade" data-anim-speed="600" ></div>
+      </div>
+
+
+
+      <div class="hidden-lg hidden-md text-center" style="position:fixed;bottom:0px;width:100%;cursor:pointer;background-color:var(--themeColor);z-index:10;"  ng-click="checkout()" ng-if="inCart.length>0 && !$state.is('checkout') && !$state.includes('account') && isCartView">
+        <h5 style="color:white;">Checkout ( <i class="fa {{currency}}" ></i> {{data.total.toFixed(2)}} )</h5>
+      </div>
+
+      <div class="hidden-lg hidden-md text-center" style="position:fixed;bottom:0px;width:100%;cursor:pointer;background-color:var(--themeColor);z-index:10;"  ng-click="mainPage()" ng-if="addToCart.length>0 && !me.pk && isCartView">
+        <h5 style="color:white;">Checkout ( <i class="fa {{currency}}" ></i> {{data.totalVal.toFixed(2)}})</h5>
+      </div>
+
+
+      <div ng-if="inCart.length >0 && !$state.is('checkout') && !$state.includes('account') && isCartView" class="col-md-2 hidden-sm hidden-xs" style="border-left:solid 2px #eeeeee;min-height:100vh;padding:0px; ">
+
+        <div style="position:sticky;top:10px;">
+
+          <div ng-if="showCartImage">
+            <img ng-if="genericImage.cartImage" src={{genericImage.cartImage}} style="width:100%;" alt="Cart Image">
+          </div>
+
+          <div ng-repeat="p in inCart" style="border-bottom:solid 2px #eeeeee; " >
+            <h5 ng-if="p.prod_howMuch==null" style="margin:10px;">{{p.product.product.name}} {{p.product.product.howMuch | convertUnit:p.product.product.unit }}</h5>
+            <div ng-if="p.prod_howMuch.length>0||p.prod_howMuch" >
+            <h5 ng-if="p.product.product.unit!='Size and Color'&&p.product.product.unit!='Size'" style="margin:10px;">{{p.product.product.name}} {{p.prod_howMuch| convertUnit : p.product.product.unit}}
+            </h5>
+            <h5 ng-if="p.product.product.unit=='Size and Color'||p.product.product.unit=='Size'" style="margin:10px;">{{p.product.product.name}} - {{p.prod_howMuch}} - {{p.desc}}
+            </h5>
+          </div>
+
+            <div class="row" style="margin:0px;" >
+              <div class="col-sm-4 text-right">
+                <i class="fa fa-minus-circle fa-2x ng-scope" style="cursor:pointer" ng-if="p.qty >0" ng-click="changeQty($index , 'decrease');"></i>
+              </div>
+              <div class="col-sm-4 text-center">
+                {{p.qty}}
+              </div>
+              <div class="col-sm-4 text-left" >
+                <i class="fa fa-plus-circle fa-2x" style="cursor:pointer" ng-click="changeQty($index , 'increase');"></i>
+              </div>
+            </div>
+
+            <div class="row" style="margin:0px;padding-left:20px;" >
+              <i class="fa {{currency}}"></i>
+              <span ng-if="p.prodSku==p.product.product.serialNo">{{(p.product.product.discountedPrice * p.qty).toFixed(2) }}</span>
+              <span ng-if="p.prodSku!=p.product.product.serialNo">{{(p.prodVarPrice * p.qty).toFixed(2)}}</span>
+            </div>
+            <div class="row" style="margin:0px;padding-left:20px;" ng-if="p.stock<=0||!p.stock">
+              <span style="font-size:18px;color:#ef4a1e">Out Of Stock</span>
+            </div>
+          </div>
+
+          <div class="text-center" style="padding:20px;cursor:pointer;background-color:var(--themeColor);color:white" ng-click="checkout()">
+            Checkout ( <i class="fa {{currency}}" ></i> {{data.total.toFixed(2)}} )
+          </div>
+        </div>
+
+      </div>
+
+
+      <div ng-if="addToCart.length>0 && !me.pk && isCartView" class="col-md-2 hidden-sm hidden-xs" style="border-left:solid 2px #eeeeee;min-height:100vh;padding:0px; ">
+
+        <div class="" style="position:sticky; top:10px;">
+          <img ng-if="genericImage.cartImage" src={{genericImage.cartImage}} style="width:100%;" alt="Cart Image">
+
+          <div ng-repeat="p in addToCart" style="border-bottom:solid 2px #eeeeee;">
+            <h5 style="margin:10px;">{{p.productName}} {{p.prod_howMuch | convertUnit:p.unit}}</h5>
+
+            <div class="row" style="margin:0px;">
+              <div class="col-sm-4 text-right">
+                <i class="fa fa-minus-circle fa-2x ng-scope" style="cursor:pointer" ng-click="updateCookieDetail($index , 'decrease');"></i>
+              </div>
+              <div class="col-sm-4 text-center">
+                {{p.qty}}
+              </div>
+              <div class="col-sm-4 text-left" >
+                <i class="fa fa-plus-circle fa-2x" style="cursor:pointer" ng-click="updateCookieDetail($index , 'increase');"></i>
+              </div>
+            </div>
+
+
+            <div class="row" style="margin:0px;padding-left:20px;">
+              <i class="fa {{currency}}"></i>
+              <span >{{p.price}}</span>
+            </div>
+
+
+            <div class="row" style="margin:0px;padding-left:20px;" ng-if="p.in_stock=='false'">
+              <span style="font-size:18px;color:#ef4a1e">Out Of Stock</span>
+            </div>
+
+          </div>
+
+          <div class="text-center" style="padding:20px;cursor:pointer;background-color:var(--themeColor);color:white" ng-click="mainPage()">
+            Checkout ( <i class="fa {{currency}}" ></i> {{data.totalVal.toFixed(2)}} )
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <div ng-include="footerUrl"></div>
+
+
+    </div> -->
+
+    {%  endverbatim %}
+    <!-- contains very common ng templates used in the directives -->
+    <!-- Stock JS libraries -->
+
+    {% if useCDN %}
+      <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.2/angular.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.17/angular-ui-router.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.4.9/angular-sanitize.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.2/ui-bootstrap-tpls.min.js"></script>
+      <script src="https://autobahn.s3.amazonaws.com/autobahnjs/latest/autobahn.min.jgz"></script>
+      <!-- <script src="https://cdn.jsdelivr.net/angularjs/1.4.7/angular-animate.min.js"></script> -->
+      <script src="https://cdn.jsdelivr.net/momentjs/2.11.1/moment.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-slider/6.4.0/rzslider.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-meta/1.0.3/ngMeta.min.js"></script>
+    {% else %}
+      <script src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+      <script src="{% static 'js/bootstrap.min.js' %}"></script>
+      <script src="{% static 'js/angular.min.js' %}"></script>
+      <script src="{% static 'js/angular-ui-router.min.js' %}"></script>
+      <script src="{% static 'js/angular-sanitize.min.js' %}"></script>
+      <script src="{% static 'js/ui-bootstrap-tpls-0.14.3.min.js' %}"></script>
+      <!-- <script src="{% static 'js/angular-animate.min.js' %}"></script> -->
+      <script src="{% static 'js/autobahn.min.js' %}"></script>
+      <script src="{% static 'js/moment.js' %}"></script>
+      <script src="{% static 'js/rzslider.min.js' %}"></script>
+      <script src="{% static 'js/ngMeta.min.js' %}"></script>
+    {% endif %}
+
+    <script src="{% static 'js/datetimepicker.js' %}"></script>
+    <script src="{% static 'js/angular-flash.js' %}"></script>
+    <script src="{% static 'js/ng-tags-input.min.js' %}"></script>
+    <!-- <script src="{% static 'js/anim-in-out.js' %}"></script> -->
+    <script src="{% static 'js/angular-bootstrap-confirm.min.js' %}"></script>
+    <!-- Custom JS files -->
+    <script type="text/javascript">
+      var wampServer = '{{wampServer}}';
+      var wampBindName = "{{user.username}}";
+      var ICON_LOGO = "{{data.icon_logo}}";
+      var BRAND_TITLE = "{{data.brand_title}}";
+      var INVENTORY_ENABLED = "{{data.inventory}}";
+
+        var x = "Total Width: " + screen.width + "px";
+        console.log(x,'sizesizesizesizesize');
+
+      {% if  user.is_superuser %}
+      var MODE = "admin";
+      {% endif %}
+      {% if not user.is_superuser %}
+      var MODE = "user";
+      {% endif %}
+      {% for s in data.settings %}
+        {% if s.fieldType == 'value' %}var settings_{{s.name}} = "{{s.value}}";{% endif %}
+        {% if s.fieldType == 'flag' and s.flag %}var settings_{{s.name}} = true;{% endif %}
+        {% if s.fieldType == 'flag' and not s.flag %}var settings_{{s.name}} = false;{% endif %}
+      {% endfor %}
+
+
+
+    </script>
+    <script src="{% static 'js/app.ecommerce.public.js' %}"></script>
+
+
+
+    <script type="text/javascript">
+    $('.nav-tabs a').click(function(){
+      $(this).tab('show');
+      })
+
+    </script>
+    <script src="{% static 'js/custom/wampProcessors.js' %}"></script>
+    <script src="{% static 'js/custom/nativeJS.js' %}"></script>
+    <script src="{% static 'js/custom/services.js' %}"></script>
+    <script src="{% static 'js/custom/directives.js' %}"></script>
+    <script src="{% static 'js/custom/directive.table.js' %}"></script>
+    <script src="{% static 'js/custom/directives.native.js' %}"></script>
+    <script src="{% static 'js/custom/filters.js' %}"></script>
+
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/angular-owl-carousel-2.js' %}"></script>
+<script src="http://localhost:8080/script/chatter-n7GvurFfpWlf90pS0HGYrLWWrixiaaFw0YPS8fUieMk=.js"></script>
+
+
+
+  </body>
+</html>
+
+
+<!-- <div class="input-group" style="width:100%">
+  <span  style="width:40%;display: inline;height:30px">
+    <input  type="search" class=" inputStyle" style=""  placeholder="Search for products...">
+  </span>
+  <span class="dropdown input-group-addon"  style="width:35%;height:30px;padding: 5px 10px 5px 10px;">
+   <button class="  dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
+   <span class="caret"></span></button>
+   <ul class="dropdown-menu">
+     <li><a href="#">HTML</a></li>
+     <li><a href="#">CSS</a></li>
+     <li><a href="#">JavaScript</a></li>
+   </ul>
+  </span>
+  <span class="input-group-addon" style="width:15%;display: inline;height:30px;padding: 5px 10px 5px 10px;">
+    <button class="btn btn-primary"  ><i class="fa fa-search " style="font-size:22px"  ></i></button>
+  </span>
+</div> -->
+
+<!-- <div class="input-group">
+
+  <input type="text" class="form-control" aria-label="Amount (rounded to the nearest dollar)">
+  <span class="input-group-addon">
+    <span class="dropdown"  style="">
+     <button class="  dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
+     <span class="caret"></span></button>
+     <ul class="dropdown-menu">
+       <li><a href="#">HTML</a></li>
+       <li><a href="#">CSS</a></li>
+       <li><a href="#">JavaScript</a></li>
+     </ul>
+    </span>
+  </span>
+  <span class="input-group-addon"><button class="btn btn-primary"  ><i class="fa fa-search "   ></i></button></span>
+</div> -->

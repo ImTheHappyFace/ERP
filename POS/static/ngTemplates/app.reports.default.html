@@ -1,0 +1,151 @@
+<div class="shaddowed card bg-white " style="position:relative;min-height:92vh;">
+  <div class="container-fluid" style="padding:10px;">
+    <breadcrumb></breadcrumb>
+    <div class="container-fluid">
+      <div class="col-md-10" style="border-right:1px solid #eee;min-height:80vh">
+        <div class="row" ng-if="activatedTab=='sales'">
+          <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-6">
+              <label>From Date</label>
+              <div class="input-group">
+                <input type="text" class="form-control" show-weeks="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="salesForm.fdt" is-open="statusfdt.opened" ng-change="fetchSalesData()" disabled/>
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="statusfdt.opened = true;"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label>To Date</label>
+              <div class="input-group">
+                <input type="text" class="form-control" show-weeks="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="salesForm.sdt" is-open="statussdt.opened" min-date="salesForm.fdt" ng-change="fetchSalesData()" disabled/>
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="statussdt.opened = true;"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" ng-if="activatedTab=='delivery'">
+          <div class="col-md-4 col-md-offset-4">
+            <label>As On</label>
+            <div class="input-group">
+              <input type="text" class="form-control" show-weeks="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="deliveryForm.fdt" is-open="statusdfdt.opened" ng-change="fetchDeliveryData()" disabled/>
+              <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="statusdfdt.opened = true;"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="row" ng-if="activatedTab=='sales'">
+          <h3 class="text-muted" style="text-align:center;padding-top:150px;" ng-if="salesNoDataMsg">NO Sales Data On This Duration</h3>
+          <h3 style="text-align:right;padding-right:20px" ng-if="!salesNoDataMsg">
+            <span class="pull-left" style="padding-left:20px">
+              <a href="/api/ecommerce/reportsData/?typ=sales&fdt={{salesForm.fdt.toJSON().split('T')[0]}}&sdt={{salesForm.sdt.toJSON().split('T')[0]}}&download" target="_blank"><button class="btn btn-primary pull-right"><i class="fa fa-download "></i> Download</button></a>
+            </span>
+            <strong>Total Amount : </strong><i class="fa {{currency}}"></i> {{salesTotalAmount | number}} &nbsp;
+            <strong>Total GST : </strong><i class="fa {{currency}}"></i> {{salesTotalGst | number}}
+          </h3>
+          <div class="col-md-12" ng-if="!salesNoDataMsg">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">S.No.</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Amount Received</th>
+                  <th scope="col">GST Collected</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat = "sd in salesData">
+                  <th scope="row">{{$index+1}}</th>
+                  <td>{{sd.name}}</td>
+                  <td><i class="fa {{currency}}"></i> {{sd.receivedAmount | number}}</td>
+                  <td><i class="fa {{currency}}"></i> {{sd.receivedAmount==0?0:sd.gstCollected | number}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+        <div class="row" ng-if="activatedTab=='delivery'">
+          <h3 class="text-muted" style="text-align:center;padding-top:150px;" ng-if="deliveryNoDataMsg">NO Delivery Data On This Date</h3>
+
+          <h3 style="text-align:right;padding-right:20px" ng-if="!deliveryNoDataMsg">
+            <span class="pull-left" style="padding-left:20px">
+              <a href="/api/ecommerce/reportsData/?typ=delivery&fdt={{deliveryForm.fdt.toJSON().split('T')[0]}}&download" target="_blank"><button class="btn btn-primary pull-right"><i class="fa fa-download "></i> Download</button></a>
+            </span>
+            <strong>Total Amount : </strong><i class="fa {{currency}}"></i> {{deliveryTotalAmount | number}}</h3>
+
+          <div class="col-md-12" ng-if="!deliveryNoDataMsg" style="padding-top:20px">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">S.No.</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Completed</th>
+                  <th scope="col">Ongoing</th>
+                  <th scope="col">COD</th>
+                  <th scope="col">CARD</th>
+                  <th scope="col">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat = "(key,val) in deliveryData">
+                  <th scope="row">{{$index+1}}</th>
+                  <td>{{val.name}}</td>
+                  <td>{{val.deliveredCount}}</td>
+                  <td>{{val.ongoingCount}}</td>
+                  <td><i class="fa {{currency}}"></i> {{val.cod | number}}</td>
+                  <td><i class="fa {{currency}}"></i> {{val.card | number}}</td>
+                  <td><i class="fa {{currency}}"></i> {{val.total | number}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- <div class="row">
+          <div class="col-md-6" style="padding-bottom:20px;padding-left:10px;padding-right:10px;" ng-repeat="order in deliveredData">
+            <div class="container-fluid well" style="padding-bottom:10px;padding-top:10px;border-radius:20px">
+              <div class="row" style="border-bottom: 1px solid #dedede;font-size:17px;padding:5px">
+                <div class="col-md-5">
+                  <span><i class="fa fa-calendar"></i> {{order.updated | date : 'dd-MM-yyyy hh:mm a'}}</span>
+                </div>
+                <div class="col-md-7 text-right">
+                  <span><i class="fa fa-user"></i> {{order.orderBy | getName}}</span>
+                </div>
+              </div>
+              <div class="row" style="padding-top:15px;">
+                <div class="col-md-10">
+                  <strong>{{order.productName}}</strong>
+                </div>
+                <div class="col-md-2 text-right" style="color:green">
+                  <strong><i class="fa fa-gift"></i> {{order.qty}}</strong>
+                </div>
+                <div class="col-md-6">
+                  <strong>Paid Amount :</strong> {{order.totalAmount * order.qty}}
+                </div>
+                <div class="col-md-6">
+                  <strong>Payment Type :</strong> {{order.modeOfShopping}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <h3 class="text-muted" style="text-align:center;padding-top:150px;" ng-if="deliveredData.length==0&&!noDataMsg">Search And Select The User To See His Delivered Orders</h3>
+
+          <h3 class="text-muted" style="text-align:center;padding-top:150px;" ng-if="noDataMsg">No Orders Delivered By This User Yet</h3>
+        </div> -->
+      </div>
+      <div class="col-md-2" style="padding-right:0px">
+        <div class="row">
+          <div class="well zoomOnHover" ng-click="activatedTab='sales'" style="font-size:23px;background-color:{{activatedTab=='sales'?'#b7b5b4':''}}">
+            Sales Report
+          </div>
+          <div class="well zoomOnHover" ng-click="activatedTab='delivery'" style="font-size:23px;margin-top:-20px;background-color:{{activatedTab=='delivery'?'#b7b5b4':''}}">
+            Delivery Report
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

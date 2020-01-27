@@ -1,0 +1,41 @@
+<div class="row" style="margin:15px">
+<div class="col-md-6">
+  <div class="form-group">
+    <label>Name</label>
+    <input type="text" class="form-control" ng-model="offerForm.name">
+  </div>
+  <div class="form-group">
+    <label>Products</label>
+    <div class="input-group">
+        <input type="text" class="form-control" uib-typeahead="c as c.name for c in productSearch($viewValue)" ng-model="offerForm.product" placeholder="Search and add Products">
+      <span class="input-group-btn">
+      <button type="button" class="btn btn-primary" ng-click="addproductData()">Add</button>
+      </span>
+    </div>
+  </div>
+  <div class="row" style="margin-bottom:10px">
+    <div class="col-md-3" ng-repeat="x in offerForm.products track by $index" style="margin-top:5px;">
+      <div class="" style="padding:10px;border:1px solid black;margin-right:10px;">
+        <span>{{x.name}}<i class="fa fa-times pull-right" aria-hidden="true" style="padding-left:10px;cursor:pointer" ng-click="deleteproducts($index)"></i></span>
+      </div>
+    </div>
+  </div>
+<button class="btn btn-primary" ng-click="addOfferTag()"> Save </button>
+  </div>
+  <div class="col-md-6">
+<div class="row">
+  <div class="col-md-3" ng-repeat="i in tagsList" ng-click="editTags($index)" >
+    <div  class="row" style="border:1px solid black;padding:10px;margin-left:15px;margin-bottom:15px;cursor:pointer" >
+      <div class="card-body text-center">
+          <div class="col-md-12">
+        <h4 ><strong>{{i.name }}</strong></h4>
+      </div>
+      <div class="col-md-12  text-right">
+        <i class="fa fa-trash fa-2x" ng-click="$event.stopPropagation();" style="cursor:pointer;color:red" mwl-confirm title="Confirm" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="deleteOffer($index)" confirm-button-type="default" cancel-button-type="default"></i>
+      </div>
+    </div>
+    </div>
+  </div>
+  </div>
+    </div>
+  </div>

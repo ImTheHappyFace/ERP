@@ -1,0 +1,66 @@
+<div class="container-fluid" ng-controller="businessManagement.ecommerce.pages.form">
+  <div class="col-md-12">
+
+    <h3 ng-if="mode == 'new'">Create a New Page</h3>
+    <h3 ng-if="mode == 'edit'">Edit Page</h3>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Title</label>
+              <input type="text" class="form-control" ng-model="form.title" placeholder="Enter Title">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>URL</label>
+              <div class="input-group">
+                <input type="text" class="form-control" ng-model="form.pageurl" placeholder="Generate Url" disabled/>
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-success" ng-click="generateUrl()">Generate</button>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="col-md-9">
+              <strong>Is TopLevel Menu :</strong>
+            </div>
+            <div class="col-md-3">
+              <input type="checkbox" class="form-control" ng-model="form.topLevelMenu"/>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="col-md-9">
+              <strong>In Bottom Menu :</strong>
+            </div>
+            <div class="col-md-3">
+              <input type="checkbox" class="form-control" ng-model="form.bottomMenu"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <textarea ui-tinymce="tinymceOptions" ng-model="form.body"></textarea>
+      </div>
+    </div>
+    <div class="row text-center" style="margin:20px">
+      <div class="btn-group btn-group-md">
+        <button type="button" class="btn btn-primary" ng-click="save()">
+          Save
+        </button>
+        <button type="button" class="btn btn-danger" mwl-confirm title="Confirm" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="resetForm()" confirm-button-type="default" cancel-button-type="default">
+          Reset
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>

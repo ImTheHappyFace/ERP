@@ -1,0 +1,308 @@
+<style media="screen">
+.flipswitch {
+position: relative;
+background: white;
+width: 90px;
+height: 40px;
+-webkit-appearance: initial;
+border-radius: 3px;
+-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+outline: none;
+font-size: 14px;
+font-family: Trebuchet, Arial, sans-serif;
+font-weight: bold;
+cursor: pointer;
+border: 1px solid #ddd;
+}
+
+.flipswitch:after {
+position: absolute;
+top: 5%;
+display: block;
+line-height: 32px;
+width: 45%;
+height: 90%;
+background: #fff;
+box-sizing: border-box;
+text-align: center;
+transition: all 0.3s ease-in 0s;
+color: black;
+border: #888 1px solid;
+border-radius: 3px;
+}
+
+.flipswitch:after {
+left: 2%;
+content: "OFF";
+}
+
+.flipswitch:checked:after {
+left: 53%;
+content: "ON";
+}
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  /* background-color: red; */
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 4px;
+}
+</style>
+<div class="container-fluid" ng-controller="sudo.managestores.store.form">
+<div class="col-md-12">
+  <h3 ng-if="mode == 'new'">Create a new Store</h3>
+  <h3 ng-if="mode != 'new'">Edit Store </h3>
+
+</div>
+  <div class="col-md-6">
+    <h4 style="font-weight:600;"><u>Basic Details</u>:</h4>
+    <div class="form-group">
+      <label>Company </label>
+      <input type="text" class="form-control" ng-model="form.company" placeholder="Enter Company name">
+    </div>
+    <div class="form-group">
+      <label>Store Name</label>
+      <input type="text" class="form-control" ng-model="form.name" placeholder="Enter Store name">
+    </div>
+    <div class="form-group">
+      <label>Moderators</label>
+      <div class="input-group">
+          <input type="text" class="form-control" uib-typeahead="c as c.first_name +  ' ' +c.last_name for c in genericUserSearch($viewValue)" ng-model="form.moderators" placeholder="Search and add Moderators">
+        <span class="input-group-btn">
+        <button type="button" class="btn btn-primary" ng-click="addmoderators()">Add</button>
+        </span>
+      </div>
+        </div>
+      <div class="row" style="margin-bottom:10px">
+        <div class="col-md-3" ng-repeat="x in form.moderatorslist track by $index" style="margin-top:5px;">
+          <div class="" style="padding:10px;border:1px solid black;margin-right:10px;">
+            <span>{{x.first_name}} {{x.last_name}}<i class="fa fa-times pull-right" aria-hidden="true" style="padding-left:10px;cursor:pointer" ng-click="deletemoderators($index)"></i></span>
+          </div>
+        </div>
+      </div>
+    <div class="form-group">
+      <label>Mobile</label>
+      <input type="text " class="form-control" ng-model="form.mobile" placeholder="Enter Mobile Number">
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" class="form-control" ng-model="form.email" placeholder="Enter Email">
+    </div>
+    <div class="form-group">
+      <label>Address</label>
+      <textarea type="text " class="form-control" ng-model="form.address" placeholder="Enter Address"></textarea>
+    </div>
+    <div class="form-group">
+      <label>Pincode</label>
+      <input type="text " class="form-control" ng-model="form.pincode" placeholder="Enter Pincode">
+    </div>
+    <div class="form-group">
+      <label>GSTIN</label>
+      <input type="text " class="form-control" ng-model="form.gstin" placeholder="Enter GSTIN">
+    </div>
+    <div class="form-group">
+      <label>CIN</label>
+      <input type="text " class="form-control" ng-model="form.cin" placeholder="Enter CIN">
+    </div>
+    <div class="form-group">
+      <label>LOGO</label>
+      <input type="file" file-model="form.logo">
+    </div>
+    <div class="form-group">
+      <label>GSTIN Certificate</label>
+      <input type="file" name="myFile" file-model="form.gstincert">
+    </div>
+    <div class="form-group">
+      <label>Personel ID</label>
+      <input type="file" name="myFile" file-model="form.personelid">
+    </div>
+    <div class="form-group">
+      <label>Owner</label>
+      <input type="text " class="form-control" ng-model="form.owner" placeholder="Search Owner" uib-typeahead="c as c.first_name +  ' ' +c.last_name for c in genericUserSearch($viewValue)">
+    </div>
+    <br>
+    <h4 style="font-weight:600;"><u>Bank Details</u>:</h4>
+    <div class="form-group">
+      <label>Bank Account Number</label>
+      <input type="text " class="form-control" ng-model="form.bankaccountNumber" placeholder="Enter Bank Account Number">
+    </div>
+    <div class="form-group">
+      <label>IFSC</label>
+      <input type="text " class="form-control" ng-model="form.ifsc" placeholder="Enter IFSC">
+    </div>
+    <div class="form-group">
+      <label>Bank Name</label>
+        <input type="text" class="form-control" ng-model="form.bankName" typeahead="bank as bank for bank in bankList | filter:$viewValue">
+    </div>
+    <div class="form-group">
+      <label>Bank Type</label>
+      <select class="form-control" ng-model="form.bankType">
+        <option value="saving">saving</option>
+        <option value="current">current</option>
+      </select>
+    </div>
+    <h5 style="font-weight:600;">Payment Options:</h5>
+    <div class="row">
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>PayPal</label> <br>
+          <input type="checkbox" ng-model="form.payPal" class="flipswitch" /> &nbsp;
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Paytm</label> <br>
+          <input type="checkbox" ng-model="form.paytm" class="flipswitch" /> &nbsp;
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>PayU</label> <br>
+          <input type="checkbox" ng-model="form.payU" class="flipswitch" /> &nbsp;
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>CCAvenue</label> <br>
+          <input type="checkbox" ng-model="form.ccAvenue" class="flipswitch" /> &nbsp;
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Google Pay</label> <br>
+          <input type="checkbox" ng-model="form.googlePay" class="flipswitch" /> &nbsp;
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="col-md-6">
+    <div class="btn-group  pull-right">
+      <button type="button" class="btn btn-primary" ng-click="save()" style="width:200px">
+        Save
+      </button>
+      <button type="button" class="btn btn-default" ng-click="resetForm()" ng-if="mode=='new'" style="width:200px">
+        Reset
+      </button>
+    </div><br/> <br/>
+    <h4 style="font-weight:600;"><u>Social</u>:</h4>
+    <div class="form-group">
+      <label>FB Link</label>
+      <input type="text" class="form-control" ng-model="form.fbLink" placeholder="Enter facebook Link">
+    </div>
+    <div class="form-group">
+      <label>Twitter Link</label>
+      <input type="text" class="form-control" ng-model="form.twitterLink" placeholder="Enter Twitter Link">
+    </div>
+    <div class="form-group">
+      <label>LinkedIn Link</label>
+      <input type="text" class="form-control" ng-model="form.linkedinLink" placeholder="Enter LinkedIn Link">
+    </div>
+    <div class="form-group">
+      <label>Playstore Link</label>
+      <input type="text" class="form-control" ng-model="form.playstoreLink" placeholder="Enter Playstore link">
+    </div>
+    <div class="form-group">
+      <label>Appstore Link</label>
+      <input type="text" class="form-control" ng-model="form.appstoreLink" placeholder="Enter Appstore Link">
+    </div>
+    <div class="form-group">
+      <label>Pinterest Link</label>
+      <input type="text" class="form-control" ng-model="form.pinterestLink" placeholder="Enter Pinterest Link">
+    </div>
+    <br>
+    <h4 style="font-weight:600;"><u>UI Settings</u>:</h4>
+    <div class="row">
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>POS</label> <br>
+          <input type="checkbox" ng-model="form.pos" class="flipswitch" /> &nbsp;
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>COD</label> <br>
+          <input type="checkbox" ng-model="form.cod" class="flipswitch" /> &nbsp;
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Rating</label> <br>
+          <input type="checkbox" ng-model="form.rating" class="flipswitch" /> &nbsp;
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>Category Browser</label> <br>
+          <input type="checkbox" ng-model="form.categoryBrowser" class="flipswitch" /> &nbsp;
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Search Field Placeholder</label>
+      <input type="text " class="form-control" ng-model="form.searchfieldplaceholder" placeholder="Enter Search Field Placeholder">
+    </div>
+    <div class="form-group">
+      <label>COD Limit</label>
+      <input type="number" class="form-control" ng-model="form.codLimit">
+    </div>
+    <div class="form-group">
+      <label>Copyright Placeholder</label>
+      <input type="text" class="form-control" ng-model="form.copyrightHolder">
+    </div>
+    <div class="form-group">
+      <label>Theme Color</label> <br>
+      <input type="color" name="favcolor" ng-model="form.themeColor">
+    </div>
+    <h4 style="font-weight:600;"><u>Uploads</u>:</h4>
+    <div class="form-group">
+      <label>Cart Image (Right Side Displaying Cart Image)</label>
+      <input type="file" file-model="form.cartImage">
+    </div><br/>
+    <div class="form-group">
+      <label>Payment Image (In The Footer Payment Method)</label>
+      <input type="file" file-model="form.paymentImage">
+    </div>
+    <div class="form-group">
+      <label>Payment Potrait Image (In The Footer Payment Method For Mobile)</label>
+      <input type="file" file-model="form.paymentPotraitImage">
+    </div>
+    <div class="form-group">
+      <label>Search Background Image (In Header Search Background)</label>
+      <input type="file" file-model="form.searchBackgroundImg">
+    </div>
+    <div class="form-group">
+      <label>Blog Background Image (In Blog Page)</label>
+      <input type="file" file-model="form.blogBackgroundImg">
+    </div>
+  </div>
+</div>
+<button onclick="topFunction()" id="myBtn"  class="pull-right btn btn-primary" ><i class="fa fa-arrow-up"></i></button>
+
+
+<script>
+
+ mybutton = document.getElementById("myBtn");
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+ if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+   mybutton.style.display = "block";
+ } else {
+   mybutton.style.display = "none";
+ }
+}
+ function topFunction() {
+ document.body.scrollTop = 0; // For Safari
+ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>

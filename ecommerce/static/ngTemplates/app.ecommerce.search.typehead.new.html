@@ -1,0 +1,70 @@
+<a ng-controller="ecommerce.search.typeheadResult" style="width:100%">
+    <div class="row">
+      <div class="col-xs-2">
+        <img ng-if="match.model.dp" ng-src="{{ '/media/' + match.model.dp}}" class="img img-rounded" alt="" style="width:50px;height:50px;">
+        <img ng-if="!match.model.dp" ng-src="{{ '/media/' + match.model.visual}}" class="img img-rounded" alt="" style="width:50px;height:50px;">
+      </div>
+      <div class="col-xs-6">
+        <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+        <span ng-if="match.model.unit == 'Size and Color' || match.model.unit == 'Size'"> {{match.model.unitPerpack }} {{match.model.prodDesc| limitTo : 10 : 0}}} </span>
+        <span ng-if="match.model.unit != 'Size and Color' && match.model.unit != 'Size'">
+          <span ng-if="match.model.howMuch==null">{{match.model.howMuch}}{{match.model.unit | getUnit}}</span>
+          <span ng-if="match.model.howMuch!=null">{{match.model.howMuch | convertUnit :match.model.unit}} </span>
+        </span>
+        <!-- <ul  ng-if="match.model.prodVar.length>0">
+          <li ng-repeat="a in match.model.prodVar">{{a.sku}}</li>
+        </ul> -->
+      </div>
+      <!-- <div ng-if="match.model.typ == 'list' && !match.model.added && me.pk&&match.model.inStock>0 " class="col-xs-4 text-right" style="padding-top:7px;" ng-click="$event.stopPropagation();">
+        <button type="button" class="btn btn-success" ng-click="addToCart(match.model)">
+          Add to Cart
+        </button>
+      </div>
+      <div ng-if="match.model.typ == 'list' && me.pk&&match.model.inStock<=0 " class="col-xs-4 text-right" style="padding-top:7px;font-size:18px;color:#ef4a1e" ng-click="$event.stopPropagation();">
+        Out of Stock
+      </div>
+      <div ng-if="match.model.typ == 'list' && match.model.added>0 && me.pk&&match.model.inStock>0" class="col-xs-4 text-right" style="padding-top:7px;" ng-click="$event.stopPropagation();"> -->
+        <!-- <button type="button" class="btn btn-default">
+          Added
+        </button> -->
+        <!-- <div class="col-md-12 col-sm-10 col-xs-10 text-right">
+          <span>
+            <i class="fa fa-minus-circle fa-2x" style="cursor:pointer;margin-right:10px" ng-if="match.model.added>0&&me.pk"  ng-click="decrementCart(match.model);$event.stopPropagation()"></i>
+          <span style="font-size:20px; padding:0px 0px 0px 0px;margin-right:10px"> {{match.model.added}} </span>
+        <i class="fa fa-plus-circle fa-2x" style="cursor:pointer"  ng-click="incrementCart(match.model);$event.stopPropagation()"></i></span>
+        </div>
+
+      </div>
+      <div ng-if="match.model.typ == 'list'&& !match.model.added  &&  !me.pk&&match.model.inStock>0" class="col-xs-4 text-right" style="padding-top:7px;" ng-click="$event.stopPropagation();">
+        <button type="button" class="btn btn-success" ng-click="addToCartCookie(match.model)">
+          Add to Cart
+        </button>
+      </div>
+      <div ng-if="match.model.typ == 'list' && !me.pk&&match.model.inStock<=0" class="col-xs-4 text-right" style="padding-top:7px;font-size:18px;color:#ef4a1e" ng-click="$event.stopPropagation();">
+          Out of Stock
+      </div> -->
+      <!-- <div ng-if="match.model.typ == 'list' && match.model.added>0 && !me.pk&&match.model.inStock>0" class="col-xs-4 text-right" style="padding-top:7px;" ng-click="$event.stopPropagation();">
+        <div class="col-md-12 col-sm-10 col-xs-10 text-right">
+          <span>
+            <i class="fa fa-minus-circle fa-2x" style="cursor:pointer;margin-right:10px" ng-if="!me.pk"  ng-click="decrementCookie(match.model);$event.stopPropagation()"></i>
+          <span style="font-size:20px; padding:0px 0px 0px 0px;margin-right:10px"> {{match.model.added}} </span>
+        <i class="fa fa-plus-circle fa-2x" style="cursor:pointer"  ng-click="incrementCookie(match.model);$event.stopPropagation()"></i></span>
+        </div>
+
+      </div> -->
+    </div>
+    <div ng-if="$parent.$parent.$last">
+
+      <!-- <style media="screen">
+        body{
+          overflow: hidden;
+          height: 100vh;
+        }
+      </style> -->
+      <div ng-if="searchImage">
+        <img ng-if="genericSearchImage.searchBgImage" src="{{genericSearchImage.searchBgImage}}" style="width:100%;position: absolute;left: 0px;" alt="Search Background Image">
+        <img ng-if="!genericSearchImage.searchBgImage" src="/static/images/searchDecoration.jpg" style="width:100%;position: absolute;left: 0px;" alt="Search Background Image">
+      </div>
+
+    </div>
+</a>

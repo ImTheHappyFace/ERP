@@ -1,0 +1,68 @@
+<breadcrumb></breadcrumb>
+<div class="container-fluid">
+
+  <uib-tabset>
+
+    <uib-tab>
+      <uib-tab-heading>
+        Categories
+      </uib-tab-heading>
+      <generic-Table data="data.tableproductData" config-Obj="{{genericProductConfig}}" callback-Fn="tableProductAction"></generic-Table>
+    </uib-tab>
+
+    <uib-tab>
+      <uib-tab-heading>
+        Offer Banners
+      </uib-tab-heading>
+      <div ng-include="'/static/ngTemplates/app.ecommerce.vendor.configure.offerBanners.html'"></div>
+      <!-- <generic-Table data="tableData.tablePromocodeData" config-Obj="{{promocodesConfig}}" callback-Fn="tablePromocodeAction"></generic-Table> -->
+    </uib-tab>
+    <uib-tab>
+      <uib-tab-heading>
+        Promocodes
+      </uib-tab-heading>
+      <div ng-include="'/static/ngTemplates/app.ecommerce.vendor.configure.promocode.html'"></div>
+      <!-- <generic-Table data="tableData.tablePromocodeData" config-Obj="{{promocodesConfig}}" callback-Fn="tablePromocodeAction"></generic-Table> -->
+    </uib-tab>
+    <uib-tab>
+      <uib-tab-heading>
+        FAQuestions
+      </uib-tab-heading>
+      <div ng-include="'/static/ngTemplates/app.ecommerce.vendor.configure.FAQuestions.html'"></div>
+    </uib-tab>
+    <uib-tab>
+      <uib-tab-heading>
+        Service Area
+      </uib-tab-heading>
+      <div ng-include="'/static/ngTemplates/app.ecommerce.vendor.configure.serviceArea.html'"></div>
+    </uib-tab>
+    <uib-tab>
+      <uib-tab-heading>
+        Offer
+      </uib-tab-heading>
+      <div ng-include="'/static/ngTemplates/app.ecommerce.vendor.configure.offer.html'"></div>
+    </uib-tab>
+    <uib-tab ng-repeat="tab in tabs" active="tab.active" disable="tab.disabled">
+      <uib-tab-heading>
+        {{tab.title}}
+        <i ng-if="tab.cancel" class="fa fa-close" ng-click="closeTab($index);"></i>
+      </uib-tab-heading>
+      <div ng-if="tab.app == 'editField'">
+          <div ng-include="'/static/ngTemplates/app.ecommerce.vendor.modal.html'"></div>
+      </div>
+      <div ng-if="tab.app == 'fieldExplore'">
+          <div ng-include="'/static/ngTemplates/app.ecommerce.vendor.explore.html'"></div>
+      </div>
+      <div ng-if="tab.app == 'editproduct'">
+          <div ng-include="'/static/ngTemplates/app.ecommerce.vendor.modal.html'"></div>
+      </div>
+      <div ng-if="tab.app == 'productExplore'">
+          <div ng-include="'/static/ngTemplates/app.ecommerce.vendor.explore.html'"></div>
+      </div>
+
+      <div ng-if="tab.app == 'offerBannerExplore'">
+          <div ng-include="'/static/ngTemplates/app.ecommerce.vendor.offerBanner.explore.html'"></div>
+      </div>
+    </uib-tab>
+  </uib-tabset>
+</div>

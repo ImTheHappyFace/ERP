@@ -1,0 +1,41 @@
+<div>
+  <div class="modal-header text-center">
+    <h4>Items to be Cancelled</h4>
+    <hr>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-6 col-xs-6">
+        <strong>Products </strong>
+      </div>
+      <div class="col-md-3 col-xs-3">
+        <strong>Qty </strong>
+      </div>
+      <div class="col-md-3 col-xs-3">
+        <strong>Amount Paid </strong>
+      </div>
+    </div>
+    <div class="row" ng-repeat="i in items">
+      <div class="col-md-6 col-xs-6">
+        <!-- <span></span> {{i.productName.slice(0,30)}}
+        <span></span>  {{i.prodVar}} -->
+
+        <span ng-if="i.prodVar==undefined"> {{i.productName.slice(0,30)}} {{i.product.product.howMuch}}{{i.product.product.unit | getUnit}}</span>
+        <span ng-if="i.prodVar"> {{i.productName}} {{i.prodVar[0].unitPerpack * i.product.product.howMuch}}{{i.product.product.unit | getUnit}} </span>
+      </div>
+      <div class="col-md-3 col-xs-3">
+        {{i.qty}}
+      </div>
+      <div class="col-md-3 col-xs-3">
+        <i class="fa {{currency}}"></i> {{i.paidAmount.toFixed(2) }}
+      </div>
+    </div>
+    <hr>
+    <div class="row container-fluid">
+      <span> Amount to be Refunded : <i class="fa {{currency}}"></i> {{amtToBeRefunded}}  </span>
+    </div>
+    <div class="row container-fluid text-center">
+      <button type="button" class="btn btn-primary" mwl-confirm title="Confirm" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="state=='cancel' ? cancel() : return()" confirm-button-type="default" cancel-button-type="default">{{state}}</button>
+    </div>
+  </div>
+</div>

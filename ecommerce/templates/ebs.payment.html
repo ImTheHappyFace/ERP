@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+  <form method="post" action="https://secure.ebs.in/pg/ma/payment/request"
+name="frmTransaction" id="frmTransaction">
+
+    {%  for key , param in data.items %}
+      <input type="hidden" name="{{key}}" value="{{param}}" />
+    {% endfor %}
+
+  </form>
+
+  <script type="text/javascript">
+
+  var form = document.getElementsByTagName("form")[0];
+  form.submit();
+
+  </script>
+
+  </body>
+</html>

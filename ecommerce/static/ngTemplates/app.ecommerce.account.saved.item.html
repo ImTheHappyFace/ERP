@@ -1,0 +1,37 @@
+<div class="col-md-3 col-sm-6 col-xs-12" style="padding-bottom:30px;"  ng-controller="controller.ecommerce.account.saved.item">
+  <div class="container-fluid">
+    <div class="row" >
+      <img ng-if="data.prodVarPrice" style="width: 100%; height:150px;" class="img" ng-src="{{data.product.product_variants.prodImage}}" onerror="this.src='/static/images/ecommerce.jpg'">
+      <img ng-if="!data.prodVarPrice" style="width: 100%; height:150px;" class="img" ng-src="{{data.product.product.displayPicture}}" onerror="this.src='/static/images/ecommerce.jpg'">
+    </div>
+    <div class="row">
+      <div class=" card bg-white" style="padding-bottom:0px;">
+        <div class="row container-fluid" style="padding:10px 20px; height:110px; " >
+          <!-- <h5 style="margin:0px" >{{data.product.product.name}}</h5> -->
+          <h5 style="margin:0px;  height:50px;">{{data.product.product.name}}
+            <span ng-if="data.prod_howMuch!=null">
+              <span ng-if="data.product.product.unit!='Size and Color'&&data.product.product.unit!='Size'">{{data.prod_howMuch | convertUnit: data.product.product.unit}}</span>
+              <span ng-if="data.product.product.unit=='Size and Color'||data.product.product.unit=='Size'">{{data.prod_howMuch}}
+              {{data.desc}} </span>
+              </span> </h5>
+          <span style="font-size:15px;" > Price : </span>
+          <span ng-if="data.prodSku==data.product.product.serialNo"  style="font-size:15px;padding-left:10px">
+            <i class="fa {{currency}}"></i>{{data.product.product.discountedPrice.toFixed(2)}}
+          </span>
+          <span ng-if="data.prodSku!=data.product.product.serialNo"  style="font-size:15px;padding-left:10px">
+            <i class="fa {{currency}}"></i>{{data.prodVarPrice.toFixed(2)}}
+          </span>
+        </div>
+        <hr style="margin:0px;">
+        <div class="row container-fluid" style="background-color:#2980B9; color:white; margin:0px; padding:10px;" >
+          <div class="col-md-6 col-sm-6 col-xs-6 text-center">
+            <i class="fa {{data.typ=='favourite'? 'fa-shopping-cart':'fa-heart'}} fa-2x" style="cursor:pointer;" ng-click="rowActionClicked(data.typ=='cart'? 'favourite':'unfavourite')" ></i>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-6 text-center" >
+            <i class="fa fa-trash-o fa-2x" style="cursor:pointer;" ng-click="rowActionClicked('deleteItem')"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

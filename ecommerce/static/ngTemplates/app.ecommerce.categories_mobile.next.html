@@ -1,0 +1,42 @@
+<style media="screen">
+.container1{
+  width:100%;
+  position:relative;
+  text-align:center;
+  margin: 10px 0px;
+  border:1px solid var(--themeColor);
+}
+.height{
+  position:relative;
+  padding-bottom: 35%;
+}
+.text{
+  left: 0px;
+  width: 100%;
+  color:#000;
+  position:absolute;
+  bottom: 15px;
+  font-weight: 600;
+}
+
+</style>
+
+<div class="row" ng-repeat="a in categories track by $index">
+
+<div class="container1" style="background-image:url('{{a.img}}')" ng-click="cat_open(a,$index)">
+    <div class="height">
+        <span class="text">
+            {{a.name}}
+        </span>
+    </div>
+</div>
+<div class="" ng-if="a.showsubcat">
+  <div class="col-xs-12" style="padding:0px;">
+    <div class="col-xs-6" ng-repeat="sub in a.child" style="margin:5px 0px;" ng-click="$state.go('categories' , {name : sub.alias.split(' ').join('_')})">
+      <div class="text-center" style="width:100%;padding:7px 5px;box-shadow:0px 0px 7px 0px rgba(49, 50, 50, 0.52);border-radius:5px;">
+        {{sub.name| limitTo:17}}
+      </div>
+    </div>
+  </div>
+</div>
+</div>

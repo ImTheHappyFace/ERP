@@ -1,0 +1,399 @@
+<div ng-controller="businessManagement.ecommerce.orders.explore" style="padding-top:20px;">
+  <div class="col-md-12">
+    <div class="col-md-3" style="border-right:solid 2px #eeeeee;min-height:82vh;position:relative;">
+
+      <div class="row text-center">
+        <h3>{{order.created | date : dd-MMM-yyyy}}</h3>
+        <h4>Status : {{order.status}}</h4>
+        <h4>Amount : <i class="fa {{currency}}"></i> {{order.totalAmount}}</h4>
+      </div>
+      <div class="row" style="margin-top:20px;font-size:18px;padding:5px 15px">
+        <span><strong>Shoping : </strong>{{order.modeOfShopping}} <br></span>
+        <span><strong>Shipping Charges : </strong><i class="fa {{currency}}"></i> {{order.shippingCharges}} <br></span>
+        <span><strong>Payment Mode : </strong>{{order.paymentMode}} <br></span>
+        <span><strong>Paid Amount : </strong><i class="fa {{currency}}"></i> {{order.paidAmount}} <br></span>
+        <span><strong>Payment Status : </strong>{{order.paymentStatus}} <br></span>
+        <span><strong>Payment RefId : </strong>{{order.paymentRefId}} <br></span>
+        <span><strong>Payment Channel : </strong>{{order.paymentChannel}} <br></span>
+        <span ng-if="order.promoCode!=null"><strong>promoCode : </strong>{{order.promoCode}} <br></span>
+        <!-- <span><strong>LandMark : </strong>{{order.landMark}} <br></span> -->
+      </div>
+      <div class="row" style="margin-top:20px;">
+        <div class="col-md-2">
+          <i class="fa fa-map-marker fa-3x pull-right" style="color:#8faec2;"></i>
+        </div>
+        <div class="col-md-10" style="font-size:18px">
+          <span><strong>LandMark :</strong> {{order.landMark}} <br></span>
+          <span>{{order.street}}</span> <br>
+          <span>{{order.city}}</span> <br>
+          <span>{{order.state}}</span> <br>
+          <span>{{order.pincode}}</span> <br>
+          <span>{{order.country}}</span> <br>
+        </div>
+      </div>
+      <div class="row" style="margin-top:10px;">
+        <div class="col-md-2">
+          <i class="fa fa-mobile-phone fa-2x pull-right" style="color:#8faec2;"></i>
+        </div>
+        <div class="col-md-10" style="font-size:18px">
+          <span>{{order.mobileNo}}</span> <br><br>
+        </div>
+      </div>
+      <div class="row" style="margin-top:10px;" >
+
+        <div class="col-md-2">
+          <i class="fa fa-user fa-3x " style="color:#8faec2;"></i>
+        </div>
+        <div class="col-md-10" style="font-size:18px" >
+          <span>{{order.user|getName}}</span> <button ng-if="!updateProfile"  ng-click="updateData()" class="btn btn-default">  <i class="fa fa-pencil" style="cursor:pointer"></i></button>
+          <button ng-if="updateProfile"  ng-click="updateDetails()" class="btn btn-primary">  <i class="fa fa-save" style="cursor:pointer"></i></button>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:10px;" ng-if="!isStoreGlobal&&updateProfile">
+        <div class="col-md-12">
+          <div class="row" style="padding-top:15px">
+            <div class="col-md-5">
+                <span> Company :</span>
+            </div>
+            <div class="col-md-7">
+                <input type="text" ng-model="details.Company" class="form-control" >
+            </div>
+          </div>
+          <div class="row" style="padding-top:15px">
+            <div class="col-md-5">
+                <span> Role :</span>
+            </div>
+            <div class="col-md-7">
+                <select class="form-control" ng-model="details.designation">
+                  <option value="member">member</option>
+                  <option value="admin">admin</option>
+                    <option value="director">director</option>
+                </select>
+            </div>
+          </div>
+          <div class="row" style="padding-top:15px">
+            <div class="col-md-5">
+                <span> Pincode :</span>
+            </div>
+            <div class="col-md-7">
+                <input type="text" ng-model="details.pincode" class="form-control" >
+            </div>
+          </div>
+          <div class="row" style="padding-top:15px">
+            <div class="col-md-5">
+                <span> GST :</span>
+            </div>
+            <div class="col-md-7">
+                <input type="text" ng-model="details.GST" class="form-control" >
+            </div>
+          </div>
+          <div class="row" style="padding-top:15px">
+            <div class="col-md-5">
+                <span> State Code :</span>
+            </div>
+            <div class="col-md-7">
+                <input type="text" ng-model="details.statecode" class="form-control" >
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="row" style="margin-top:10px;" ng-if="updateProfile&&isStoreGlobal">
+        <div class="col-md-12">
+          <div class="row" style="padding-top:15px">
+            <div class="col-md-5">
+                <span> Role :</span>
+            </div>
+            <div class="col-md-7">
+              <select  class="form-control" ng-model="details.designation">
+                <option value="member">member</option>
+                <option value="admin">admin</option>
+                  <option value="director">director</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-9" ng-if="order.orderQtyMap.length>0">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="col-md-12" ng-if="checkConditions.posPrinting">
+            <div class="input-group" ng-if="!connected">
+              <input type="text" class="form-control" placeholder="Please enter device ID" ng-model="connectData.deviceID">
+              <!-- <p class="help-block" style="font-size:12px">Please Connect The Device First</p> -->
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-success" ng-click="connectDevice()">Connect</button>
+              </span>
+            </div>
+            <div class="input-group" ng-if="connected">
+              <input type="text" class="form-control" value="{{connectData.deviceID}}" disabled>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-danger" ng-click="disconnectDevice()">Disconnect</button>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="text-center" ng-if="order.approved">
+            <h3>Approved <i class='fa fa-check' style="color:green"></i></h3>
+          </div>
+          <div class="text-center" ng-if="order.approved!=null && !order.approved">
+            <h3>Rejected <i class='fa fa-times' style="color:red"></i></h3>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="btn-group pull-right" ng-if="order.approved==null">
+            <button type="button" class="btn btn-primary" mwl-confirm title="Approve" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="orderApproved(order.pk,true)" confirm-button-type="default" cancel-button-type="default">Approve </button>
+            <button type="button" class="btn btn-danger" mwl-confirm title="Reject" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="orderApproved(order.pk,false)" confirm-button-type="default" cancel-button-type="default">Reject </button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="col-md-12" ng-if="!checkConditions.splitOrder" style="padding-top:15px">
+          <!-- <div class="col-md-4" ng-if="checkConditions.thirdParty">
+            <input type="checkbox" ng-model="selectAll.toWatch"> SelectAll
+          </div> -->
+          <div class="col-md-4" ng-if="checkConditions.thirdParty && order.status!='failed' && order.orderQtyMap[succIdx].courierName==null && order.orderQtyMap[succIdx].courierAWBNo==null">
+            <div class="form-group">
+              <button type="button" class="btn btn-primary" mwl-confirm title="Approve" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="openWeightPopup(order.orderQtyMap)" confirm-button-type="default" cancel-button-type="default">Generate Manifest </button>
+              <p class="help-block">Generate Manifest for selected orders</p>
+            </div>
+          </div>
+          <div class="col-md-4" ng-if="!checkConditions.thirdParty && order.status!='failed' && order.orderQtyMap[succIdx].courierName==null && order.orderQtyMap[succIdx].courierAWBNo==null"">
+            <div class="form-group">
+              <button type="button" class="btn btn-primary" mwl-confirm title="Approve" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="generateManifestForAll()" confirm-button-type="default" cancel-button-type="default">Generate Manifest </button>
+              <p class="help-block">Generate Manifest for selected orders</p>
+            </div>
+          </div>
+          <div class="col-md-5" style="font-size:19px" ng-if="checkConditions.changeStatus && order.status!='failed'&&succIdx>=0&&order.orderQtyMap[succIdx].status!=lastStatus">
+            <span class="text-muted ">Change Status To </span> &nbsp;
+            <!-- <div class="btn btn-warning">
+              <span mwl-confirm title="Change Status" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="changeStatusForAll('packed')" confirm-button-type="default" cancel-button-type="default" ng-if="order.orderQtyMap[succIdx].status=='created'">Packed</span>
+              <span mwl-confirm title="Change Status" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="changeStatusForAll('shipped')" confirm-button-type="default" cancel-button-type="default" ng-if="order.orderQtyMap[succIdx].status=='packed'">Shipped</span>
+              <span mwl-confirm title="Change Status" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="changeStatusForAll('inTransit')" confirm-button-type="default" cancel-button-type="default" ng-if="order.orderQtyMap[succIdx].status=='shipped'">InTransit</span>
+              <span mwl-confirm title="Change Status" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="changeStatusForAll('reachedNearestHub')" confirm-button-type="default" cancel-button-type="default" ng-if="order.orderQtyMap[succIdx].status=='inTransit'">ReachedNearestHub</span>
+              <span mwl-confirm title="Change Status" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="changeStatusForAll('outForDelivery')" confirm-button-type="default" cancel-button-type="default" ng-if="order.orderQtyMap[succIdx].status=='reachedNearestHub'">OutForDelivery</span>
+              <span mwl-confirm title="Change Status" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="changeStatusForAll('delivered')" confirm-button-type="default" cancel-button-type="default" ng-if="order.orderQtyMap[succIdx].status=='outForDelivery'">Delivered</span>
+              <span mwl-confirm title="Change Status" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="changeStatusForAll('returnToOrigin')" confirm-button-type="default" cancel-button-type="default" ng-if="order.orderQtyMap[succIdx].status=='delivered'">ReturnToOrigin</span>
+              <span mwl-confirm title="Change Status" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="changeStatusForAll('returned')" confirm-button-type="default" cancel-button-type="default" ng-if="order.orderQtyMap[succIdx].status=='returnToOrigin'">Returned</span>
+            </div> -->
+            <span  ng-repeat="s in orderStatusList track by $index" ng-if="order.orderQtyMap[succIdx].status==orderStatusList[$index]">
+              <span class="btn btn-warning" mwl-confirm title="Change Status" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="changeStatusForAll(orderStatusList[$index+1])" confirm-button-type="default" cancel-button-type="default">{{orderStatusList[$index+1]}}</span>
+            </span>
+
+          </div>
+          <div class="col-md-3 pull-right" ng-if="order.status!='failed' && order.orderQtyMap[succIdx].courierName!=null && order.orderQtyMap[succIdx].courierAWBNo!=null">
+
+            <row ng-if="checkConditions.thirdParty">
+              <div class="row">
+                <a href="/api/ecommerce/downloadManifest/?trackingId={{order.orderQtyMap[succIdx].courierAWBNo}}" target="_blank">
+                 <button type="button" class="btn btn-primary">Download Manifest <i class="fa fa-download"></i></button> </a>
+
+              </div>
+              <!-- <div class="row" style="margin-top:15px;">
+                <button class="btn btn-default" mwl-confirm title="Reset Manifest" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="resetManifest()" confirm-button-type="default" cancel-button-type="default">Reset Manifest <i class="fa fa-refresh"></i></button>
+              </div> -->
+              <div class="row" style="margin-top:15px;">
+                <a href="/api/ecommerce/downloadManifest/?allData={{order.pk}}&packingSlip" target="_blank">
+                <button type="button" class="btn btn-default">Download PackingSlip <i class="fa fa-download"></i></button> </a>
+              </div>
+
+              <div class="row" style="margin-top:15px;">
+                <a href="/api/ecommerce/downloadInvoice/?value={{order.pk}}" target="_blank">
+                <button type="button" class="btn btn-default">Download Invoice <i class="fa fa-download"></i></button> </a>
+              </div>
+
+
+             </row>
+             <row ng-if="!checkConditions.thirdParty">
+               <div class="row">
+                 <a href="/api/ecommerce/downloadManifest/?allData={{order.pk}}" target="_blank" ng-if="!checkConditions.posPrinting">
+                  <button type="button" class="btn btn-primary">Download Manifest <i class="fa fa-download"></i></button> </a>
+
+                  <span class="btn btn-default" ng-if="checkConditions.posPrinting" ng-click="downloadManifestPrinter()">Download Manifest <i class="fa fa-download"></i>
+                  </span>
+               </div>
+               <div class="row" style="margin-top:15px;">
+                 <a href="/api/ecommerce/downloadManifest/?allData={{order.pk}}&packingSlip" target="_blank">
+                   <button  type="button" class="btn btn-default">Download Packing Slip<i class="fa fa-download"></i></button> </a>
+               </div>
+
+               <div class="row" style="margin-top:15px;">
+                 <a href="/api/ecommerce/downloadInvoice/?value={{order.pk}}" target="_blank">
+                 <button type="button" class="btn btn-default">Download Invoice <i class="fa fa-download"></i></button> </a>
+               </div>
+
+
+              </row>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin:20px 5px">
+        <div class="" ng-repeat="pData in order.orderQtyMap" style="margin-bottom:10px">
+          <div class="container-fluid card" style="padding:10px; border-left:4px solid #0c9a9e;position:relative;" ng-init="idx=$index">
+
+            <!-- <input type="checkbox" ng-checked="pData.selected" ng-model="pData.selected"> -->
+            <div class="row">
+              <div class="col-md-12">
+
+                <div class="col-md-5" style="font-size:19px" ng-if="checkConditions.changeStatus && checkConditions.splitOrder && order.status!='failed' && pData.status != 'cancelled' && pData.status!='returned'&&pData.status!=lastStatus">
+                  <span class="text-muted ">Change Status To </span> &nbsp;
+                  <!-- <div class="btn btn-warning">
+                    <span mwl-confirm title="Change Status" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="changeStatus($index,'packed')" confirm-button-type="default" cancel-button-type="default" ng-if="pData.status=='created'">Packed</span>
+                    <span mwl-confirm title="Change Status" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="changeStatus($index,'shipped')" confirm-button-type="default" cancel-button-type="default" ng-if="pData.status=='packed'">Shipped</span>
+                    <span mwl-confirm title="Change Status" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="changeStatus($index,'inTransit')" confirm-button-type="default" cancel-button-type="default" ng-if="pData.status=='shipped'">InTransit</span>
+                    <span mwl-confirm title="Change Status" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="changeStatus($index,'reachedNearestHub')" confirm-button-type="default" cancel-button-type="default" ng-if="pData.status=='inTransit'">ReachedNearestHub</span>
+                    <span mwl-confirm title="Change Status" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="changeStatus($index,'outForDelivery')" confirm-button-type="default" cancel-button-type="default" ng-if="pData.status=='reachedNearestHub'">OutForDelivery</span>
+                    <span mwl-confirm title="Change Status" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="changeStatus($index,'delivered')" confirm-button-type="default" cancel-button-type="default" ng-if="pData.status=='outForDelivery'">Delivered</span>
+                    <span mwl-confirm title="Change Status" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="changeStatus($index,'returnToOrigin')" confirm-button-type="default" cancel-button-type="default" ng-if="pData.status=='delivered'">ReturnToOrigin</span>
+                    <span mwl-confirm title="Change Status" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="changeStatus($index,'returned')" confirm-button-type="default" cancel-button-type="default" ng-if="pData.status=='returnToOrigin'">Returned</span>
+                  </div> -->
+                  <span  ng-repeat="s in orderStatusList track by $index" ng-if="pData.status==orderStatusList[$index]">
+                    <span class="btn btn-warning" mwl-confirm title="Change Status" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="changeStatus(idx,orderStatusList[$index+1])" confirm-button-type="default" cancel-button-type="default">{{orderStatusList[$index+1]}}</span>
+                  </span>
+                </div>
+                <div class="col-md-{{checkConditions.splitOrder&&checkConditions.changeStatus?7:12}}">
+
+                  <div class="fa fa-trash-o pull-right fa-2x" style="cursor:pointer;color:red" mwl-confirm title="Cancel Item" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="orderItemCancel($index)" confirm-button-type="default"
+                    cancel-button-type="default" ng-if="order.status!='failed' && pData.status=='created' || pData.status=='packed'">
+                  </div>
+                  <span ng-if="checkConditions.splitOrder">
+                    <div class="btn btn-default btn-sm pull-right" ng-if="(pData.courierName==null||pData.courierAWBNo==null && order.status!='failed') && pData.status!='cancelled'" ng-click="openManifest($index)">
+                      Generate Manifest
+                    </div>
+                  </span>
+                  <div class="btn-group pull-right" ng-if="order.status!='failed' && pData.courierName!=null && pData.courierAWBNo!=null">
+                    <button type="button" class="btn btn-primary" ng-click="openManifest($index)" ng-if="checkConditions.splitOrder&&checkConditions.thirdParty">Edit Manifest </button>
+                    <!-- <a href="/api/ecommerce/downloadManifest/?qPk={{pData.pk}}" target="_blank">
+                    <button type="button" class="btn btn-default">Download Manifest <i class="fa fa-download"></i></button> </a> -->
+
+                    <span ng-if="checkConditions.splitOrder">
+                      <a href="/api/ecommerce/downloadManifest/?qPk={{pData.pk}}" target="_blank">
+                        <button type="button" class="btn btn-default">Download Manifest <i class="fa fa-download"></i></button> </a>
+
+                      <a href="/api/ecommerce/downloadManifest/?qPk={{pData.pk}}&packingSlip" target="_blank">
+                        <button type="button" class="btn btn-default">Download PackingSlip <i class="fa fa-download"></i></button> </a>
+                      </span>
+
+
+                    </div>
+              </div>
+
+
+            </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-md-12">
+                <h3 ng-if="pData.prodVar==undefined"> {{pData.productName}} <span ng-if="pData.product.product.howMuch!=1||pData.product.product.unit!='Quantity'"> {{pData.product.product.howMuch | convertUnit:pData.product.product.unit}} </span></h3>
+                <h3 ng-if="pData.prodVar"> {{pData.productName}}<span ng-if="pData.prodVar[0].unitPerpack!=1||pData.prodVar[0].unit!='Quantity'"> {{pData.prodVar[0].unitPerpack | convertUnit:pData.prodVar[0].unit}} </span>
+                  <!-- <span ng-if="pData.product.product.unit!='Size and Color' && pData.product.product.unit!='Size'"> {{pData.prodVar[0].unitPerpack * pData.product.product.howMuch | convertUnit: pData.product.product.unit}} </span>
+                  <span ng-if="pData.product.product.unit=='Size and Color'||pData.product.product.unit=='Size'"> {{pData.prodVar[0].unitPerpack }} {{pData.desc}} </span> -->
+                </h3>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4" >
+                <div class="col-md-8" style="padding:0px" ng-if="checkConditions.showGst&&pData.product.product_taxAmount>0">
+                  <span style="font-size:15px;">Price : <i class="fa {{currency}}"></i> {{pData.priceDuringOrder}} ( <b>+</b> {{pData.product.product_taxAmount}} )</span>
+                </div>
+                <div class="col-md-8" style="padding:0px" ng-if="!checkConditions.showGst||pData.product.product_taxAmount==0">
+                  <span style="font-size:15px;">Price : <i class="fa {{currency}}"></i> {{pData.priceDuringOrder}}</span>
+                </div>
+                <div class="col-md-4" style="padding:0px">
+                  <span style="font-size:15px;">Quantity : {{pData.qty}}</span>
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <span style="font-size:15px;">Discount : <i class="fa {{currency}}"></i> {{pData.discountAmount}} </span>
+              </div>
+              <div class="col-md-3">
+                <span style="font-size:15px;">Total Price : <i class="fa {{currency}}"></i> {{pData.totalAmount}}</span>
+              </div>
+              <div class="col-md-3">
+                <span style="font-size:15px;">Paid Amount : <i class="fa {{currency}}"></i> {{pData.paidAmount}} </span>
+              </div>
+            </div>
+            <div class="row" ng-if="pData.customization">
+              <div class="col-md-1">
+                <p> <strong>Customization:</strong> </p>
+                <img src="{{pData.customization.image}}" alt="" style="width:100px;height:100px;">
+              </div>
+              <div class="col-md-3">
+                {{pData.customization.data}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <!-- <div class="col-md-12"> -->
+                <div class="col-md-3" style="font-size:19px">
+                  <strong>Status : {{pData.status}}</strong>
+                </div>
+                <div class="col-md-4" style="font-size:19px">
+                  <strong>Refund Amount : {{pData.refundAmount}}</strong>
+                </div>
+                <div class="col-md-3" style="font-size:19px">
+                  <strong>Refund Status : <i class="fa fa-{{pData.refundStatus?'check-circle':'times-circle'}}" style="color:{{pData.refundStatus?'#2b832b':'#fe2121'}}"></i></strong>
+                </div>
+                <div class="col-md-2">
+                  <div class="btn btn-default btn-lg" ng-click="expanded= !expanded">
+                    Logs &nbsp;<i class="fa fa-chevron-{{ !expanded ? 'down':'up'}}"></i>
+                  </div>
+                </div>
+                <!-- <span>Refund Amount : {{pData.refundAmount}}</span><br>
+                <span>Refund Status : {{pData.refundStatus}}</span><br>
+                <span>Cancellable : {{pData.cancellable}}</span><br> -->
+              <!-- </div> -->
+            </div>
+            <div class="row" style="margin-top:15px">
+              <div class="row" ng-if="expanded" style="margin-top:15px;margin-left:15px">
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <textarea class="form-control" rows="5" cols="80" ng-model="pData.logText" placeholder="Write Log Here..."></textarea>
+                  </div>
+                  <div class="btn btn-success pull-right" ng-click="saveLog($index,pData.logText)">Submit</div>
+                </div>
+                <div class="col-md-7">
+                  <span style="font-size:17px;"><b>Logs History</b></span>
+
+                  <table class="table table-striped">
+                    <tbody>
+                      <tr ng-repeat="log in pData.trackingLog">
+                        <td style="width:30%">{{log.time | date : 'dd-MMM-yyyy'}}<br>( {{log.time | date : 'hh:mm a'}} )</td>
+                        <td style="width:70%">{{log.logTxt}}</td>
+                      </tr>
+                    </tbody>
+
+                  </table>
+
+                  <!-- <ul>
+                    <li ng-repeat="log in pData.trackingLog" style="font-size:15px">
+                      <div class="col-md-9">
+                        {{log.logTxt}}
+                      </div>
+                      <div class="col-md-3 text-right">
+                        {{log.time | date : 'dd-MMM-yyyy : hh:mm a'}}
+                      </div>
+                      </li>
+                  </ul> -->
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="row" style="padding-bottom:15px">
+        <div class="col-md-12">
+          <span class="btn btn-primary" ng-click="addNewProduct(order.pk)">Add <i class="fa fa-plus"></i></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

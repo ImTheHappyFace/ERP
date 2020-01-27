@@ -1,0 +1,337 @@
+<style>
+  .tab {
+    overflow: hidden;
+    border-bottom: 1px solid #ccc;
+    /* background-color: #f1f1f1; */
+  }
+
+  .navbar-nav>li>a {
+    color: black;
+    font-size: 16px
+  }
+
+  .tab li {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin: 20px;
+    margin-bottom: 0px;
+    margin-top: 5px;
+    padding-bottom: 12px;
+    transition: 0.3s;
+    font-size: 17px;
+  }
+
+  /* Change background color of buttons on hover */
+  .tab li>a:hover {
+    /* background-color: #ddd; */
+  }
+
+  /* Create an active/current tablink class */
+  .tab li.active {
+    background-color: #fff;
+    border-bottom: 2px solid blue;
+    color: blue;
+    /* font-weight:600; */
+  }
+
+  /* Style the tab content */
+  .tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border-top: 2px solid #ccc;
+    border-top: none;
+  }
+
+  /* Style the close button */
+  .topright {
+    float: right;
+    cursor: pointer;
+    font-size: 28px;
+  }
+
+  .topright:hover {
+    color: red;
+  }
+
+  .dropbtn1 {
+    padding: 16px;
+    font-size: 14px;
+    border: none;
+    font-weight: bold
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .categoryDropDown-content a:hover {
+    background-color: #ddd;
+  }
+
+  .dropdown1:hover .dropdown-content {
+    display: block;
+  }
+
+  .custom-slider.rzslider .rz-bar {
+    background: #c2c2c2;
+    height: 2px;
+  }
+
+  .custom-slider.rzslider .rz-selection {
+    background: var(--themeColor);
+  }
+
+  .custom-slider.rzslider .rz-pointer {
+    width: 4px;
+    height: 16px;
+    top: -7px;
+    /* to remove the default positioning */
+    bottom: 0;
+    background-color: #333;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+  }
+
+  .custom-slider.rzslider .rz-pointer:after {
+    display: none;
+  }
+
+  .custom-slider.rzslider .rz-bubble {
+    bottom: 14px;
+  }
+
+  .custom-slider.rzslider .rz-limit {
+    font-weight: bold;
+    color: orange;
+    display: none;
+  }
+
+  .custom-slider.rzslider .rz-tick {
+    width: 1px;
+    height: 10px;
+    margin-left: 4px;
+    border-radius: 0;
+    background: #ffe4d1;
+    top: -1px;
+  }
+
+  .custom-slider.rzslider .rz-tick.rz-selected {
+    background: orange;
+  }
+
+  .rzslider .rz-bubble {
+    display: none
+  }
+
+  .overon {
+    margin-top: 5%;
+  }
+
+  @media only screen and (max-width:480px) {
+
+    .overon {
+      z-index: 1;
+    }
+  }
+</style>
+
+<!-- <div class="row">
+  <div class="col-md-12 text-center  hidden-xs hidden-sm  anim-in-out anim-zoom-out"
+    style="padding-right:0px;padding-left:0px;margin-bottom:20px;overflow:hidden;height:20vh;background: url('{{category.bannerImage}}') no-repeat center center;background-size: cover;">
+    <h2 style="padding-top:3%;color:#000000;text-shadow: 0 0 20px rgba(255,255,255,1),0 0 20px rgba(255,255,255,1),0 0 20px rgba(255,255,255,1),0 0 20px rgba(255,255,255,1),0 0 20px rgba(255,255,255,1),0 0 20px rgba(255,255,255,1),0 0 20px rgba(255,255,255,1),0 0 20px
+    rgba(255,255,255,1);"> {{category.name}}</h2>
+  </div>
+  <div class="col-xs-12 col-sm-12 text-center hidden-md hidden-lg  anim-in-out anim-zoom-out" style="padding-left:0px;padding-right:0px;margin-bottom:20px">
+    <div style="width: 100%; height:200px;background: url('{{category.visual}}') no-repeat center center;background-size: cover;">
+      <h5 style="padding-top:20%;color:#000000;text-shadow: 0 0 20px rgba(255,255,255,1),0 0 20px rgba(255,255,255,1),0 0 20px rgba(255,255,255,1),0 0 20px rgba(255,255,255,1),0 0 20px rgba(255,255,255,1),0 0 20px rgba(255,255,255,1),0 0 20px rgba(255,255,255,1),0 0 20px
+      rgba(255,255,255,1);"> {{category.name}}</h5>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="row">
+        <div class="col-md-11">
+          <h5> <strong> Categories </strong> </h5>
+          <p ng-click="$state.go('categories' , {name : r.alias.split(' ').join('_')})" ng-repeat="r in categories" style="margin-bottom:0px;cursor:pointer">
+            <span ng-if="r.name.length>35" style="margin:0px;  height:60px;">{{r.name.slice(0,35)}}...</span>
+            <span ng-if="r.name.length<=35" style="margin:0px;  height:60px;">{{r.name}} </span>
+          </p>
+        </div>
+      </div>
+      <div class="row" style="padding-top:30px">
+        <div class="col-md-11">
+          <h5> <strong> Filter By </strong> </h5>
+          <p style="margin-top:15px;font-weight:bold;font-size:14px"> Price </p>
+          <rzslider class="custom-slider" rz-slider-model="slider1.minValue" rz-slider-high="slider1.maxValue" rz-slider-options="slider1.options"></rzslider>
+          <p> Range : ₹{{slider1.minValue}} - ₹{{slider1.maxValue}}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="row" style="border-bottom:1px solid #c7c7c7">
+        <div class="col-md-6">
+          <p style="font-size:14px;font-weight:bold"> <span style="color:var(--themeColor)">{{listingCatProductsData1.length}}</span> Products Found </p>
+        </div>
+        <div class="col-md-6 text-right">
+          <span> Sorted by : </span>
+          <div class="dropdown1">
+            <span class="dropbtn1">highest rated</span>
+            <div class="dropdown-content text-right">
+              <a href="#">highest rated</a>
+              <a href="#">name</a>
+              <a href="#">price</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3" ng-repeat="l in listingCatProductsData1" style="padding:10px;height:350px;">
+          <product-cards list="l" add-cart="addToCart"></product-cards>
+        </div>
+      </div>
+      <div clas="row" ng-if="loadBtn">
+        <div class="col-md-12 text-center">
+          <button type="button" style="margin-bottom:15px" class="btn btn-default" ng-click="loadMore()">Show More</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+<div class="container" style="margin-top:100px;margin-bottom:100px;">
+  <div class="row">
+    <div class="col-lg-3" style="padding-top:20px;padding-bottom:50px;">
+
+      <div class="row" style="padding:10px;border-bottom:1px solid #ccc">
+        <div class="col-lg-6">
+          <p style="font-weight:600;font-size:16px">Filters</p>
+        </div>
+        <div class="col-lg-6 text-right">
+          <p style="font-weight:600;font-size:16px;text-transform:uppercase;color:blue">Clear all</p>
+        </div>
+      </div>
+      <div class="row" style="padding:15px;border-bottom:1px solid #ccc">
+        <p style="font-weight:600;font-size:16px;text-transform:uppercase;">Categories</p>
+        <div class="" ng-repeat="r in categories">
+          <p ng-click="$state.go('categories' , {name : r.alias.split(' ').join('_')})">{{r.name}}</p>
+        </div>
+      </div>
+      <div class="row" style="padding:15px;border-bottom:1px solid #ccc">
+        <div class="col-lg-6">
+          <p style="font-weight:600;font-size:16px;text-transform:uppercase;">Price</p>
+
+        </div>
+        <div class="col-lg-6 text-right">
+          <p style="font-weight:600;font-size:16px;text-transform:uppercase;">Clear all</p>
+
+        </div>
+        <div class="row" style="margin:0px;">
+          <rzslider class="custom-slider" rz-slider-model="slider1.minValue" rz-slider-high="slider1.maxValue" rz-slider-options="slider1.options"></rzslider>
+          <p> Range : ₹{{slider1.minValue}} - ₹{{slider1.maxValue}}
+
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-9">
+
+      <div class="row" style="margin-left:0px;padding-bottom:50px;">
+        <div class="col-lg-12">
+          <p>Home <span><i class="fa fa-chevron-right" aria-hidden="true" style="padding-left:10px;padding-right:10px;">
+              </i></span>{{category.name}}</p>
+        </div>
+        <div class="col-lg-12">
+          <ul class="nav navbar-nav tab">
+            <li style="margin-left:0px">Sort by</li>
+            <li class="tablinks" ng-click="categoryTyp($event,'popular')" id="defaultOpen">Popularity</li>
+            <li class="tablinks" ng-click="categoryTyp($event,'lowtohigh')">Price-Low to High</li>
+            <li class="tablinks" ng-click="categoryTyp($event,'hightolow')">Price-High to Low</li>
+            <li class="tablinks" ng-click="categoryTyp($event,'newest')">Newest First</li>
+          </ul>
+
+
+          <div id="popular" class="tabcontent">
+
+            <div class="row">
+              <div class="col-md-12" ng-repeat="l in listingCatProductsData1" style="padding:10px;height:350px;">
+
+                <product-cards list="l" add-cart="addToCart"></product-cards>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div id="lowtohigh" class="tabcontent">
+            <div class="row">
+              <div class="col-md-12" ng-repeat="l in listingCatProductsData1" style="padding:10px;height:350px;">
+                <product-cards list="l" add-cart="addToCart"></product-cards>
+              </div>
+
+            </div>
+          </div>
+
+          <div id="hightolow" class="tabcontent">
+            <div class="row">
+              <div class="col-md-12" ng-repeat="l in listingCatProductsData1" style="padding:10px;height:350px;">
+                <product-cards list="l" add-cart="addToCart"></product-cards>
+              </div>
+
+            </div>
+          </div>
+          <div id="newest" class="tabcontent">
+            <div class="row">
+              <div class="col-md-12" ng-repeat="l in listingCatProductsData1" style="padding:10px;height:350px;">
+                <product-cards list="l" add-cart="addToCart"></product-cards>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+        <!-- <div class="col-lg-12" ng-repeat="l in listingCatProductsData1" style="padding-top:20px;padding-bottom:20px;border-bottom:1px solid #ccc">
+          <div class="col-lg-3">
+            <div class="" ng-if="l.displayPicture" style="background-image:url('{{l.displayPicture.url}}');height:150px;background-size:contain;background-repeat:no-repeat;background-position:center;">
+
+            </div>
+            <div class="" ng-if="!l.displayPicture" style="background-image:url('/static/images/mobile.jpg');height:150px;background-size:contain;background-repeat:no-repeat;background-position:center;">
+
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <p style="font-weight:600;font-size:16px;">{{l.product.name}}</p>
+          </div>
+          <div class="col-lg-3">
+            <p ng-if=" l.product.discountedPrice != l.product.price" style="font-size:18px;font-weight:600;margin:0px;"><span><i class="fa fa-inr" aria-hidden="true"></i>
+              </span>{{l.product.discountedPrice}}</p>
+            <p ng-if=" l.product.discountedPrice == l.product.price" style="font-size:18px;font-weight:600;margin:0px;"><span><i class="fa fa-inr" aria-hidden="true"></i>
+              </span>0</p>
+
+            <p style="text-decoration: line-through;font-size:16px;color:#ccc"><span><i class="fa fa-inr" aria-hidden="true" style="text-decoration: line-through;"></i></span>{{l.product.price}} </p>
+
+          </div>
+        </div> -->
+
+
+      </div>
+    </div>
+  </div>
+
+</div>

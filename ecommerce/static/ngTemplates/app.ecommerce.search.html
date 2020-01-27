@@ -1,0 +1,36 @@
+<style media="screen">
+*:focus {
+    outline: none;
+}
+
+input:focus{
+   border: transparent;
+}
+</style>
+<div class="" style="min-height:700px;">
+
+
+<div class="row" style="background:var(--themeColor);height:45px;">
+<div class="col-md-12" style="margin-top:5.5px;">
+
+<span>  <input type="text" name="" value="" ng-change="genericProductSearch(searchProduct.product)" ng-model="searchProduct.product" placeholder="{{settings.searchField}}" style="width:100%;background-color:#F1F2F7;box-shadow:none;padding:2px 15px;border-radius:25px;">
+<i class="fa fa-times" aria-hidden="true" ng-click="searchProduct.product=''" style="position:absolute;top:6px;right:25px;font-size:20px;"></i>
+</span>
+</div>
+</div>
+
+
+  <div class="" ng-repeat="a in matchedproducts" style="border:1px solid #e6e6e6;margin:10px;padding:10px;box-shadow: 0 8px 6px -6px black;" ng-click="openDetails(a.pk,a.product.name.split(' ').join('-'))">
+    <div class="flex-container" style="display: flex;">
+      <div class="" style="width:20%;margin-right:0px;">
+        <img src="{{'/media/'+a.dp}}" alt="" style="width:100%;">
+      </div>
+      <div class="" style="text-align:left;width:60%;margin-right:0px;margin-left:10px;">
+        {{a.name}}
+        <p>MRP:{{a.price}}</p>
+      </div>
+    </div>
+  </div>
+
+
+</div>

@@ -1,0 +1,27 @@
+<div class="col-md-4">
+  <div class="card card-cascade" style="margin-bottom:15px">
+    <div class="container-fluid card-body text-center" style="padding-top:15px;height:10vh">
+      <h4><strong>{{data.title}}</strong></h4>
+    </div>
+    <div class="container-fluid">
+      <strong>Subtitle : </strong> {{data.subtitle}} <br>
+      <strong>Created : </strong> {{data.created | date : 'dd-MMM-yyyy: hh:mm:ss a'}}<br>
+      <strong>User : </strong> {{data.user | getName}}
+    </div>
+    <hr>
+    <div class="row" style="margin:10px 15px;margin-bottom:5px">
+      <div class="col-md-4">
+        <i class="fa fa-pencil fa-lg" style="cursor:pointer" ng-click="rowActionClicked('edit')"></i>
+      </div>
+      <div class="col-md-8">
+        <div class="col-md-6">
+          <i class="fa fa-trash fa-lg" style="cursor:pointer" mwl-confirm title="Confirm" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="rowActionClicked('delete')" confirm-button-type="default" cancel-button-type="default"></i>
+        </div>
+        <div class="col-md-6">
+          <i class="fa fa-info fa-lg pull-right" style="cursor:pointer" ng-click="rowActionClicked('info')"></i>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

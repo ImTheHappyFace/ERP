@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="container-fluid">
+    <div class="col-md-4">
+      <div class="row" ng-controller="businessManagement.ecommerce.configure.offerBanner" style="margin:20px 15px">
+        <span class="text-center"><h4>{{msg}} offer banner</h4></span>
+        <div class="form-group" ng-if="mode == 'edit'">
+          <label>Active</label>
+          <input type="checkbox" ng-model="form.active">
+        </div>
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" ng-model="form.title" class="form-control" placeholder="Enter title">
+        </div>
+        <div class="form-group">
+          <label>Subtitle</label>
+          <input type="text" class="form-control" ng-model="form.subtitle" placeholder="Enter Subtitle">
+        </div>
+        <div class="form-group">
+          <label>Banner Image</label>
+          <input type="file" file-model="form.image">
+        </div>
+        <div class="form-group">
+          <label>Banner Potrait Image</label>
+          <input type="file" file-model="form.imagePortrait">
+        </div>
+
+        <div class="form-group">
+          <label>Level</label>
+          <input type="number" class="form-control" ng-model="form.level" min="1">
+          <p class="help-block">
+            Enter 1 if it will be on the slide show , 2 if it will be shown in the sidebar, 2 if this will be a flash message
+          </p>
+        </div>
+        <div class="form-group">
+          <label>Page</label>
+          <input type="text" ng-model="form.page" class="form-control" uib-typeahead="p as p.title for p in pageSearch($viewValue)" placeholder="Search and select a page">
+        </div>
+
+
+        <button type="button" class="btn btn-primary" ng-click="submit()">
+          {{mode == 'new' ? 'Create':'Save'}}
+        </button>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="row" style="margin:20px 15px">
+        <generic-Table data="data.tableOfferBannersData" config-Obj="{{offerBannersConfig}}" callback-Fn="tableActionOfferBanners"></generic-Table>
+      </div>
+    </div>
+  </div>
+</div>

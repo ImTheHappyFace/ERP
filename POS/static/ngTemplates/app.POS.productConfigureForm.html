@@ -1,0 +1,35 @@
+<div>
+  <div class="modal-header bg-blue" style="height:7vh;">
+    <div class="row">
+      <div class="col-md-2">
+        <i class = "fa fa-window-close fa-2x" ng-click = "close()"></i>
+      </div>
+    </div>
+    <!-- <div class="container-fluid">
+      <h4>
+        <div class="row">
+          <div class="col-md-12 pull-right">
+            <span class="pull-right">
+              Create a Product Meta
+            </span>
+          </div>
+        </div>
+      </h4>
+    </div> -->
+  </div>
+  <div class="container-fluid" style="padding:10px">
+    <uib-tabset>
+
+      <uib-tab active="searchTabActive">
+        <uib-tab-heading>
+          Browse
+          <i class="fa fa-list-ul"></i>
+        </uib-tab-heading>
+        <div class="container-fluid">
+          <generic-Table data="data.productMetatableData" config-Obj="{{configProductMeta}}" callback-Fn="tableActionProductMeta"></generic-Table>
+        </div>
+      </uib-tab>
+
+    </uib-tabset>
+  </div>
+  </div>

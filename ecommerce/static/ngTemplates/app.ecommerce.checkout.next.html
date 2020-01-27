@@ -1,0 +1,1061 @@
+<style media="screen">
+.imageemptcart{
+  height:70vh;
+}
+.imagezoom:hover{
+  transform: scale(1.5);
+}
+  @media only screen and (max-width: 480px) {
+    .imageemptcart{
+      width: 100%;
+    }
+}
+</style>
+<div class="container-fluid" style="padding:0px;font-family: var(--fontStyle)!important;{{topLevelMenu?'margin-top:5vh':''}};" ng-if="cartItems.length>0">
+  <div class="container card bg-white" style="display:block;position:relative;min-height:500px;padding-left:0px;">
+
+    <div class="row hidden-sm hidden-xs" style="font-family: var(--fontStyle)!important;padding-top:30px;border-bottom:1px solid #c2c2c2;margin-left:0px">
+      <div class="col-md-3 text-center" style="border-right:1px solid #c2c2c2">
+        <svg style="height:35px;width:40px">
+          <path style="fill:#000;height:35px;width:40px;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;background-color:red;"
+            d="M 3.49805,1 C 2.11366,1 1,2.1156 1,3.5 1,4.8844 2.11366,5.9981 3.49805,5.9981 H 8.2461 l 4.32031,18.9433 c -0.485102,0.859586 0.592586,1.629507 0.614035,-0.07699 L 41.63281,21.2969 V 3.8399 l -28.03515,-0.07 c 0.01,-0.09 0.0254,-0.177 0.0254,-0.2695 0,-1.3844 -1.11366,-2.5 -2.49805,-2.5 z m 8.9082,24.459 c -1.21488,0 -2.19336,0.9785 -2.19336,2.1934 0,1.2148 0.97848,2.1933 2.19336,2.1933 h 0.27735 c -1.15513,0.596521 -1.880769,1.787838 -1.88086,3.0879 5.57e-4,1.918742 1.555868,3.474048 3.47461,3.4746 1.919503,5.25e-4 3.476003,-1.555097 3.47656,-3.4746 -0.0012,-1.301347 -0.729318,-2.492984 -1.88672,-3.0879 h 18.74805 c -1.15513,0.596521 -1.880769,1.787838 -1.88086,3.0879 5.57e-4,1.919503 1.557057,3.475125 3.47656,3.4746 1.918742,-5.52e-4 3.474053,-1.555858 3.47461,-3.4746 -8.46e-4,-1.300919 -0.728124,-2.49245 -1.88477,-3.0879 h 0.10352 c 1.21488,0 2.19336,-0.9785 2.19336,-2.1933 0,-1.2149 -0.97848,-2.1934 -2.19336,-2.1934 z"
+            id="path828" inkscape:connector-curvature="0" sodipodi:nodetypes="cssccccccsccsssccccccccccssss" />
+        </svg>
+
+        <!-- <i class="fa fa-shopping-cart fa-3x" ></i> -->
+        <h5 style="text-align:center;text-transform:capitalize;">
+          Checkout
+        </h5>
+      </div>
+      <div class="col-md-3 text-center" style="border-right:1px solid #c2c2c2;color:{{ data.stage == 'review'?'var(--themeColor)':'#000000'}}">
+        <!-- <img src="static/images/Review.svg" style="filter: invert(42%) sepia(93%) saturate(1352%) hue-rotate(87deg) brightness(119%) contrast(119%);"/> -->
+        <svg style="height:35px;width:40px">
+          <path style="fill:{{ data.stage == 'review'?'var(--themeColor)':'#000000'}};" d="M31.923,9.14L13.417,27.642c-0.496,0.494-1.299,0.494-1.793,0L0.37,16.316
+		c-0.494-0.496-0.494-1.302,0-1.795l2.689-2.687c0.496-0.495,1.299-0.495,1.793,0l7.678,7.729L27.438,4.654
+		c0.494-0.494,1.297-0.494,1.795,0l2.689,2.691C32.421,7.84,32.421,8.646,31.923,9.14z" />
+        </svg>
+        <!-- <i class="fa fa-check fa-3x"></i> -->
+        <h5 style="text-align:center;text-transform:capitalize;color:{{ data.stage == 'review'?'var(--themeColor)':'#000000'}}">
+          Review
+        </h5>
+      </div>
+      <div class="col-md-3 text-center" style="border-right:1px solid #c2c2c2;color:{{ data.stage == 'shippingDetails'?'var(--themeColor)':'#000000'}}">
+        <svg style="height:35px;width:40px">
+          <path id="path939"
+            style="opacity:1;fill:{{ data.stage == 'shippingDetails'?'var(--themeColor)':'#000000'}};height:35px;width:40px;fill-opacity:1;stroke:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+            d="m 30.819254,23.821187 c -2.981594,-2.64e-4 -5.398715,2.416857 -5.398451,5.398451 -2.64e-4,2.981593 2.416857,5.398715 5.398451,5.39845 2.981593,2.65e-4 5.398715,-2.416857 5.39845,-5.39845 0,-0.09184 -0.0023,-0.183307 -0.0076,-0.274016 -0.142488,-2.854299 -2.501934,-5.124699 -5.391647,-5.124472 z m 0,1.988296 c 1.799206,-4.53e-4 3.273108,1.392832 3.401121,3.15927 0.0076,0.08277 0.0076,0.166677 0.0076,0.25096 -6.05e-4,1.88281 -1.527345,3.408681 -3.410154,3.408189 -1.88281,4.92e-4 -3.40955,-1.525379 -3.410155,-3.408189 -3.7e-5,-0.09109 0.0035,-0.181417 0.01134,-0.270992 0.137575,-1.756913 1.607206,-3.139653 3.399609,-3.1392 z M 11.500086,23.821187 c -2.868246,-2.64e-4 -5.2141231,2.236574 -5.3880948,5.060977 -0.00756,0.111496 -0.011339,0.224126 -0.011339,0.337512 -2.645e-4,2.981593 2.4168567,5.398714 5.3984508,5.39845 2.981593,2.64e-4 5.398715,-2.416857 5.39845,-5.39845 2.65e-4,-2.981594 -2.416857,-5.398715 -5.39845,-5.398451 z m 0,1.988296 c 1.883565,-4.91e-4 3.410645,1.526589 3.410154,3.410155 -6.05e-4,1.882809 -1.527345,3.40868 -3.410154,3.408189 -1.8828098,4.91e-4 -3.4095499,-1.52538 -3.4101547,-3.408189 -4.913e-4,-1.883566 1.526589,-3.410646 3.4101547,-3.410155 z M 15.414164,4.9442241 c -0.542135,0 -0.978519,0.4363842 -0.978519,0.9785196 V 10.436444 H 9.1954053 L 2.9454275,16.87589 v 9.343748 l -1.4511874,1.074217 v 1.640617 c 0,-0.277039 5.9857511,-0.09487 5.9857511,-0.09487 1.6233448,-4.237455 6.2717858,-4.344491 7.6197168,0.09487 0.100157,0.03402 0.202582,0.06425 0.314456,0.06425 h 1.551345 8.392857 c 4.426318,-5.736907 8.341228,-3.2208 10.083325,0.08882 0.384416,0.730281 0,0 2.76344,-0.08882 0.532724,-0.100913 0.978595,-0.436346 0.978595,-0.978481 V 5.9225548 c 0,-0.5421355 -0.436384,-0.9785197 -0.978595,-0.9785197 z m -5.099603,8.1777639 h 3.816378 l -0.156094,5.044913 H 5.2697613 Z"
+            inkscape:connector-curvature="0" sodipodi:nodetypes="ccccsccccccscccssccccscccscccccccsscscssscccccccccc" />
+        </svg>
+        <!-- <i class="fa fa-truck fa-3x"></i> -->
+        <h5 style="text-align:center;text-transform:capitalize;color:{{ data.stage == 'shippingDetails'?'var(--themeColor)':'#000000'}}">
+          Shipment details
+        </h5>
+      </div>
+      <div class="col-md-3 text-center" style="color:{{ data.stage == 'payment'?'var(--themeColor)':'#000000'}}">
+        <svg style="height:35px;width:40px">
+          <path
+            style="opacity:1;fill:{{ data.stage == 'payment'?'var(--themeColor)':'#000000'}};height:35px;width:40px;fill-opacity:1;stroke:none;stroke-width:4.74298668;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+            d="m 3.2394167,3.2433005 c -1.2855389,0 -2.32140239,1.0031513 -2.32140239,2.2480141 V 31.91872 c 0,1.244863 1.03586349,2.246179 2.32140239,2.246179 H 39.393392 c 1.285539,0 2.321402,-1.001316 2.321402,-2.246179 V 5.4913146 c 0,-1.2448628 -1.035863,-2.2480141 -2.321402,-2.2480141 z m 1.942973,2.2516481 H 37.452277 c 1.098419,0 1.982576,0.8561696 1.982576,1.9198633 V 11.037524 H 3.1998141 V 7.4148119 c 0,-1.0636937 0.8841199,-1.9198633 1.9825756,-1.9198633 z M 3.1998141,18.829913 H 39.434853 v 11.16531 c 0,1.063659 -0.884157,1.919828 -1.982576,1.919828 H 5.1823897 c -1.0984557,0 -1.9825756,-0.856169 -1.9825756,-1.919828 z m 3.1404527,7.500683 v 2.667332 h 5.6801252 v -2.667332 z m 8.3499002,0.02117 v 2.625418 h 7.960177 v -2.625418 z"
+            id="rect952" inkscape:connector-curvature="0" />
+        </svg>
+        <!-- <i class="fa fa-credit-card fa-3x"></i> -->
+        <h5 style="text-align:center;text-transform:capitalize;color:{{ data.stage == 'payment'?'var(--themeColor)':'#000000'}}">
+          Pay
+        </h5>
+      </div>
+
+      <!-- <div class="row" style="padding-left:40%; padding-top:20px;color:white">
+        <i class="fa fa-shopping-cart fa-4x"></i>
+      </div>
+      <h4 style="text-align:center;text-transform:capitalize;color:white;">
+        Checkout
+      </h4>
+      <hr>
+      <div style="position:absolute;left:0px;width:100%;display:block;background-color:var(--themeColor);font-family: var(--fontStyle)!important" >
+        <ul class="nav padded sidebar-checkout" style="width:100%;padding:0px;margin:0px;display:block;height:603px;">
+          <li ng-class="{activeTab: data.stage == 'review'}">
+            <a>
+              <div align="center">
+                <i class="fa fa-check fa-2x pull-left"></i> Review
+              </div>
+            </a>
+          </li>
+          <li ng-class="{activeTab: data.stage == 'shippingDetails'}">
+            <a>
+              <div align="center">
+                <i class="fa fa-truck fa-2x pull-left"></i> Shipment details
+              </div>
+            </a>
+          </li>
+          <li ng-class="{activeTab: data.stage == 'payment'}">
+            <a>
+              <div align="center">
+                <i class="fa fa-credit-card fa-2x pull-left"></i> Pay
+              </div>
+            </a>
+          </li>
+          <li ng-if="data.stage=='confirmation'" ng-class="{activeTab: data.stage == 'confirmation'}">
+            <a>
+              <div align="center">
+                <i class="fa fa-check-circle fa-2x pull-left"></i> Confirmation
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div> -->
+    </div>
+
+    <div class="row hidden-md hidden-lg" style="margin-left:0px; padding-bottom:25px;background-color:var(--themeColor);font-family: var(--fontStyle)!important;{{isTopMenu?'padding-top:35px':''}} ">
+      <div class="col-xs-12">
+        <h4 style="color:white;margin-top:50px;">
+          <i class="fa fa-shopping-cart fa-2x"></i> Checkout
+        </h4>
+      </div>
+    </div>
+
+    <div class="row  hidden-md hidden-lg" style="margin-left:0px; height:15vh;  padding-bottom:25px;background-color:var(--themeColor);font-family: var(--fontStyle)!important " ng-if="data.stage=='!confirmation'">
+      <div class="col-xs-4 text-center  " ng-class="{activeTopTab: data.stage == 'review'}">
+        <div class="row " style="padding:0px;">
+          <i class="fa fa-check"></i>
+        </div>
+        <span style="color:white">
+          Review
+        </span>
+      </div>
+      <div class="col-xs-4 text-center" ng-class="{activeTopTab: data.stage == 'shippingDetails'}">
+        <div class="row " style="padding:0px;">
+          <i class="fa fa-truck"></i>
+        </div>
+        <span style="color:white">
+          Shipment
+        </span>
+      </div>
+      <div class="col-xs-4 text-center" ng-class="{activeTopTab: data.stage == 'payment'}">
+        <div class="row " style="padding:0px;">
+          <i class="fa fa-credit-card"></i>
+        </div>
+        <span style="color:white">
+          Pay
+        </span>
+      </div>
+    </div>
+
+    <div class="col-md-12 ">
+      <div class="container-fluid" style="margin-top:30px;font-family: var(--fontStyle)!important">
+        <div ng-if="data.stage == 'review'">
+          <div ng-if="showReview">
+            <div class="row">
+              <div class="container-fluid hidden-xs hidden-sm">
+                <div class="row">
+                  <div class="col-md-2" style="padding-left:50px">
+                    <span> <strong>Product</strong> </span>
+                  </div>
+                  <div class="col-md-offset-2 col-md-3 text-center">
+                    <strong style="padding-left:50px">Price</strong>
+                  </div>
+                  <div class="col-md-1">
+                    <strong>Qty</strong>
+                  </div>
+                  <div ng-if="!isStoreGlobal" class="col-md-1">
+                    <strong>GST</strong>
+                  </div>
+                  <div class="{{isStoreGlobal==true?'col-md-2':'col-md-2'}}" style="padding-left:40px">
+                    <strong>Total</strong>
+                  </div>
+                </div>
+
+                <div ng-if="item">
+                  <div class="row" style="padding-top:30px;">
+                    <div class="col-md-3">
+                      <img style="width: 100%; height:150px;" class="img" ng-src="{{item.files[0].attachment}}" ng-if="item.files.length>0">
+                      <img style="width: 100%; height:150px;" class="img" src="/static/images/ecommerce.jpg" ng-if="item.files==null">
+                    </div>
+                    <div class="col-md-3" style="height:100px;">
+                      <h6 ng-if="item.product.name.length>20 && " style="margin:0px;  height:50px;font-family: var(--fontStyle)!important;">{{item.product.name.slice(0,20)}}...</h6>
+                      <h6 ng-if="item.product.name.length<=20" style="margin:0px;  height:50px;font-family: var(--fontStyle)!important;">{{item.product.name}}</h6>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="row container-fluid">
+                        <div class="col-md-6">
+                          <span class="pull-right" ng-if="item.product.discount>0"> <strike> <i class="fa {{currency}}"></i> {{item.product.price.toFixed(2)}} </strike> </span>
+                        </div>
+                        <div class="col-md-6">
+                          <span><i class="fa {{currency}}"></i>{{item.product.discount.toFixed(2)}}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-1">
+                      <p> X </p>
+                    </div>
+                    <div class="col-md-1">
+                      <input type="number" ng-change="changeQty()" ng-model="item.qty" name="" value="" style="width: 60px;" min="1">
+                    </div>
+                    <div class="col-md-1">
+                      <p> <i class="fa {{currency}}"></i> {{(item.product.discount * item.qty).toFixed(2) }} </p>
+                    </div>
+                  </div>
+                </div>
+                <div ng-if="cartItems" ng-repeat="c in cartItems">
+                  <div class="row" style="padding-top:10px;">
+                    <div class="col-md-2" style="overflow:hidden;">
+                      <img style="width: 70%;" class="img" ng-src="{{c.product.product.displayPicture}}" ng-if="!c.prod_var">
+                      <img style="width: 70%;" class="img" ng-src="{{c.prod_var.prodImage}}" ng-if="c.prod_var">
+                      <!-- <img style="width: 70%;" class="img" src="/static/images/ecommerce.jpg" ng-if="c.product.files==null"> -->
+                    </div>
+                    <div class="col-md-2" style="height:100px;padding-top: 15px;">
+                      <!-- <h5 ng-if="c.product.product.name.length>30" style="margin:0px;  height:50px;">{{c.product.product.name.slice(0,30)}}...</h5>
+                    <h5 ng-if="c.product.product.name.length<=30" style="margin:0px;  height:50px;">{{c.product.product.name}}</h5> -->
+                      <h6 ng-if="c.prod_var==undefined" style="margin:0px; height:50px;font-family: var(--fontStyle)!important;"> {{c.product.product.name}}<span ng-if="c.product.product.howMuch!=null"> <span
+                            ng-if="c.product.product.howMuch!='1'||c.product.product.unit!='Quantity'">
+                            {{c.product.product.howMuch | convertUnit: c.product.product.unit}} </span> </h6>
+                      <h6 ng-if="c.prod_var" style="margin:0px;  height:50px;font-family: var(--fontStyle)!important;">{{c.product.product.name}}
+                        <span ng-if="c.product.product.unit!='Size and Color'&&c.product.product.unit!='Size'"> <span ng-if="c.prod_var.unit!='Quantity'||c.prod_var.unitPerpack!=1"> {{c.prod_var.unitPerpack | convertUnit: c.prod_var.unit}}
+                          </span></span>
+                        <span ng-if="c.product.product.unit=='Size and Color'||c.product.product.unit=='Size'"> {{c.prod_var.unitPerpack}} </span>
+                      </h6>
+
+                    </div>
+                    <div class="col-md-3">
+                      <div class="row container-fluid" ng-if="c.prodSku==c.product.product.serialNo">
+                        <div class="col-md-6" style="padding-top: 15px;">
+                          <span class="pull-right" ng-if="c.product.product.discount != c.product.product.price"> <strike> <i class="fa {{currency}}"></i> {{c.product.product.price.toFixed(2)}} </strike> </span>
+                        </div>
+                        <div class="col-md-6" style="padding-top: 15px;">
+                          <!-- {{c.product.product.discount.toFixed(2)}}  -->
+                          <span><i class="fa {{currency}}"></i>{{c.unitPrice}}</span>
+                        </div>
+                      </div>
+                      <div class="row container-fluid" ng-if="c.prodSku!=c.product.product.serialNo">
+                        <div class=" col-md-6" style="padding-top: 15px;">
+                          <span class="pull-right" ng-if="c.prodVarPrice != c.prod_var.discount"> <strike> <i class="fa {{currency}}"></i> {{c.prodVarPrice.toFixed(2)}} </strike> </span>
+                        </div>
+                        <div class="col-md-6" style="padding-top: 15px;">
+                          <span><i class="fa {{currency}}"></i>{{c.unitPriceVarient}}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-1" style="padding-top: 15px;" ng-if="c.stock>0">
+                      <!-- <input type="number" ng-change="changeQty(c)" ng-model="c.qty" name="" value="" style="width: 60px;" min="1" > -->
+                      <select class="form-control" ng-click="$event.stopPropagation();" style="border:2px solid var(--themeColor);font-family: var(--fontStyle)!important;" ng-options="i for i in c.orderThrList" ng-model="c.qty"
+                        ng-change="calcTotal()">
+                      </select>
+                    </div>
+                    <div class="col-md-1" style="padding-top: 15px;" ng-if="c.stock<=0">
+                      <span style="color:#ef4a1e">Out Of Stock</span>
+                      <!-- <button class="btn btn-primary" ng-click="addWishList($index,c.pk)">Add to Wishlist <i class="fa fa-heart"></i></button> -->
+                    </div>
+
+                    <div ng-if="!isStoreGlobal&&!c.prodVarPrice" class="col-md-1" style="padding-top: 15px;">
+                      <!-- <span><i class="fa {{currency}}"></i>{{((c.gst * c.product.product.discount  * c.qty)/100).toFixed(2)}}</span> -->
+                      <span>{{c.gst}} % </span>
+                    </div>
+                    <div ng-if="!isStoreGlobal&&c.prodVarPrice" class="col-md-1" style="padding-top: 15px;">
+                      <span>{{c.gst}} % </span>
+                    </div>
+                    <div class="{{isStoreGlobal==true?'col-md-2':'col-md-2'}}" style="padding-top: 15px;padding-left:40px;">
+                      <!-- <p ng-if="c.prodSku==c.product.product.serialNo"> <i class="fa {{currency}}"></i> {{((c.product.product.discount * c.qty) + (c.gst * c.product.product.discount/100  * c.qty)).toFixed(2) }} </p>
+                    <p ng-if="c.prodSku!=c.product.product.serialNo"> <i class="fa {{currency}}"></i> {{((c.prod_var.discount * c.qty) + (c.gst * c.prod_var.discount/100  * c.qty)).toFixed(2) }} </p> -->
+
+                      <p ng-if="c.prodSku==c.product.product.serialNo"> <i class="fa {{currency}}"></i> {{(c.product.product.discount * c.qty).toFixed(2) }} </p>
+                      <p ng-if="c.prodSku!=c.product.product.serialNo"> <i class="fa {{currency}}"></i> {{(c.prod_var.discount * c.qty).toFixed(2) }} </p>
+                    </div>
+                    <div class="col-md-1" style="padding-top: 15px;" ng-if="isHeart">
+                      <i class="fa fa-heart fa-2x" ng-click="addWishList($index,c.pk)"></i>
+                    </div>
+                    <div class="col-md-1" style="padding-top: 15px;">
+                      <i class="fa fa-trash fa-2x" ng-click="deleteFromCart($index,c.pk)"></i>
+                    </div>
+                  </div>
+                  <br>
+                  <p> <strong>Customization:</strong> </p>
+                  <div class="row" ng-if="c.product.product.customizable">
+                    <div class="col-md-6">
+
+
+                    <div class="flex-container" ng-if="c.customization.pk">
+                      <div class="">
+                        <img class="imagezoom" src="{{c.customization.image}}" alt="" style="width:200px;height:100px;">
+                      </div>
+                      <div class="">
+                        <span>Comment:</span>  {{c.customization.data}}
+                      </div>
+                    </div>
+                    <div class="" ng-if="!c.customization.pk">
+                      <p>No Customization Uploaded</p>
+                    </div>
+                    </div>
+                    <div class="col-md-4">
+                          <textarea type="text" class="form-group" name="" value="" ng-model="c.customization.data" placeholder="Type your Customization" rows="3" cols="30" style="resize:none;"></textarea>
+                          <input type="file" name="" value="" file-model="c.customization.image">
+                    </div>
+                    <div class="col-md-2">
+                      <div class="" style="margin-right:0px;">
+                        <button type="button" class="btn btn-info" name="button" ng-click="uploadcustomatcart($index)" style="background-color:#5BC0DE;">Upload</button>
+                      </div>
+                      <div class="">
+                        <button type="button" class="btn btn-danger" name="button" ng-click="deletecustomatcart($index)" ng-if="!c.customisedData.image && c.customization.data !== ''">REMOVE</button>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                </div>
+
+              </div>
+
+
+              <div class="hidden-lg hidden-md">
+
+                <div ng-if="item">
+                  <div class="row" style="font-family: var(--fontStyle)!important">
+                    <div class="col-xs-6" style="overflow:hidden;">
+                      <img style="width: 100%;" class="img" ng-src="{{item.files[0].attachment}}" ng-if="item.files.length>0">
+                      <img style="width: 100%;" class="img" src="/static/images/ecommerce.jpg" ng-if="item.files==null">
+                    </div>
+                    <div class="col-xs-6">
+                      <div class="row" style="padding:0px;">
+                        <h6 ng-if="item.product.name.length>20" style="margin:0px;  height:50px;">{{item.product.name.slice(0,20)}}...</h6>
+                        <h6 ng-if="item.product.name.length<=20" style="margin:0px;  height:50px;">{{item.product.name}}</h6>
+                      </div>
+                      <div class="row" style="padding:0px">
+                        <span ng-if="item.product.discount>0" style="padding-right:5px;"> <strike> <i class="fa {{currency}}"></i> {{item.product.price.toFixed(2)}} </strike> </span>
+                        <span><i class="fa {{currency}}"></i>{{item.product.discount.toFixed(2)}}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" style="padding-top:20px;">
+                    <div class="col-xs-4">
+                      <span>Qty :</span>
+                    </div>
+                    <div class="col-xs-4">
+                      <!-- <input type="number" ng-change="changeQty()" ng-model="item.qty" name="" value="" style="width: 40px;" min="1" > -->
+                      <select class="form-control" ng-click="$event.stopPropagation();" style="border:2px solid var(--themeColor);font-family: var(--fontStyle)!important;" ng-options="i for i in c.orderThrList" ng-model="c.qty">
+                      </select>
+                    </div>
+
+                    <div class="col-xs-4">
+                      <span>Total :</span>
+                    </div>
+                    <div class="col-xs-4">
+                      <p> <i class="fa {{currency}}"></i> {{(item.product.discount * item.qty).toFixed(2) }} </p>
+                    </div>
+                  </div>
+                </div>
+                <div ng-if="cartItems" ng-repeat="c in cartItems" style="font-family: var(--fontStyle)!important">
+                  <div class="col-xs-12 col-sm-12">
+                    <div class="row" style="padding-top:30px;">
+                      <div class="col-xs-6" style="overflow:hidden;">
+                        <img style="width: 100%;" class="img" ng-src="{{c.product.product.displayPicture}}" ng-if="c.product.product.displayPicture&&!c.prod_var">
+                        <img style="width: 100%;" class="img" ng-src="media/{{c.prod_var.prodImage}}" ng-if="c.prod_var">
+                        <img style="width: 100%;" class="img" src="/static/images/ecommerce.jpg" ng-if="c.product.files==null">
+                      </div>
+                      <div class="col-xs-6">
+                        <div class="row" style="padding:0px">
+                          <h6 ng-if="c.prod_var==undefined" style="margin:0px; height:50px;"> {{c.product.product.name}}<span ng-if="c.product.product.howMuch!=null"> {{c.product.product.howMuch | convertUnit: c.product.product.unit}}</span> </h6>
+                          <h6 ng-if="c.prod_var" style="margin:0px;  height:50px;">{{c.product.product.name}}
+                            <span ng-if="c.product.product.howMuch!=null">
+                              <span ng-if="c.product.product.unit!='Size and Color'&&c.product.product.unit!='Size'"> <span ng-if="c.prod_var.unit!='Quantity'||c.prod_var.unitPerpack!=1">
+                                  {{c.prod_var.unitPerpack | convertUnit: c.product.product.unit}}</span></span>
+                              <span ng-if="c.product.product.unit=='Size and Color'||c.product.product.unit=='Size'"> {{c.prod_var.unitPerpack }} - {{c.desc}}</span>
+                            </span></h6>
+                          <!-- <h6 ng-if="c.product.product.name.length>30" style="margin:0px;  height:50px;">{{c.product.product.name.slice(0,30)}}...</h6>
+                        <h6 ng-if="c.product.product.name.length<=30" style="margin:0px;  height:50px;">{{c.product.product.name}}</h6> -->
+                        </div>
+                        <div ng-if="c.prodSku==c.product.product.serialNo" class="row" style="padding:0px">
+                          <span ng-if="c.product.product.discount != c.product.product.price" style="padding-right:5px;"> <strike> <i class="fa {{currency}}"></i> {{c.product.product.price.toFixed(2)}} </strike> </span>
+                          <span><i class="fa {{currency}}"></i>{{c.product.product.discount.toFixed(2)}}</span>
+                        </div>
+                        <div ng-if="c.prodSku!=c.product.product.serialNo" class="row" style="padding:0px">
+                          <span ng-if="c.prodVarPrice != c.prod_var.discount"> <strike> <i class="fa {{currency}}"></i> {{c.prodVarPrice.toFixed(2)}} </strike> </span>
+                          <span><i class="fa {{currency}}"></i>{{c.prod_var.discount.toFixed(2)}}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row" style="padding-top:20px;">
+                      <div class="row">
+                        <div class="col-xs-3" ng-if="c.stock>0">
+                          <span>Qty :</span>
+                        </div>
+                        <div class="col-xs-2" ng-if="c.stock>0" style="padding:0px">
+                          <select class="form-control" ng-click="$event.stopPropagation();" style="border:2px solid var(--themeColor);font-family: var(--fontStyle)!important;" ng-options="i for i in c.orderThrList" ng-model="c.qty"
+                            ng-change="calcTotal()">
+                          </select>
+                        </div>
+
+                        <div ng-if="!isStoreGlobal" class="col-xs-3">
+                          <span>GST :</span>
+                        </div>
+                        <div ng-if="!isStoreGlobal&&!c.prodVarPrice" class="col-xs-4" style="padding:0px">
+                          <!-- <span><i class="fa {{currency}}"></i> {{(c.gst * c.product.product.discount/100 * c.qty).toFixed(2)}}</span> -->
+                          <span> {{c.gst}} %</span>
+                        </div>
+                        <div ng-if="!isStoreGlobal&&c.prodVarPrice" class="col-xs-4" style="padding:0px">
+                          <span> {{c.gst}} %</span>
+                          <!-- <span><i class="fa {{currency}}"></i> {{((c.gst *  c.prod_var.discount  * c.qty)/100).toFixed(2)}}</span> -->
+                        </div>
+                      </div>
+
+
+
+                      <!-- <div ng-if="!isStoreGlobal" class="col-md-1" style="padding-top: 50px;">
+                      <span><i class="fa {{currency}}"></i>{{(c.gst * c.product.product.price )/100}}</span>
+                    </div>
+                    <div class="{{isStoreGlobal==true?'col-md-2':'col-md-1'}}" style="padding-top: 50px;padding-left:40px;">
+                      <p ng-if="c.prodSku==c.product.product.serialNo"> <i class="fa {{currency}}"></i> {{((c.product.product.discountedPrice * c.qty) + (c.gst * c.product.product.price/100)).toFixed(2) }} </p>
+                      <p ng-if="c.prodSku!=c.product.product.serialNo"> <i class="fa {{currency}}"></i> {{((c.prodVarPrice * c.qty) + (c.gst * c.product.product.price/100)).toFixed(2) }} </p>
+                    </div> -->
+
+                      <div class="row" style="padding-top:15px;">
+                        <div class="col-xs-12" ng-if="c.stock<=0||!c.stock">
+                          <span style="color:#ef4a1e">Out Of Stock</span>
+                          <!-- <button class="btn btn-primary" ng-click="addWishList($index,c.pk)">Add to Wishlist <i class="fa fa-heart"></i></button> -->
+                        </div>
+                        <div class="col-xs-4">
+                          <p>Total :</p>
+                        </div>
+                        <div class="col-xs-5">
+                          <!-- <p ng-if="c.prodSku==c.product.product.serialNo"> <i class="fa {{currency}}"></i> {{((c.product.product.discount * c.qty) +  (c.gst * c.product.product.discount/100 * c.qty)).toFixed(2)}} </p>
+                        <p ng-if="c.prodSku!=c.product.product.serialNo"> <i class="fa {{currency}}"></i> {{((c.prod_var.discount * c.qty) + (c.gst * c.prod_var.discount/100  * c.qty)).toFixed(2) }} </p> -->
+                          <p ng-if="c.prodSku==c.product.product.serialNo"> <i class="fa {{currency}}"></i> {{(c.product.product.discount * c.qty).toFixed(2)}} </p>
+                          <p ng-if="c.prodSku!=c.product.product.serialNo"> <i class="fa {{currency}}"></i> {{(c.prod_var.discount * c.qty).toFixed(2) }} </p>
+                        </div>
+                      </div>
+                      <div class="row" style="padding-top:15px;">
+                        <div class="col-xs-6">
+                          <i class="fa fa-heart fa-2x" ng-click="addWishList($index,c.pk)"></i>
+                        </div>
+                        <div class="col-xs-6">
+                          <i class="fa fa-trash fa-2x" ng-click="deleteFromCart($index,c.pk)"></i>
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+            <hr class="visible-xs">
+
+            <div class="row" style="margin-top:30px;padding:10px;" ng-if="item || cartItems.length>0&&isPromocode">
+              <div class="col-md-4">
+                <div class="input-group">
+                  <input type="text" class="form-control" ng-model="data.promoCode" placeholder="Apply Promo Code..." />
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-primary" ng-click="applyPromo()">Apply</button>
+                  </span>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <span style="color: {{msg=='Success'?'green':'red'}};"> {{msg}}</span>
+                <!-- <span  ng-if="promo=='notApplied'" style="color: red;" > This Promocode is invalid! </span> -->
+              </div>
+            </div>
+
+            <div class="row hidden-sm hidden-xs" style="margin-top:30px;padding:10px;">
+              <div class="col-md-6">
+                <div class="row">
+                  <span style="font-size:20px;">Total </span>
+                  <br>
+                  <i class="fa fa-2x {{currency}}"></i> <span ng-if="total!=totalAfterDiscount" style="font-size:20px; padding-right:10px; "> <strike> {{total.toFixed(2)}} </strike> </span>
+                  <span style="font-size:20px;"> {{totalAfterDiscount.toFixed(2)}} </span> <span class="text-muted" ng-if="!isStoreGlobal">(GST Included)</span>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <!-- {{item}} {{cartItems.length}} -->
+                <button ng-if="item || cartItems.length>0 " type="button" class="btn btn-success pull-right" ng-click="next()">
+                  Next
+                </button>
+              </div>
+            </div>
+
+            <div class="row hidden-md hidden-lg" style="margin-top:30px;padding:10px;">
+              <div class="col-xs-6">
+                <div class="row">
+                  <span style="font-size:14px;">Total </span>
+                  <br>
+                  <i class="fa {{currency}}"></i> <span ng-if="total!=totalAfterDiscount" style="font-size:14px;"> <strike> {{total.toFixed(2)}} </strike> </span>
+                  <span style="font-size:14px;"> {{totalAfterDiscount.toFixed(2)}} </span><span class="text-muted" ng-if="!isStoreGlobal">(GST Included)</span>
+                </div>
+              </div>
+              <div class="col-xs-6">
+                <!-- {{item}} {{cartItems.length}} -->
+                <button ng-if="item || cartItems.length>0 " type="button" class="btn btn-success pull-right" ng-click="next()">
+                  Next
+                </button>
+              </div>
+            </div>
+
+            <div class="row" ng-if="msg=='Success'" style="padding:15px;">
+              <span style="font-size:20px;"> Total Payable <br>
+                <i class="fa {{currency}}"></i> {{totalAfterPromo.toFixed(2)}}</span>
+              <span style="font-size:18px; padding-left:10px; " class="text-muted">(after {{promoDiscount}} % discount )</span>
+            </div>
+
+            <div class="row" style="padding:15px;">
+              <p ng-if="total!=totalAfterDiscount && msg!='Success'">You are saving <i class="fa {{currency}}"></i> {{(total - totalAfterDiscount).toFixed(2)}} on this order</p>
+              <p ng-if="msg=='Success'">You are saving <i class="fa {{currency}}"></i> {{(total - totalAfterPromo).toFixed(2)}} on this order</p>
+            </div>
+          </div>
+          <div ng-if="!showReview" class="text-center" style="padding-top:50px;">
+            <img src="static/images/ZNeT.gif" alt="">
+          </div>
+        </div>
+        <!-- review page ends here  -->
+        <div ng-if="data.stage == 'shippingDetails'">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2 col-sm-offset-1  col-xs-offset-1  col-sm-10 col-xs-10" style="padding-left:10px;">
+              <div class="row">
+                <div class="row card" style="margin-bottom:15px;padding-top:20px;">
+                  <div class="col-md-6 col-xs-12 col-sm-6  text-center">
+                    <h5>{{me.first_name}} {{me.last_name}}</h5>
+                  </div>
+                  <div class="col-md-6 col-xs-12 col-sm-6 text-center">
+                    <div class="form-group">
+                      <h5>{{me.profile.mobile}}</h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="row card" style="margin-bottom:15px" ng-if="!saved&&savedAddress.length>0">
+                  <div class="row card" style="margin-left:0px;margin-right:0px;background-color:var(--themeColor);font-family: var(--fontStyle)!important;">
+                    <h5 style="padding-left:10px;color:white"> DELIVERY ADDRESS </h5>
+                  </div>
+                  <div class="col-md-12" ng-repeat="adr in savedAddress track by $index">
+                    <div class="row" style="margin-top:15px">
+                      <div class="col-md-1 col-xs-1 col-sm-1">
+                        <input ng-model="check" type="radio" name="radio" value="adr.pk" ng-click="ChangeAdd($index,'use')">
+                      </div>
+                      <div class="col-md-10 col-xs-7 col-sm-10">
+                        <div class="row">
+                          <strong>{{adr.title}}</strong><br /> {{adr.landMark}} {{adr.street}}, {{adr.city}}, {{adr.state}}, {{adr.country}} - {{adr.pincode}}
+                        </div>
+
+
+                        <div class="row" ng-if="addressview&&$index==idxVal">
+                          <h4>Shipping Address</h4>
+                          <div class="form-group">
+                            <input type="text" class="form-control" id="ldm" ng-model="data.address.mobileNo" placeholder="Enter Mobile Number...">
+                          </div>
+                          <div class="form-group">
+
+                            <textarea ng-model="data.address.street" class="form-control" id="street" placeholder="Enter street.."></textarea>
+                          </div>
+                          <div class="form-group">
+
+                            <input type="text" class="form-control" id="ldm" ng-model="data.address.landMark" placeholder="Enter Landmark..">
+                          </div>
+                          <div ng-if="isStoreGlobal">
+                            <div class="row">
+                              <div class="col-md-6 col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                  <input ng-model="data.address.country" uib-typeahead="c.name as c.name for c in countrySearch($viewValue)" type="text" class="form-control" id="country" placeholder="Enter Country..">
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                  <input ng-model="data.address.state" uib-typeahead="s.name as s.name for s in stateSearch($viewValue, data.address.country.uniqueId)" type="text" class="form-control" id="state" placeholder="Enter State..">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-6 col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                  <input ng-model="data.address.city" uib-typeahead="c.name as c.name for c in citySearch($viewValue, data.address.state.uniqueId)" type="text" class="form-control" id="city" placeholder="Enter City..">
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                  <input ng-model="data.address.pincode" type="text" class="form-control" id="pincode" placeholder="Enter Pincode..">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div ng-if="!isStoreGlobal">
+                            <div class="row">
+                              <div class="col-md-6 col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                  <input ng-model="data.address.pincode" type="text" class="form-control" id="pincode" placeholder="Enter Pincode..">
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                  <input ng-model="data.address.city" type="text" class="form-control" id="city" placeholder="Enter City..">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-6 col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                  <input ng-model="data.address.state" type="text" class="form-control" id="state" placeholder="Enter State..">
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                  <input ng-model="data.address.country" type="text" class="form-control" id="country" placeholder="Enter Country.." disabled>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row" style="margin-bottom:10px">
+                            <div class="hidden-xs col-md-12 col-sm-6">
+                              <button type="button" class="btn btn-warning" ng-click="saveAdd()" ng-if="data.address.pk">Update</button>
+                              <button type="button" class="btn btn-primary" ng-click="cancel()" ng-if="data.address.pk">Cancel</button>
+                            </div>
+                            <div class="hidden-lg hidden-md hidden-sm col-xs-12 ">
+                              <button type="button" class="btn btn-warning" ng-click="saveAdd()" ng-if="data.address.pk" style="width:100%">Update</button><br /><br />
+                              <button type="button" class="btn btn-primary" ng-click="cancel()" ng-if="data.address.pk" style="width:100%">Cancel</button>
+                            </div>
+                          </div>
+                          <div class="checkbox row" style="padding-left:15px">
+                            <label><input type="checkbox" value="checked" ng-model="dataToSend.sameAsShipping">&nbsp; Billing Address Same as Shipping</label>
+                          </div>
+                          <div ng-if="showFields">
+                            <h4>Billing Address</h4>
+                            <div class="form-group">
+                              <textarea ng-model="data.billingAddress.street" class="form-control" id="street" placeholder="Enter street.."></textarea>
+                            </div>
+                            <div class="form-group">
+                              <input type="text" class="form-control" id="ldm" ng-model="data.billingAddress.landMark" placeholder="Enter Landmark..">
+                            </div>
+                            <div ng-if="isStoreGlobal">
+                              <div class="row">
+                                <div class="col-md-6 col-xs-12 col-sm-6">
+                                  <div class="form-group">
+                                    <input ng-model="data.billingAddress.country" uib-typeahead="c.name as c.name for c in countrySearch($viewValue)" type="text" class="form-control" id="country" placeholder="Enter Country..">
+                                  </div>
+                                </div>
+                                <div class="col-md-6 col-xs-12 col-sm-6">
+                                  <div class="form-group">
+                                    <input ng-model="data.billingAddress.state" uib-typeahead="s.name as s.name for s in stateSearch($viewValue, data.billingAddress.country.uniqueId)" type="text" class="form-control" id="state"
+                                      placeholder="Enter State..">
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-6 col-xs-12 col-sm-6">
+                                  <div class="form-group">
+                                    <input ng-model="data.billingAddress.city" uib-typeahead="c.name as c.name for c in citySearch($viewValue, data.billingAddress.state.uniqueId)" type="text" class="form-control" id="city" placeholder="Enter City..">
+                                  </div>
+                                </div>
+                                <div class="col-md-6 col-xs-12 col-sm-6">
+                                  <div class="form-group">
+                                    <input ng-model="data.billingAddress.pincode" type="text" class="form-control" id="pincode" placeholder="Enter Pincode..">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div ng-if="!isStoreGlobal">
+                              <div class="row">
+                                <div class="col-md-6 col-xs-12 col-sm-6">
+                                  <div class="form-group">
+                                    <input ng-model="data.billingAddress.pincode" type="text" class="form-control" id="pincode" placeholder="Enter Pincode..">
+                                  </div>
+                                </div>
+                                <div class="col-md-6 col-xs-12 col-sm-6">
+                                  <div class="form-group">
+                                    <input ng-model="data.billingAddress.city" type="text" class="form-control" id="city" placeholder="Enter City..">
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-6 col-xs-12 col-sm-6">
+                                  <div class="form-group">
+                                    <input ng-model="data.billingAddress.state" type="text" class="form-control" id="state" placeholder="Enter State..">
+                                  </div>
+                                </div>
+                                <div class="col-md-6 col-xs-12 col-sm-6">
+                                  <div class="form-group">
+                                    <input ng-model="data.billingAddress.country" type="text" class="form-control" id="country" placeholder="Enter Country..">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-1 col-sm-1 col-sm-1" ng-if="$index==idx" ng-click="ChangeAdd($index,'edit')" style="cursor:pointer">
+                        <strong>Edit</strong>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="row card" style="margin-bottom:15px;padding-bottom:0px" ng-if="!saved">
+                  <div class=" btn btn-block btn-default" ng-click="resetAdd()">
+                    Add a New Address
+                  </div>
+                  <div class="row" ng-if="newAdr" style="padding-left:25px;padding-right:25px">
+                    <h4>Shipping Address</h4>
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="ldm" ng-model="data.address.mobileNo" placeholder="Enter Mobile Number...">
+                    </div>
+                    <div class="form-group">
+
+                      <textarea ng-model="data.address.street" class="form-control" id="street" placeholder="Enter street.."></textarea>
+                    </div>
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="ldm" ng-model="data.address.landMark" placeholder="Enter Landmark..">
+                    </div>
+                    <div ng-if="isStoreGlobal">
+                      <div class="row">
+                        <div class="col-md-5 col-xs-12 col-sm-6">
+                          <div class="form-group">
+                            <input ng-model="data.address.country" uib-typeahead="c.name as c.name for c in countrySearch($viewValue)" type="text" class="form-control" id="country" placeholder="Enter Country..">
+                          </div>
+                        </div>
+
+                        <div class="col-md-5 col-xs-12 col-sm-6">
+                          <div class="form-group">
+                            <input ng-model="data.address.state" uib-typeahead="s.name as s.name for s in stateSearch($viewValue, data.address.country.uniqueId)" type="text" class="form-control" id="state" placeholder="Enter State..">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-5 col-xs-12 col-sm-6">
+                          <div class="form-group">
+                            <input ng-model="data.address.city" type="text" uib-typeahead="c.name as c.name for c in citySearch($viewValue, data.address.state.uniqueId)" class="form-control" id="city" placeholder="Enter City..">
+                          </div>
+                        </div>
+                        <div class="col-md-5 col-xs-12 col-sm-6">
+                          <div class="form-group">
+                            <input ng-model="data.address.pincode" type="text" class="form-control" id="pincode" placeholder="Enter Pincode..">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row" style="margin-bottom:10px">
+                        <div class="hidden-xs col-md-12 col-sm-6">
+                          <button type="button" class="btn btn-warning" ng-click="saveAdd()" ng-if="data.address.pk == none">
+                            <i class="fa fa-star fa-lg"></i> &nbsp;Save for later use
+                          </button>
+                          <button type="button" class="btn btn-primary" ng-click="cancel()" ng-if="data.address.pk == none">
+                            Cancel
+                          </button>
+                        </div>
+
+                        <div class="hidden-lg hidden-md hidden-sm col-xs-12">
+                          <button type="button" class="btn btn-warning" ng-click="saveAdd()" ng-if="data.address.pk == none" style="width:100%">
+                            <i class="fa fa-star fa-lg"></i> &nbsp;Save for later use
+                          </button><br /><br />
+                          <button type="button" class="btn btn-primary" ng-click="cancel()" ng-if="data.address.pk == none" style="width:100%">
+                            <i class="fa fa-close fa-lg"></i> &nbsp;Cancel
+                          </button>
+                        </div>
+
+
+                      </div>
+
+
+                    </div>
+                    <div ng-if="!isStoreGlobal">
+                      <div class="row">
+                        <div class="col-md-5 col-xs-12 col-sm-6">
+                          <div class="form-group">
+                            <input ng-model="data.address.pincode" type="text" class="form-control" id="pincode" placeholder="Enter Pincode..">
+                          </div>
+                        </div>
+
+                        <div class="col-md-5 col-xs-12 col-sm-6">
+                          <div class="form-group">
+                            <input ng-model="data.address.city" type="text" class="form-control" id="city" placeholder="Enter City..">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-5 col-xs-12 col-sm-6">
+                          <div class="form-group">
+                            <input ng-model="data.address.state" type="text" class="form-control" id="state" placeholder="Enter State..">
+                          </div>
+                        </div>
+                        <div class="col-md-5 col-xs-12 col-sm-6">
+                          <div class="form-group">
+                            <input ng-model="data.address.country" type="text" class="form-control" id="country" placeholder="Enter Country.." disabled>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row" style="margin-bottom:10px">
+                        <div class="hidden-xs col-md-12 col-sm-6" ng-if="showMessage">
+                          <span style="color:red">Sorry!! We Don't Service in this Area
+                        </div>
+                        <div class="hidden-xs col-md-12 col-sm-6">
+                          <button type="button" class="btn btn-warning" ng-click="saveAdd()" ng-if="data.address.pk == none">
+                            <i class="fa fa-star fa-lg"></i> &nbsp;Save for later use
+                          </button>
+                          <button type="button" class="btn btn-primary" ng-click="cancel()" ng-if="data.address.pk == none">
+                            Cancel
+                          </button>
+                        </div>
+                        <div class="hidden-lg hidden-md hidden-sm col-xs-12 " ng-if="showMessage">
+                          <span style="color:red">Sorry!! We Don't Service in this Area
+                        </div>
+
+                        <div class="hidden-lg hidden-md hidden-sm col-xs-12">
+                          <button type="button" class="btn btn-warning" ng-click="saveAdd()" ng-if="data.address.pk == none" style="width:100%">
+                            <i class="fa fa-star fa-lg"></i> &nbsp;Save for later use
+                          </button><br /><br />
+                          <button type="button" class="btn btn-primary" ng-click="cancel()" ng-if="data.address.pk == none" style="width:100%">
+                            <i class="fa fa-close fa-lg"></i> &nbsp;Cancel
+                          </button>
+                        </div>
+
+
+                      </div>
+                    </div>
+
+
+                    <div class="checkbox row" style="padding-left:15px">
+                      <label><input type="checkbox" value="checked" ng-model="dataToSend.sameAsShipping">&nbsp; Billing Address Same as Shipping</label>
+                    </div>
+                    <div ng-if="showFields">
+                      <h4>Billing Address</h4>
+                      <div class="form-group">
+
+                        <textarea ng-model="data.billingAddress.street" class="form-control" id="street" placeholder="Enter street.."></textarea>
+                      </div>
+                      <div class="form-group">
+
+                        <input type="text" class="form-control" id="ldm" ng-model="data.billingAddress.landMark" placeholder="Enter Landmark..">
+                      </div>
+                      <div ng-if="isStoreGlobal">
+                        <div class="row">
+                          <div class="col-md-6 col-xs-12 col-sm-6">
+                            <div class="form-group">
+                              <input ng-model="data.billingAddress.country" uib-typeahead="c.name as c.name for c in countrySearch($viewValue)" type="text" class="form-control" id="country" placeholder="Enter Country..">
+                            </div>
+                          </div>
+                          <div class="col-md-6 col-xs-12 col-sm-6">
+                            <div class="form-group">
+                              <input ng-model="data.billingAddress.state" uib-typeahead="s.name as s.name for s in stateSearch($viewValue, data.billingAddress.country.uniqueId)" type="text" class="form-control" id="state" placeholder="Enter State..">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6 col-xs-12 col-sm-6">
+                            <div class="form-group">
+                              <input ng-model="data.billingAddress.city" uib-typeahead="c.name as c.name for c in citySearch($viewValue, data.billingAddress.state.uniqueId)" type="text" class="form-control" id="city" placeholder="Enter City..">
+                            </div>
+                          </div>
+                          <div class="col-md-6 col-xs-12 col-sm-6">
+                            <div class="form-group">
+                              <input ng-model="data.billingAddress.pincode" type="text" class="form-control" id="pincode" placeholder="Enter Pincode..">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div ng-if="!isStoreGlobal">
+                        <div class="row">
+                          <div class="col-md-6 col-xs-12 col-sm-6">
+                            <div class="form-group">
+                              <input ng-model="data.billingAddress.pincode" type="text" class="form-control" id="pincode" placeholder="Enter Pincode..">
+                            </div>
+                          </div>
+                          <div class="col-md-6 col-xs-12 col-sm-6">
+                            <div class="form-group">
+                              <input ng-model="data.billingAddress.city" type="text" class="form-control" id="city" placeholder="Enter City..">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6 col-xs-12 col-sm-6">
+                            <div class="form-group">
+                              <input ng-model="data.billingAddress.state" type="text" class="form-control" id="state" placeholder="Enter State..">
+                            </div>
+                          </div>
+                          <div class="col-md-6 col-xs-12 col-sm-6">
+                            <div class="form-group">
+                              <input ng-model="data.billingAddress.country" type="text" class="form-control" id="country" placeholder="Enter Country.." disabled>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row card" style="margin-bottom:15px;padding-bottom:0px" ng-if="saved">
+                  <div class="row card" style="margin-left:0px;margin-right:0px;background-color:var(--themeColor);font-family: var(--fontStyle)!important">
+                    <h5 style="padding-left:10px;color:white"> DELIVERY ADDRESS </h5>
+                  </div>
+                  <div class="row" style="padding-left:15px;padding-top:15px;padding-bottom:15px">
+                    <div class="col-md-10 col-sm-10 col-xs-12">
+                      <strong>{{me.first_name}} {{me.last_name}}</strong><br />{{data.address.landMark}} {{data.address.street}}, {{data.address.city}}, {{data.address.state}}, {{data.address.country}} - {{data.address.pincode}}
+                    </div>
+                    <div class="col-md-1 col-sm-1 col-xs-12">
+                      <strong ng-click="change()" style="cursor:pointer">
+                        Change
+                      </strong>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row" style="margin-top:55px">
+            <button type="button" class="btn btn-default pull-left" ng-click="prev()">
+              Go back
+            </button>
+            <button type="button" class="btn btn-success pull-right" ng-click="next()">
+              Next
+            </button>
+          </div>
+
+        </div>
+
+
+
+        <!-- <div ng-if="data.stage == 'confirmation'">
+          <h1>Thank you</h1>
+
+          <h2>Your order details are as follows</h2>
+          <strong> Order No. : </strong> #{{order.odnumber}}<br>
+          <strong> Order date and time : </strong> {{order.dt | date : 'dd-MMM-yyyy: hh:mm:ss a'}}<br>
+          <strong> Payment mode. : </strong> {{order.paymentMode}}<br>
+
+          <hr>
+        <!-- </div> -->
+
+
+        <div ng-if="data.stage == 'payment'">
+          <div ng-if="getShippingCharges">
+            <div class="row" style="padding:20px;">
+              <span style="font-size:20px;">Select Mode of Payment<span>
+            </div>
+            <div class="row" style="padding:20px;">
+              <div ng-if="isCod">
+                <div class="form-group" ng-if="!totalLimit && limitValue != '0'">
+                  <input type="radio" name="modeOfPayment" ng-model="data.modeOfPayment" ng-init="data.modeOfPayment='COD'" value="COD"> Cash on Delivery(COD) <br>
+                </div>
+                <div class="form-group" ng-if="totalLimit || limitValue == '0'">
+                  <input type="radio" name="modeOfPayment" ng-model="data.modeOfPayment" value="COD" disabled> COD (Cannot use this option as your total exceed <i class="fa {{currency}}"></i>{{limitValue}})<br>
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="radio" name="modeOfPayment" ng-model="data.modeOfPayment" value="Card"> Credit Card/ Debit Card / Net Banking / UPI
+              </div>
+              <div class="form-group">
+                <input type="radio" name="modeOfPayment" ng-model="data.modeOfPayment" value="discussion">Submit for Discussion
+              </div>
+              <button type="button" class="btn btn-info" name="button" ng-click="submitDiscussion()" ng-if="data.modeOfPayment == 'discussion'">Feed Discussion</button>
+            </div>
+            <div class="row" style="padding:20px;">
+              <p>
+                <strong>Shipping Charges :</strong>
+                <span><i class="fa {{currency}}"></i> {{shippingCharges.toFixed(2)}}</span>
+              </p>
+              <p>
+                <strong>Total amount payable :</strong>
+                <span ng-if="msg=='Success'"> <i class="fa {{currency}}"></i> {{(totalAfterPromo + shippingCharges).toFixed(2)}} <span class="text-muted" ng-if="!isStoreGlobal">(GST Included)</span> </span>
+                <span ng-if="msg!='Success'"><i class="fa {{currency}}"></i> {{(totalAfterDiscount + shippingCharges).toFixed(2)}} <span class="text-muted" ng-if="!isStoreGlobal">(GST Included)</span> </span>
+              </p>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+
+                <button type="button" class="btn btn-default pull-left" ng-click="prev()">
+                  Go back
+                </button>
+              </div>
+              <div class="" ng-if="data.modeOfPayment!='discussion'">
+
+
+              <button ng-if="errorInshipping" type="button" class="btn btn-success btn-lg pull-right hidden-sm hidden-xs" name="button" ng-click="openShippingErrorModal()" ng-disabled="true">{{data.modeOfPayment=='COD'? 'Order': 'Pay'}}</button>
+
+              <button ng-if="errorInshipping" type="button" class="btn btn-success pull-right hidden-lg hidden-md" name="button" disabled>{{data.modeOfPayment=='COD'? 'Order': 'Pay'}}</button>
+
+
+              <button ng-if="!errorInshipping" type="button" class="btn btn-success btn-lg pull-right hidden-sm hidden-xs" ng-click="data.modeOfPayment=='COD'? order(): pay()">
+                {{data.modeOfPayment=='COD'? 'Order': 'Pay'}}
+              </button>
+              <button ng-if="!errorInshipping" type="button" class="btn btn-success pull-right hidden-lg hidden-md" ng-click="data.modeOfPayment=='COD'? order(): pay()">
+                {{data.modeOfPayment=='COD'? 'Order': 'Pay'}}
+              </button>
+              </div>
+              <div class="" ng-if="data.modeOfPayment=='discussion'">
+                <button type="button" class="btn btn-success pull-right" ng-click="order()">
+                  Order
+                </button>
+              </div>
+            </div>
+          </div>
+          <div ng-if="!getShippingCharges" class="text-center" style="padding-top:60px">
+            <img src="static/images/ZNeT.gif" alt="">
+          </div>
+          <div class="row" ng-if="getShippingCharges" style="margin-left:15px;">
+            <div class="row" style="padding-top:20px;">
+              <span style="font-size:20px;">Order Summary<span>
+            </div>
+            <div class="row" style="padding-top:5px;">
+              <span style="font-size:15px;"> Shipping Details </span>: <span style="font-size:14px;"> {{username}} ,{{data.address.mobileNo}} {{data.address.landMark}} {{data.address.street}}, {{data.address.city}}, {{data.address.state}},
+                {{data.address.country}} - {{data.address.pincode}} </span>
+            </div>
+          </div>
+          <div class="row" ng-if="getShippingCharges">
+            <div class="col-xs-12" style="padding:0px">
+              <div class="col-md-3 col-xs-12" ng-repeat="c in cartItems" style="margin-top:15px;">
+                <div class="card text-center">
+                  <img ng-if="!c.prod_var" style="height:150px;width:100%;" class="img" ng-src="{{c.product.product.displayPicture}}">
+                  <img ng-if="c.prod_var" style=" height:150px;width:100%;" class="img" ng-src="{{c.prod_var.prodImage}}">
+
+                  <div class="row" style="height:60px; padding:0px 10px">
+                    <div class="col-xs-8" style="padding-right:5px;">
+
+                      <p ng-if="c.prod_var==undefined" style="margin:0px"> {{c.product.product.name.slice(0,20)}}<span ng-if="c.product.product.howMuch!=null"> {{c.product.product.howMuch | convertUnit: c.product.product.unit}} </span> </p>
+
+                      <p ng-if="c.prod_var" style="margin:0px">{{c.product.product.name.slice(0,20)}} <span ng-if="c.product.product.howMuch!=null">
+                          <span ng-if="c.product.product.unit!='Size and Color'&&c.product.product.unit!='Size'"> {{c.prod_var.unitPerpack * c.product.product.howMuch | convertUnit: c.product.product.unit}}</span>
+                          <span ng-if="c.product.product.unit=='Size and Color'||c.product.product.unit=='Size'"> {{c.prod_var.unitPerpack }} - {{c.desc}}</span>
+                        </span></p>
+
+                    </div>
+                    <div class="col-xs-4" style="padding-left:5px;">
+                      <div ng-if="c.prodSku==c.product.product.serialNo">
+                        <i class="fa {{currency}}"></i> {{c.product.product.discount.toFixed(2)}}</span>
+                      </div>
+                      <div ng-if="c.prodSku!=c.product.product.serialNo">
+                        <i class="fa {{currency}}"></i> {{c.prod_var.discount.toFixed(2)}}</span>
+                      </div>
+                      <p style="margin:0px;">Qty:<span style="margin-left:5px;">{{c.qty}}</span></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div ng-if="data.stage == 'processing'">
+          <div class="col-md-4 col-md-offset-4">
+            <div class="text-center">
+              <i class="fa fa-spinner fa-spin fa-5x"></i> <br>
+              <span>Please wait</span>
+            </div>
+          </div>
+        </div>
+        <!-- <div ng-if="data.stage == 'confirmation'">
+          <h1>Thank you</h1>
+          <h2>Your order details are as follows</h2>
+          <strong> Order No. : </strong> #{{order.odnumber}}<br>
+          <strong> Order date and time : </strong> {{order.dt | date : 'dd-MMM-yyyy: hh:mm:ss a'}}<br>
+          <strong> Payment mode. : </strong> {{order.paymentMode}}<br>
+          <hr>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid" style="margin-top:20px;height:100vh;padding:0px;font-family: var(--fontStyle)!important;{{topLevelMenu?'margin-top:5vh':''}}" ng-if="cartItems.length==0">
+  <div class="row text-center" style="padding-top:35px">
+    <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+      <img src="static/images/empty-cart.jpg" alt="" class="imageemptcart">
+      <br />
+      <a style="border:1px solid var(--themeColor);padding:15px;cursor:pointer;color:var(--themeColor);font-family: var(--fontStyle)!important" href="/"> CONTINUE SHOPPING </a>
+    </div>
+  </div>
+</div>

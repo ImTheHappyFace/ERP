@@ -1,0 +1,366 @@
+<div class="container-fluid">
+  <div class="col-md-8 col-md-offset-{{recentlyViewed.product != none ? '1' : '2' }} bg-white">
+    <div class="row hidden-sm hidden-xs" style="margin:0px 0px 30px 0px">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb" style="margin-left:-15px;margin-right:-15px;background:#ffffff">
+          <li class="breadcrumb-item" ng-repeat="b in breadcrumbList"><a style="cursor:pointer" ng-click="$state.go('categories', {name : b.split(' ').join('_')})">{{b}}</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{details.product.name}}</li>
+        </ol>
+      </nav>
+    </div>
+
+    <div class="row hidden-md hidden-lg" style="margin:35px 0px 0px 0px">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb" style="margin-left:-30px;margin-right:-30px;background:#ffffff!important">
+          <li class="breadcrumb-item" ng-repeat="b in breadcrumbList"><a style="cursor:pointer" ng-click="$state.go('categories', {name : b.split(' ').join('_')})">{{b}}</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{details.product.name}}</li>
+        </ol>
+      </nav>
+    </div>
+
+    <div class="row container-fluid" style="padding:0px;">
+      <div class="col-md-1 hidden-sm hidden-xs" style="padding:0px; cursor:pointer;">
+        <!-- <img ng-repeat="f in details.files" ng-click="changePicture($index)" style="{{details.files[pictureInView].attachment==f.attachment?'width: 100%; border:1px solid #b4acb0':'width: 100%'}}" class="img" ng-src="{{f.attachment}}"> -->
+        <img style="width: 100%;" class="img" ng-src="{{imgData}}">
+      </div>
+      <div class="col-md-5 col-xs-10" style="padding:0px;overflow:hidden;">
+        <spam ng-if="selectedObj.specialOffer.length>0&&selectedObj.specialOffer!='null'" style="position:absolute;background-color:var(--themeColor);color:white; border-radius:15px 15px 15px 15px;font-size:14px;padding:0px 5px 0px 5px;overflow:hidden;max-width: 30vh;height:3vh"> <strong> {{selectedObj.specialOffer}} </strong> </spam>
+        <img style="width: 100%;" class="img" ng-src="{{imgData}}">
+        <!-- <img style="width: 100%;" class="img" ng-src="{{details.files[pictureInView].attachment}}"> -->
+      </div>
+      <div class="col-md-6 col-xs-12" style="height:100%;right:0px;" ng-if="dataFetched">
+        <div class="row container-fluid">
+          <div class="{{prodVarList.length>1? 'col-md-6':'col-md-12'}}">
+            <p style="padding-bottom:0px;">
+              <strong style="font-size:20px;">{{details.product.name}}<span ng-if="selectedObj.qty!='1'||selectedObj.unit!='Quantity'"> {{selectedObj.qty}} {{selectedObj.unit|getUnit}}</span></strong> <br>
+            </p>
+          </div>
+
+          <div class="col-md-6">
+            <span ng-if="prodVarList.length>1">
+              <select class="form-control" style="border:1px solid #eee" ng-options="pv.str for pv in prodVarList" ng-model="selectedProdVar.toWatch">
+              </select>
+            </span>
+          </div>
+
+          <div class="col-md-offset-6 col-md-6">
+            <span ng-if="prodVarListColors.length>0">
+              <select class="form-control" style="border:1px solid #eee" ng-options="c.prodDesc for c in prodVarListColors" ng-model="selectedColor.toWatch">
+              </select>
+            </span>
+          </div>
+
+          <hr style="margin-top:0px;margin-bottom:5px;">
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-xs-12 ">
+            <div class="row container-fluid">
+
+              <span style="background-color:#388e3c; color:white; padding:5px; border-radius:5px;" ng-if="details.rating.rating__avg!=none&&showRatings"> {{details.rating.rating__avg| number : 1}} <i class="fa fa-star" aria-hidden="true"></i></span>
+              <span ng-if="showRatings"> {{details.rating_count}} Ratings & Reviews</span>
+
+            </div>
+            <div class="row container-fluid" ng-if="isCod" style="padding-top:14px;">
+              <i class="fa fa-money fa-1x text-muted"></i> Cash on delivery : Yes
+            </div>
+          </div>
+          <div class="col-md-6 col-xs-12">
+
+            <div class="row">
+              <span ng-if="details.product.serialNo==selectedObj.sku&&showPrice" style="font-size:20px;padding-left:10px"> Price :
+                <span ng-if="selectedObj.amnt != selectedObj.discount" class="text-muted"><strike><i class="fa {{currency}}"></i>{{details.product.price}}</i></strike> </span>
+                <span ng-if="selectedObj.amnt != selectedObj.discount"><i class="fa {{currency}}">{{details.product.discount}}</i> </span>
+              <span ng-if="selectedObj.amnt == selectedObj.discount"><i class="fa {{currency}}">{{details.product.price}}</i> </span>
+              </span>
+              <span ng-if="details.product.serialNo!=selectedObj.sku&&showPrice" style="font-size:20px;padding-left:10px"> Price :
+                <span ng-if = "selectedObj.amnt == selectedObj.discount&&showPrice"><i class="fa {{currency}}"></i>{{selectedObj.amnt}}</span>
+              <span ng-if="selectedObj.amnt != selectedObj.discount&&showPrice" class="text-muted"><strike><i class="fa {{currency}}"></i>{{selectedObj.amnt}}</i></strike> </span>
+              <span ng-if="selectedObj.amnt != selectedObj.discount&&showPrice"><i class="fa {{currency}}"></i>{{selectedObj.discount}} </span>
+              </span>
+            </div>
+            <div class="row">
+              <span style="padding-left:10px;" ng-if="selectedObj.amnt!=selectedObj.discount&&showPrice" style="font-size:18px;"><strong> <i class="fa {{currency}}"></i>{{(selectedObj.amnt - selectedObj.discount).toFixed(2)}} Off </strong></span>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="padding:10px;" ng-if="me != null">
+          <div ng-if="selectedObj.inStock>0">
+          <div class="col-md-12 " ng-if="showOptions&&details.added_cart<=0">
+            <div class="row container-fluid text-center" ng-click="addToCart(details.pk)" style="background-color:#2980b9; color:white; padding:5px 0px;" ng-if="selectedObj.inStock>0&&me.pk">
+              <span  style="cursor:pointer;">
+                  <span style="font-size:15px;"><b> Add To Cart </b></span>
+              <i class="fa fa-shopping-cart fa-2x"></i>
+              </span>
+            </div>
+          </div>
+          <div class="col-md-12 " ng-if="showOptions&&details.added_cart>0">
+            <div class="row container-fluid" style="padding:0px 15px;">
+              <div class="col-xs-offset-3 col-xs-1" style="padding:0px;">
+                <button type="button" class="btn btn-default decrementBtn" ng-click="decrement(details.pk);" style="padding:0px!important">
+                  <i class="fa fa-minus" style="font-size:14px;"></i>
+                </button>
+              </div>
+              <div class="col-xs-4" style="padding:0px;" >
+                <button type="button" name="button" class="inCartBtn btn btn-sm btn-default" ng-click="$event.stopPropagation()">
+                  {{details.added_cart}} in Cart
+                </button>
+              </div>
+              <div class="col-xs-1" style="padding:0px;" >
+                <button type="button" class="btn btn-default incrementBtn" ng-click="increment(details.pk);">
+                  <i class="fa fa-plus" style="font-size:14px;"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12" ng-if="!showOptions||selectedObj.inStock<=0||!selectedObj.inStock">
+          <span style="font-size:25px;color:#ef4a1e">Out Of Stock</span>
+        </div>
+        </div>
+        <div class="row" style="padding:10px;" ng-if="me == null">
+          <div ng-if="selectedObj.inStock>0">
+          <div class="col-md-12" ng-if="showOptions&&details.added_cart<=0">
+            <div ng-click="createCookieDetail(details)" class="row container-fluid text-center" style="background-color:#5980b9; color:white; padding:5px 0px;cursor:pointer" >
+              <span  style="cursor:pointer;">
+                  <span style="font-size:15px;"><b> Add To Cart</b></span>
+              <i class="fa fa-shopping-cart fa-2x"></i>
+              </span>
+            </div>
+          </div>
+          <div class="col-md-12 " ng-if="showOptions&&details.added_cart>0">
+            <div class="row container-fluid" style="padding:0px 15px;">
+              <div class="col-xs-offset-3 col-xs-1" style="padding:0px;">
+                <button type="button" class="btn btn-default decrementBtn" ng-click="decrementCookie(details);" style="padding:0px!important">
+                  <i class="fa fa-minus" style="font-size:14px;"></i>
+                </button>
+              </div>
+              <div class="col-xs-4" style="padding:0px;">
+                <button type="button" name="button" class="inCartBtn btn btn-sm btn-default" ng-click="$event.stopPropagation()">
+                  {{details.added_cart}} in Cart
+                </button>
+              </div>
+              <div class="col-xs-1" style="padding:0px;">
+                <button type="button" class="btn btn-default incrementBtn" ng-click="incrementCookie(details);">
+                  <i class="fa fa-plus" style="font-size:14px;"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+          <div class="col-md-12" ng-if="!showOptions||selectedObj.inStock<=0||!selectedObj.inStock">
+            <span style="font-size:25px;color:#ef4a1e">Out Of Stock</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <hr>
+    <!-- {{details}} -->
+    <div class="row">
+      <div class="container-fluid" style="padding:10px;">
+        <div class="row" ng-if="showDescription">
+          <div class="col-md-6">
+            <strong style="font-size:16px;">Specifications : </strong>
+            <table class="table table-striped" style="margin-top:20px;">
+              <th>
+                Property
+              </th>
+              <th>
+                Value
+              </th>
+              <tr ng-repeat="f in details.specifications">
+                <td>
+                  {{f.name | humanize}}
+                </td>
+                <td>
+                  <span ng-if="f.fieldType=='choice'">
+                    {{f.value | humanize}}
+                  </span>
+                  <span ng-if="f.fieldType=='date'">
+                    {{f.value | date : 'dd-MMM-yyyy'}}
+                  </span>
+                  <span ng-if="f.fieldType=='boolean'">
+                    {{f.value == 'true'? 'Yes' : 'No'}}
+                  </span>
+                  <span ng-if="['choice' , 'date' , 'boolean'].indexOf(f.fieldType) == -1">
+                    {{f.value}} {{f.unit !='' && f.unit != null ? '(' + f.unit + ')': ''}}
+                  </span>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-md-6">
+            <strong style="font-size:16px;">Description : </strong>
+            <div class="row" style="margin-top:20px;">
+              <div class="container-fluid" ng-bind-html="details.source"></div>
+            </div>
+          </div>
+
+          <hr>
+        </div>
+        <div class="row bg-blue text-center" style="margin:0px;margin-top:20px;" ng-if="showRatings">
+          <h5 style="color:white;">Ratings and Review</h5>
+        </div>
+        <div class="row" ng-if="showRatings">
+          <div class="col-md-4 hidden-sm hidden-xs" style="padding-top:20px;">
+            <div class="col-md-5 hidden-sm hidden-xs text-center">
+              <span ng-if="details.rating.rating__avg==none">None</span> <br>
+              <span ng-if="details.rating.rating__avg!=none">{{details.rating.rating__avg| number : 1}}/5</span> <br>
+              <i class="fa fa-star" style="color:#e3bc18;font-size:80px;"></i>
+            </div>
+            <div class="col-md-7 hidden-sm hidden-xs">
+              <div class="container-fluid" ng-repeat="m in ratings.meta">
+                <!-- <span style="margin-right:10px;">{{ratings.counts[$index]}}</span> -->
+                <uib-rating ng-model="m" max="m" readonly="true" style="font-size:15px;color:#e2a900;"></uib-rating> <br>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8 hidden-sm hidden-xs" ng-if="me != null">
+            <h5>Have you used this product before ?  <small style="margin-left:20px;">Give us your review</small> </h5>
+            <uib-rating ng-model="form.rating" max="5" min="1" readonly="!form.ratable" style="font-size:30px;color:#e2a900;"></uib-rating> <br>
+            <button type="button" class="btn btn-default" ng-click="form.reviewEditor = true;" ng-if="!form.reviewEditor&&me != null">
+              <i class="fa fa-pencil-square-o"></i>  Write a review
+            </button>
+            <div ng-if="form.reviewEditor">
+              <div class="col-md-10 hidden-sm hidden-xs">
+                <input type="text" placeholder="Tittle.." ng-model="form.reviewHeading" style="background:white;width:100%">
+                <textarea style="margin-top:20px" class="form-control" ng-model="form.reviewText" autofocus="true" placeholder="Write a review..."></textarea>
+              </div>
+              <div class="col-md-2 hidden-sm hidden-xs btn-group-vertical" style="padding-top:47px">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-success" ng-click="sendReview()">
+                <i class="fa fa-plus"></i> Add
+                </button>
+                  <button type="button" class="btn btn-default" ng-click="form.reviewEditor = false">
+                  <i class="fa fa-close"></i> Close
+                </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="row" ng-if="showRatings">
+          <div class="col-sm-12 col-xs-12  hidden-md hidden-lg">
+            <div class="col-sm-6 col-xs-6  hidden-md hidden-lg text-center">
+              <span ng-if="details.rating.rating__avg==none">None</span> <br>
+              <span ng-if="details.rating.rating__avg!=none">{{details.rating.rating__avg| number : 1}}/5</span> <br>
+              <i class="fa fa-star" style="color:#e3bc18;font-size:80px;"></i>
+            </div>
+            <div class="col-sm-6 col-xs-6 hidden-md hidden-lg" style="padding-top:20px">
+              <div ng-repeat="m in ratings.meta">
+                <!-- <span style="margin-right:10px;">{{ratings.counts[$index]}}</span> -->
+                <uib-rating ng-model="m" max="m" readonly="true" style="font-size:15px;color:#e2a900;"></uib-rating> <br>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-xs-12 hidden-md hidden-lg text-center" ng-if="me != null">
+            <h5>Have you used this product before ?  <small ><br/>Give us your review</small> </h5>
+            <uib-rating ng-model="form.rating" max="5" min="1" readonly="!form.ratable" style="font-size:30px;color:#e2a900;"></uib-rating> <br>
+            <button type="button" class="btn btn-default" ng-click="form.reviewEditor = true;" ng-if="!form.reviewEditor&&me != null">
+              <i class="fa fa-pencil-square-o"></i>  Write a review
+            </button>
+            <div ng-if="form.reviewEditor">
+              <div class="row">
+                <div class="col-sm-12 hidden-md hidden-lg">
+                  <input type="text" placeholder="Tittle.." ng-model="form.reviewHeading" style="background:white;width:100%">
+                  <textarea style="margin-top:20px" class="form-control" ng-model="form.reviewText" autofocus="true" placeholder="Write a review..."></textarea>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12  hidden-md hidden-lg btn-group" style="padding-top:10px">
+                  <button type="button" class="btn btn-success" ng-click="sendReview()">
+                <i class="fa fa-plus"></i> Add
+                </button>
+                  <button type="button" class="btn btn-default" ng-click="form.reviewEditor = false">
+                  <i class="fa fa-close"></i> Close
+                </button>
+
+                </div>
+              </div>
+            </div>
+            <hr>
+          </div>
+
+          <hr>
+        </div>
+        <div class="row text-center" ng-if="me != null&&reviews.length==0&&showRatings">
+          <!-- <h4>No reviews yet. Be the first to review</h4> -->
+          <h4>Write a review</h4>
+        </div>
+        <div class="row" ng-if="reviewsCount!=0">
+
+
+          <div class="container-fluid" ng-if="showRatings">
+            <div class="col-md-12 col-xs-12 col-sm-6" ng-repeat="r in reviews">
+              <div class="row container-fluid">
+                <div class="col-md-3" style="padding-left:35px;">
+                  <div class="row">
+                    <uib-rating ng-model="r.rating" max="5" readonly="true" style="font-size:17px;color:#e2a900;padding-left:0px"></uib-rating>
+                    <span class="label success" style="background-color:green">Verified User</span></br>
+                    <span class="text-muted"> By {{r.user.first_name}} {{r.user.last_name}} On {{r.created | date : 'dd-MMM-yyyy'}}</span>
+
+                  </div>
+
+                </div>
+                <div class="col-md-9">
+                  <div class="row container-fluid">
+
+                    <h5>{{r.headingVal}} </h5>
+                    <p>
+                      {{r.textVal}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <hr>
+            </div>
+            <nav>
+              <ul class="pager">
+                <li><a href="" ng-if="offset>0" ng-click="prevReviews()">Previous</a></li>
+                <li><a href="" ng-if="next!=none" ng-click="nextReviews()">Next</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="margin:0px;">
+      <div class=" col-md-10 hidden-xs hidden-sm" style="padding:40px; padding-top:0px;width:100%">
+        <h4>Suggested Products</h4>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-4" ng-repeat=" l in suggest">
+                <product-card list="l" add-cart="addToCart"></product-card>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="col-xs-12 hidden-md hidden-lg" style="padding:40px; padding-top:0px;">
+        <!-- <div style="padding:10px;" class="row card bg-white"> -->
+        <h4 class="text-center">Suggested Products</h4>
+        <div class="row">
+          <div class=" col-xs-12 col-sm-6" ng-repeat="l in suggest">
+            <product-card list="l" add-cart="addToCart"></product-card>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-2 hidden-xs hidden-sm" style="margin-left:15px; position:sticky; top:10px; " ng-if="recentlyViewed.product != none &&me.pk">
+    <h4>Recently Viewed</h4>
+    <div class="row">
+      <div class="col-md-12">
+        <product-card list="recentlyViewed.product" add-cart="addToCart"></product-card>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="col-md-3" style="padding-bottom:20px;padding-left:10px;padding-right:10px;">
+  <div class="container-fluid card" style="padding-bottom:10px;">
+    <div class="row" style="border-bottom: 1px solid #dedede;">
+      <div class="col-md-8" style="position:relative;display:block;">
+        <div class="row" style="padding-left:10px;">
+          <h3>{{data.name}}</h3>
+        </div>
+      </div>
+    </div>
+    <div class="row container-fluid" style="padding-top:20px;height:70px;">
+      <div class="col-md-10">
+        <strong>Mobile:</strong> {{data.mobile}} <br>
+        <strong>Email:</strong> {{data.email}} <br>
+        <strong>Address:</strong> {{data.address}} <br>
+        <strong>Pincode:</strong> {{data.pincode}} <br>
+        <strong>Owner:</strong> {{data.owner.first_name}} {{data.owner.last_name}} <br>
+      </div>
+      <div class="col-md-2">
+        <div style="padding-right:20px;">
+          <div class="row">
+            <span class="pull-right" style="cursor:pointer;" ng-click="rowActionClicked('storeEditor')">
+            <i class="fa fa-pencil fa-lg" style="margin-top:0px;"></i>
+          </span> <br><br>
+            <!-- <span class="pull-right" style="cursor:pointer;">
+          <i class="fa fa-info-circle fa-lg" style="margin-top:0px;" ng-click="rowActionClicked('storeInfo')"></i>
+        </span> -->
+
+          </div>
+          <div class="row">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

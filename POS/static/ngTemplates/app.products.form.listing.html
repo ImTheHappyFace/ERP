@@ -1,0 +1,141 @@
+<div>
+  <div class="row">
+    <div  class="col-md-6">
+
+      <!-- <div class="form-group">
+        <label>Product</label>
+        <input uib-typeahead="p as p.name for p in productSearch($viewValue)" class="form-control" type="text" ng-model = "data.form.product" placeholder="Search By Product Name">
+          <span class="input-group-addon" ng-click="refresh()" style="cursor:pointer; background-color:#fff;" >New</span>
+      </div> -->
+
+      <div class="row">
+        <div class="col-md-12" style="padding:0px">
+
+          <label  ng-if=data.form.pk>Category</label>
+          <div  ng-if=data.form.pk>
+            <input uib-typeahead="c as c.name for c in genericProductSearch($viewValue)" class="form-control" type="text" ng-model = "data.genericProduct" placeholder="Search By Category Name">
+          </div>
+
+          <!-- <label>Product</label>
+          <div class="input-group">
+            <input uib-typeahead="p as p.name for p in productSearch($viewValue)" class="form-control" type="text" ng-model = "data.form.product" placeholder="Search By Product Name">
+            <span class="input-group-addon" ng-if=!data.form.product.pk ng-click="openProductmodal()" style="cursor:pointer; background-color:#fff;" >New</span>
+            <span class="input-group-addon" ng-if=data.form.product.pk ng-click="openProductmodal()" style="cursor:pointer; background-color:#fff;" >Edit</span>
+          </div> -->
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+      <div ng-repeat="f in data.genericProduct.fields">
+        <div class="form-group">
+          <!-- {{f.data}} -->
+          <label ng-if="f.fieldType != 'choice'">{{f.name | humanize}} {{f.unit==null || f.unit == ''? '': 'in (' + f.unit + ')' }}</label>
+          <label ng-if="f.fieldType == 'choice'">{{f.name | humanize}} {{f.unit==null || f.unit == ''? '': '(choice parent label :  ' + f.unit + ')' }}</label>
+          <input ng-if="f.fieldType == 'char'" type="text" class="form-control" ng-model="f.value">
+          <input ng-if="f.fieldType == 'boolean'" type="checkbox" ng-model="f.value">
+          <input ng-if="f.fieldType == 'float'" type="number" class="form-control" ng-model="f.value" step="0.01">
+          <div class="input-group" ng-if="f.fieldType == 'date'">
+            <input type="text" class="form-control" show-weeks="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="f.value" is-open="f.opened"  />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="f.opened = true;"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+          </div>
+          <!-- <input ng-if="f.fieldType == 'choice'" uib-typeahead="choice as choice.name for choice in choiceSearch($viewValue , f)" ng-model="f.value" type="text" class="form-control" placeholder="Search and select a choice"> -->
+          <!-- {{f.data}} {{f.fieldType}} -->
+          <select ng-if="f.fieldType == 'choice'" class="form-control" ng-model="f.value">
+            <option ng-repeat="o in  f.data" value="{{o}}" >{{o}}</option>
+          </select>
+          <p class="help-block">{{f.helpText}}.</p>
+        </div>
+
+
+      </div>
+      <div style="margin-top:5px;margin-bottom:10px">
+        <label >Product Index</label>
+        <input class="form-control" type="number" ng-model="data.form.productIndex">
+      </div>
+      <!-- <div class="btn-group">
+        <button ng-if="false" type="button" class="btn btn-default" ng-click="preview()">Preview </button>
+        <button type="button" class="btn btn-primary" ng-click="submitListing()">Submit </button>
+      </div> -->
+    </div>
+  </div>
+
+    </div>
+  </div>
+    <div class="col-md-6">
+      <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Add a media file <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a ng-click="switchMediaMode('image')" href="">Image</a></li>
+          <li><a ng-click="switchMediaMode('doc')" href="">Document</a></li>
+          <li><a ng-click="switchMediaMode('video')" href="">Upload a video</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a ng-click="switchMediaMode('onlineVideo')" href="">Link a youtube video</a></li>
+          <li><a ng-click="switchMediaMode('onlineImage')" href="">Link an image</a></li>
+        </ul>
+      </div>
+      <div  style="padding-top:20px;">
+        <div class="form-group" ng-if="['image' , 'doc' , 'video'].indexOf(data.form.mediaType) >= 0">
+          <label> Upload {{data.form.mediaType | humanize}}</label>
+          <input type="file" file-model="data.form.file">
+          <p class="help-block">Select the file.</p>
+        </div>
+        <div ng-if="['image' , 'doc' , 'video'].indexOf(data.form.mediaType) == -1 && data.form.mediaType!=''">
+          <div class="form-group">
+            <label>Provide the link for {{data.form.mediaType | humanize}}</label>
+            <input type="text" ng-model = "data.form.url" class="form-control" placeholder="Enter the link including http://">
+          </div>
+        </div>
+        <button type="button" ng-click="postMedia()" ng-if="data.form.mediaType!=''" class="btn btn-primary">Attach</button>
+
+        <hr>
+        <div class="row">
+          <div class="col-md-3 col-sm-4 col-xs-6" style="padding:10px;" ng-repeat= "f in data.form.files">
+
+            <div class="container" style="position:relative; width:100%; padding:20px;" ng-mouseover="deleteObjOption=true" ng-mouseleave="deleteObjOption=false">
+              <span>
+                <i ng-show="deleteObjOption" ng-click = "removeMedia($index)" class="fa fa-times fa-3x" style="position:absolute;top:-5px;right:0px;text-align: center;z-index:10;cursor:pointer"></i>
+              </span>
+              <img ng-if="f.mediaType == 'image'" class="shaddowed" ng-src="{{f.attachment}}"  height="50" width="90"/>
+              <img ng-if="f.mediaType == 'onlineImage'" class="shaddowed" ng-src="{{f.link}}"  height="50" width="90"/>
+              <div ng-if="['video' , 'doc' , 'onlineVideo'].indexOf(f.mediaType) != -1">
+                <a href="{{f.link}}">{{f.link}}</a>
+              </div>
+            </div>
+            <input type="number" ng-model="f.imageIndex">
+            <!-- <div ng-drag="true" ng-drag-data="f" data-allow-transform="true" style="padding:15px">
+
+
+            <div class="container" style="position:relative; width:100%; padding:20px;" ng-mouseover="deleteObjOption=true" ng-mouseleave="deleteObjOption=false">
+              <span>
+                <i ng-show="deleteObjOption" ng-click = "removeMedia($index)" class="fa fa-times fa-3x" style="position:absolute;top:-5px;right:0px;text-align: center;z-index:10;cursor:pointer"></i>
+              </span>
+              <img ng-if="f.mediaType == 'image'" class="shaddowed" ng-src="{{f.attachment}}"  height="50" width="90"/>
+              <img ng-if="f.mediaType == 'onlineImage'" class="shaddowed" ng-src="{{f.link}}"  height="50" width="90"/>
+              <div ng-if="['video' , 'doc' , 'onlineVideo'].indexOf(f.mediaType) != -1">
+                <a href="{{f.link}}">{{f.link}}</a>
+              </div>
+            </div>
+          </div> -->
+        </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top:10px;padding:0px;">
+    <label>Additional Optional fields</label>
+    <p class="help-block">
+      Design feature rich HTML description
+    </p>
+    <textarea ui-tinymce="tinymceOptions" ng-model="data.form.source"></textarea>
+  </div>
+  <div class="row" style="text-align: center;margin-top:2em">
+    <div class="btn-group">
+      <button ng-if="false" type="button" class="btn btn-default" ng-click="preview()">Preview </button>
+      <button type="button" class="btn btn-primary" ng-click="submitListing()">Submit </button>
+    </div>
+  </div>
+</div>

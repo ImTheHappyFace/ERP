@@ -1,0 +1,30 @@
+
+<div class="col-md-4">
+  <div class="cards" style="{{data.status==true?'border:0.5px solid green':'border:0.5px solid #f2f2f2'}};box-shadow:0 2px 8px rgba(26,24,20,0.2);margin-bottom: 25px;">
+    <div class="row" style="padding: 12px;" >
+      <div class="col-md-9">
+        <span><strong># {{data.pk}}</strong></span><br>
+        <h3 style="padding-bottom: 0px;">Target Amount : {{data.targetAmount}}</h3>
+        <span><strong>Coins : </strong>{{data.achievedCoin}}</span><br>
+        <!-- <span><strong>Status : </strong>{{data.status}}</span><br> -->
+        <span><strong>Validity : </strong>{{data.validity}}</span><br>
+      </div>
+      <div class="col-md-3 text-right"  style="">
+        <!-- <div class="row">
+          <span><i class="fa fa-info" style="color: blue;font-size: 20px;cursor:pointer;" ng-click="rowActionClicked('info')"></i>
+          </span>
+        </div> -->
+        <div class="" style="padding-right: 15px;">
+          <span><i class="fa fa-pencil" style="color: blue;font-size: 20px;cursor:pointer;" ng-click="rowActionClicked('edit')"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="margin-top:10px;padding-right: 28px;padding-bottom:12px">
+      <div class="col-md-12 text-right">
+        <span><i class="fa fa-trash" style="color: red;font-size: 20px;cursor:pointer;"  mwl-confirm title="Confirm" message="Are you sure?" confirm-text="Yes" cancel-text="No" on-confirm="rowActionClicked('delete')"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

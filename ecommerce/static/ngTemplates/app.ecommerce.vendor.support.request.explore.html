@@ -1,0 +1,33 @@
+<div class="container-fluid" ng-controller="businessManagement.ecommerce.support.request.explore">
+  <div class="row" style="margin-top:30px">
+    <div class="col-md-9">
+    <h5><strong>email : </strong><span>{{data.request.email}}</h5></span>
+    <h5><strong>Mobile : </strong><span>{{data.request.mobile}}</h5></span>
+    <h5 ng-if="data.request.invoiceNo"><strong>Invoice No : </strong><span>{{data.request.invoiceNo}}</h5></span>
+    <h5 ng-if="data.request.subject"><strong>Subject : </strong><span>{{data.request.subject}}</h5></span>
+    <h5><strong>Message : </strong><span>{{data.request.message}}</h5></span>
+    <h5 ng-if="data.request.status=='resolved'||data.request.status=='junk'"><strong>Status : </strong><span>{{data.request.status}}</h5></span>
+  </div>
+    <div class="col-md-3" ng-if="data.request.status=='ongoing'||data.request.status=='created'">
+      <div class="form-group">
+        <label>Status</label>
+        <select class="form-control" ng-model="data.request.status">
+          <option value="created">Created</option>
+          <option value="ongoing">Ongoing</option>
+          <option value="resolved">Resolved</option>
+          <option value="junk">Junk</option>
+        </select>
+      </div>
+      </div>
+    <hr>
+  </div>
+  <div class="row" style="margin-top:30px" ng-if="data.request.status=='ongoing'||data.request.status=='created'">
+      <div class="col-md-12">
+    <div class="form-group">
+      <label>Response</label>
+      <textarea ui-tinymce="tinymceOptions" ng-model="data.request.response"></textarea>
+    </div>
+    <button type="button" class="btn btn-primary" ng-click="sendResponse()">Send</button>
+  </div>
+</div>
+</div>

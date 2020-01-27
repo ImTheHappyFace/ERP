@@ -1,0 +1,31 @@
+
+  <div class="modal-header">
+
+  </div>
+
+  <div class="row modal-body">
+    <div class="row">
+    <div class = "col-md-offset-1 col-md-10" >
+      <div ng-if="trackItems.trackingLog.length>0">
+    <table class="table table-striped" >
+      <tbody>
+        <tr>
+          <th style="width:30%">Data and Time</th>
+          <th style="width:70%">Activity</th>
+        </tr>
+        <tr ng-repeat="log in trackItems.trackingLog">
+          <td style="width:30%">{{log.time | date : 'dd-MMM-yyyy : hh:mm a'}}</td>
+          <td style="width:70%">{{log.logTxt}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div  ng-if="trackItems.trackingLog.length==0" class="text-center">
+      <h3>Your Order is yet to be confirmed</h3>
+    </div>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+
+</div>

@@ -1,0 +1,332 @@
+<style media="screen">
+  /* *,
+*:after,
+*:before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+} */
+
+  .clearfix:before,
+  .clearfix:after {
+    content: " ";
+    display: table;
+  }
+
+  .clearfix:after {
+    clear: both;
+  }
+
+  body {
+    font-family: sans-serif;
+    background: #f6f9fa;
+  }
+
+  h1 {
+    color: #ccc;
+    text-align: center;
+  }
+
+  a {
+    color: #ccc;
+    text-decoration: none;
+    outline: none;
+  }
+
+
+  .tab_container {
+    position: relative;
+    padding-top: 20px;
+  }
+
+  .mainInputTabs,
+  section {
+    clear: both;
+    padding-top: 10px;
+    display: none;
+  }
+
+  label {
+    font-weight: 400;
+    font-size: 13px;
+    display: block;
+    float: left;
+    padding: 15px;
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    background: #f0f0f0;
+  }
+
+  #tab1:checked~#content1,
+  #tab2:checked~#content2,
+  #tab3:checked~#content3,
+  #tab4:checked~#content4,
+  #tab5:checked~#content5 {
+    display: block;
+    background: #fff;
+  }
+
+  .tab_container .tab-content p,
+  .tab_container .tab-content h3 {
+    -webkit-animation: fadeInScale 0.7s ease-in-out;
+    -moz-animation: fadeInScale 0.7s ease-in-out;
+    animation: fadeInScale 0.7s ease-in-out;
+  }
+
+  .tab_container .tab-content h3 {
+    text-align: center;
+  }
+
+  .tab_container [id^="tab"]:checked+label {
+    background: #fff;
+    box-shadow: inset 0 3px #1D18CD
+  }
+
+  .tab_container [id^="tab"]:checked+label .blueDot {
+    background: #1D18CD;
+  }
+
+  .tab_container [id^="tab"]:checked+label .fa {
+    color: #1D18CD;
+  }
+
+  label .fa {
+    font-size: 1.3em;
+    margin: 0 0.4em 0 0;
+  }
+
+  /*Media query*/
+  @media only screen and (max-width: 900px) {
+    label span {
+      display: none;
+    }
+
+    .tab_container {
+      width: 98%;
+    }
+  }
+
+  /*Content Animation*/
+  /* @keyframes fadeInScale {
+  0% {
+  	transform: scale(0.9);
+  	opacity: 0;
+  }
+
+  100% {
+  	transform: scale(1);
+  	opacity: 1;
+  }
+} */
+
+  .no_wrap {
+    text-align: center;
+    color: #0ce;
+  }
+
+  .link {
+    text-align: center;
+  }
+
+  .blueDot {
+    margin-left: 4px;
+    border-radius: 33%;
+    background: #80808033;
+    padding: 1px 5px;
+    color: white;
+  }
+
+
+  .footerIcons{
+    padding: 13px;
+    background:#39384B;
+    border-radius: 30%/56%;
+    margin-right: 15px;
+    cursor: pointer;
+  }
+
+  .lastIcon{
+    background-color: red;
+  }
+</style>
+
+<div style="padding:20px 20px 20px 20px;">
+  <div class="tab_container">
+    <input id="tab1" type="radio" name="tabs" checked class="mainInputTabs">
+    <label for="tab1"><i class="fa fa-bars"></i><span>All Orders</span> <span class="blueDot">{{data.tableData_new.length}}</span> </label>
+
+    <input id="tab2" type="radio" name="tabs" class="mainInputTabs" class="mainInputTabs" class="mainInputTabs">
+    <label for="tab2"><i class="fa fa-toggle-on"></i><span>Active</span><span class="blueDot">{{data.tableData_InProgress.length}}</span></label>
+
+    <input id="tab3" type="radio" name="tabs" class="mainInputTabs" class="mainInputTabs">
+    <label for="tab3"><i class="fa fa-bar-chart-o"></i><span>To Invoice</span><span class="blueDot">{{data.tableData_Completed.length}}</span></label>
+
+    <input id="tab4" type="radio" name="tabs" class="mainInputTabs">
+    <label for="tab4"><i class="fa fa-truck"></i><span>To Ship</span><span class="blueDot">51</span></label>
+
+    <section id="content1" class="tab-content">
+      <div class="row" style="margin-top:1em;">
+        <div class="container-fluid">
+          <div class="table-responsive">
+            <!--Table-->
+            <table class="table table-striped">
+
+              <!--Table head-->
+              <thead style="background:#FAFAFC">
+                <tr>
+                  <th> <input type="checkbox" class="inputCheckBox">
+                    Orders #
+                  </th>
+                  <th> Customer Name </th>
+                  <th> Status </th>
+                  <th> Total </th>
+                  <th> Created </th>
+                  <th> Last updated </th>
+
+                </tr>
+              </thead>
+              <!--Table head-->
+
+              <!--Table body-->
+              <tbody ng-repeat="state in data.tableData_new track by $index">
+                <tr ng-if="$index %2 !=0" style="background:#F4F4FB">
+                  <th scope="row"> <input type="checkbox" name="" value="" ng-model="state.chkbxVal" > {{state.orders.pk}}</th>
+                  <td>{{state.user.first_name}}</td>
+                  <td>{{state.Status}}</td>
+                  <td>{{state.total}}</td>
+                  <td>{{state.created_on}}</td>
+                  <td>{{state.last_updated}}</td>
+                </tr>
+                <tr ng-if="$index % 2==0" style="background:transparent">
+                  <th scope="row">
+                    <input type="checkbox" name="" value="" ng-model="state.chkbxVal" >
+                   {{state.orders.pk}}</th>
+                  <td>{{state.user.first_name}}</td>
+                  <td>{{state.Status}}</td>
+                  <td>{{state.total}}</td>
+                  <td>{{state.created_on}}</td>
+                  <td>{{state.last_updated}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+      <div class="col-md-2">
+      </div>
+        <div class="col-md-8" style="padding:15px 190px;height:80px" ng-if="flag">
+          <div  style="height:80px;border-radius: 6% / 56%;background:#1A1927;">
+            <div class="row" style="padding:23px;color:white">
+              <div class="col-md-4" style="padding-top:8px">
+                <span > <i class="fa fa-times" aria-hidden="true" style="cursor:pointer;" ng-click = "closeWidget()"></i></span> &nbsp;
+                <span style="padding: 2px 10px;background:#39384B;border-radius: 50% / 54%;"> {{flag}} </span> &nbsp;
+                <span> items selected</span>
+              </div>
+              <div class="col-md-8" style="padding-top:8px">
+                <span class="footerIcons"> <i class="fa fa-ellipsis-h" aria-hidden="true" style="padding-right:5px"></i> More </span>
+                <span class="footerIcons"> <i class="fa fa-envelope-o" aria-hidden="true" style="padding-right:5px"></i>Send </span>
+                <span class="footerIcons"> <i class="fa fa-print" aria-hidden="true" style="padding-right:5px"></i> Print </span>
+                <span class="footerIcons"> <i class="fa fa-pencil" aria-hidden="true" style="padding-right:5px"></i> Edit </span>
+                <span class="footerIcons lastIcon"> <i class="fa fa-trash-o" aria-hidden="true" style="padding-right:5px"></i> Delete </span>
+              </div>
+            </div>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <!--tab 2  -->
+
+    <section id="content2" class="tab-content">
+      <div class="row" style="margin-top:1em;">
+        <div class="container-fluid">
+          <div class="table-responsive">
+            <!--Table-->
+            <table class="table table-striped">
+
+              <!--Table head-->
+              <thead style="background:#FAFAFC">
+                <tr>
+                  <th> Orders # </th>
+                  <th> Customer Name </th>
+                  <th> Status </th>
+                  <th> Total </th>
+                  <th> Created </th>
+                  <th> Last updated </th>
+
+                </tr>
+              </thead>
+              <!--Table head-->
+
+              <!--Table body-->
+              <tbody ng-repeat="state in data.tableData_InProgress">
+                <tr ng-if="$index %2 !=0" style="background:#F4F4FB">
+                  <th scope="row"> <input type="checkbox" name="" value="" ng-model="state.chkbxVal" > {{state.orders.pk}}</th>
+                  <td>{{state.user.first_name}}</td>
+                  <td>{{state.Status}}</td>
+                  <td>{{state.total}}</td>
+                  <td>{{state.created_on}}</td>
+                  <td>{{state.last_updated}}</td>
+                </tr>
+
+                <tr ng-if="$index % 2==0" style="background:transparent">
+                  <th scope="row"> <input type="checkbox" name="" value="" ng-model="state.chkbxVal" > {{state.orders.pk}}</th>
+                  <td>{{state.user.first_name}}</td>
+                  <td>{{state.Status}}</td>
+                  <td>{{state.total}}</td>
+                  <td>{{state.created_on}}</td>
+                  <td>{{state.last_updated}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+      <div class="col-md-2">
+      </div>
+        <div class="col-md-8" style="padding:15px 190px;height:80px" ng-if="flag2">
+          <div  style="height:80px;border-radius: 6% / 56%;background:#1A1927;">
+            <div class="row" style="padding:23px;color:white">
+              <div class="col-md-4" style="padding-top:8px">
+                <span > <i class="fa fa-times" aria-hidden="true" style="cursor:pointer;" ng-click = "closeWidget()"></i></span> &nbsp;
+                <span style="padding: 2px 10px;background:#39384B;border-radius: 50% / 54%;"> {{flag2}} </span> &nbsp;
+                <span> items selected</span>
+              </div>
+              <div class="col-md-8" style="padding-top:8px">
+                <span class="footerIcons"> <i class="fa fa-ellipsis-h" aria-hidden="true" style="padding-right:5px"></i> More </span>
+                <span class="footerIcons"> <i class="fa fa-envelope-o" aria-hidden="true" style="padding-right:5px"></i>Send </span>
+                <span class="footerIcons"> <i class="fa fa-print" aria-hidden="true" style="padding-right:5px"></i> Print </span>
+                <span class="footerIcons"> <i class="fa fa-pencil" aria-hidden="true" style="padding-right:5px"></i> Edit </span>
+                <span class="footerIcons lastIcon"> <i class="fa fa-trash-o" aria-hidden="true" style="padding-right:5px"></i> Delete </span>
+              </div>
+            </div>
+            </div>
+        </div>
+      </div>
+
+
+
+    </section>
+
+    <section id="content3" class="tab-content">
+
+    </section>
+
+    <section id="content4" class="tab-content">
+
+    </section>
+
+    <section id="content5" class="tab-content">
+
+  </div>
+
+
+
+</div>

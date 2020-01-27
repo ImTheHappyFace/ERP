@@ -1,0 +1,222 @@
+@media only screen and (max-width: 600px) {
+  #genericPage{
+    margin-top: 100px;
+  }
+}
+.ng-cloak {
+    display: none !important;;
+}
+html,body {
+    font-family: var(--fontStyle)!important;
+    overflow-x: hidden;
+  }
+
+[uib-typeahead-popup=""] {
+    width:100%;
+}
+.active successText{
+	color:white;
+}
+
+h5{
+  font-size: 16px !important;
+}
+
+
+
+.glassyButton{
+	border:solid 3px white;
+	border-radius:30px;
+	padding:6px;
+	color:white;
+	cursor:pointer;
+}
+
+.glassyButton:hover{
+	background: rgba(0, 0, 0, 0.2) none repeat scroll 0% 0%;
+
+}
+
+.ecomNav input:focus{
+	outline: none;
+	border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.ecomNav{
+	margin:0px;
+}
+
+.cardCartBtn{
+	border-radius: 15px;
+	width: 40px;
+	height: 30px;
+}
+
+.aboutUsMap .angular-google-map-container {
+	height:400px;
+}
+
+.asideModal .angular-google-map-container {
+	position:absolute;
+	height: 100%;
+	width: 100%;
+}
+
+.zoomOnHover:hover{
+	transform: scale(1.1);
+	/*box-shadow: 2px 2px 10px rgba(7, 131, 184, 1);*/
+}
+.zoomOnHover{
+	transition: all .2s ease-in-out;
+}
+
+.zoomEffect{
+	transition: all .2s ease-in-out;
+}
+
+.zoomText{
+	font-size: 20px;
+}
+
+.glassy {
+
+  -o-box-shadow:
+      0 2px 8px rgba(0,0,0,0.5),
+      inset 0 1px rgba(255,255,255,0.3),
+      inset 0 10px rgba(255,255,255,0.2),
+      inset 0 10px 20px rgba(255,255,255,0.25),
+      inset 0 -15px 30px rgba(0,0,0,0.3);
+
+  -webkit-box-shadow:
+      0 2px 8px rgba(0,0,0,0.5),
+      inset 0 1px rgba(255,255,255,0.3),
+      inset 0 10px rgba(255,255,255,0.2),
+      inset 0 10px 20px rgba(255,255,255,0.25),
+      inset 0 -15px 30px rgba(0,0,0,0.3);
+
+  -moz-box-shadow:
+      0 2px 8px rgba(0,0,0,0.5),
+      inset 0 1px rgba(255,255,255,0.3),
+      inset 0 10px rgba(255,255,255,0.2),
+      inset 0 10px 20px rgba(255,255,255,0.25),
+      inset 0 -15px 30px rgba(0,0,0,0.3);
+
+	box-shadow:
+        0 2px 8px rgba(0,0,0,0.5), /* Exterior Shadow */
+        inset 0 1px rgba(255,255,255,0.3), /* Top light Line */
+        inset 0 10px rgba(255,255,255,0.2), /* Top Light Shadow */
+        inset 0 10px 20px rgba(255,255,255,0.25), /* Sides Light Shadow */
+        inset 0 -15px 30px rgba(0,0,0,0.3); /* Dark Background */
+}
+
+.sidebar-checkout> li > a {
+  color:white;
+}
+
+.sidebar-checkout> li > a:hover, .sidebar-checkout > li >a:focus , .sidebar-checkout> .active > a , .sidebarList> li > a:focus , .sidebarList> li > a:active , .activeTab .activeTopTab{
+	background: rgba(0, 0, 0, 0.2) none repeat scroll 0% 0%;
+	color: #fff;
+}
+
+.activeSlideTab {
+  background-color:white;
+  border-bottom: solid 6px #f0a71e;
+  border-top: solid 2px #8a8a8a;
+
+}
+
+.activeSlideTab:before {
+  content: '';
+  display: block;
+  position: relative;
+  top: -11px;
+  right:-45%;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-top: solid 2px #8a8a8a;
+  border-right: solid 2px #8a8a8a;
+  -moz-transform:rotate(-45deg);
+  -webkit-transform:rotate(-45deg);
+}
+
+.activeTab:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 15px;
+  right:-16px;
+  width: 30px;
+  height: 30px;
+  background: white;
+  -moz-transform:rotate(-45deg);
+  -webkit-transform:rotate(-45deg);
+}
+
+.activeTopTab:after{
+	content: '';
+  display: block;
+  position: absolute;
+  top: 15vh;
+  left:12vw;
+  width: 30px;
+  height: 30px;
+  background: white;
+  -moz-transform:rotate(45deg);
+  -webkit-transform:rotate(45deg);
+}
+
+.activeTopTabAcnt:after{
+	content: '';
+  display: block;
+  position: absolute;
+  top: 35px;
+  left:5.5vw;
+  width: 30px;
+  height: 30px;
+  background: white;
+  -moz-transform:rotate(45deg);
+  -webkit-transform:rotate(45deg);
+}
+
+.register {
+    background-image: url("/static/images/register.jpg");
+    background-color: #cccccc;
+}
+
+footer {
+    padding: 25px 0;
+    text-align: center;
+}
+
+footer span.copyright {
+    text-transform: uppercase;
+    text-transform: none;
+    line-height: 40px;
+}
+
+footer ul.quicklinks {
+    margin-bottom: 0;
+    text-transform: uppercase;
+    text-transform: none;
+    line-height: 40px;
+}
+.owl-prev, .owl-next {
+       width: 40px;
+       height: 40px;
+       position: absolute;
+       font-size: 8px !important;
+       top: 50%;
+       transform: translateY(-50%);
+       display: block !important;
+       border:0px solid black;
+       background-color: var(--themeColor) !important;
+       color:#ffff;
+       border-radius: 50px 50px 50px 50px !important;
+   }
+   .owl-prev { left: -20px; }
+   .owl-next { right: -20px; }
+   .owl-prev i, .owl-next i {transform : scale(5,5); color: white;
+  font-weight: bolder;}

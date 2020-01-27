@@ -1,0 +1,279 @@
+<style media="screen">
+  body {
+    background: white;
+  }
+
+  .mainSearchBar {
+    border: none;
+    outline: none;
+    background: none;
+    padding: 0px 0 26px 28px;
+    border-bottom: 1px solid #00000021;
+    border-radius: none;
+    width: 100%;
+  }
+
+  .searchIcon {
+    position: relative;
+    top: 22px;
+    left: -2px;
+    color: #BAB8BA;
+    font-size: 19px;
+  }
+
+  ::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: pink;
+  }
+
+
+  ::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #BAB8BA;
+    font-size: 19px;
+  }
+
+
+  .div1-side {
+    height: 76px;
+    background: white;
+    margin-top: 18px;
+    border-radius: 2%;
+  }
+
+  .mainImgRound {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+
+  }
+
+  .dot {
+    height: 20px;
+    width: 20px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+    padding: 0px 0px 1px 6px;
+    color: white;
+  }
+
+  .maincard:hover {
+    cursor: pointer;
+    transition: all .2s cubic-bezier(.02,.54,.58,1); 
+    transform: scalex(1.04);
+
+  }
+
+  .maincard{
+    /* transform: translate3d(0,-20px,0); */
+    
+  }
+
+  .mainSmiley {
+    position: relative;
+    top: 51px;
+    left: 13px;
+    z-index: 2;
+    font-size: 27px;
+    color: rgba(128, 128, 128, 0.473);
+    cursor: pointer;
+  }
+
+  .files-main{
+  position: relative;
+  top: -46px;
+  z-index: 3;
+  right: -107rem;
+  font-size: 17px;
+  cursor: pointer;
+  }
+
+  .sendOption{
+    position: relative;
+    top: -46px;
+    right: -109rem;
+    z-index: 3;
+    font-size: 19px;
+    cursor: pointer;
+    color:white;
+    box-shadow: 2px 11px 18px #BBDAF7;
+  }
+
+
+  .messages {
+  display: table;
+   max-width:100%;
+   min-width:50px;
+   background: #ffeec0;
+   padding:8px 14px;
+   margin:3px;
+   -webkit-border-radius: 2px;
+   border-radius: 2px;
+   border-radius:8%/50%;
+   background: #298CEF;
+   color: white;
+   font-weight: 600;
+}
+
+.primaryMessage{
+  background: #E7E6EC4A;
+  color: black;
+}
+
+
+
+</style>
+
+
+
+<div style="padding:0px 20px 0px 20px;">
+  <div class="row" >
+    <div class="col-md-4" style="height:96vh;">
+      <div class="row" >
+        <div class="col-md-12" >
+          <div class="row">
+            <div class="col-md-12">
+              <i class="fa fa-search searchIcon" aria-hidden="true"></i>
+              <input type="text" name="" value="" placeholder="Search" class="mainSearchBar">
+            </div>
+          </div>
+
+          <div class="row maincard" style="padding:10px 13px 0 13px;" ng-repeat="row in data.people.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))">
+            <div class="col-md-12 " style="background:white;height:80px;box-shadow:2px 2px 9px #0000002b;">
+              <div class="row">
+                <div class="col-md-1" style="padding-top:17px">
+                  <img ng-src="{{row.profileImg}}" alt="" class="mainImgRound">
+                </div>
+                <div class="col-md-9" style="padding:18px 0 0 25px">
+                  <span> <b>{{row.name }}</b></span> <br>
+                  <span>
+                    {{row.message}}
+                  </span>
+                </div>
+                <div class="col-md-2" style="padding-top:12px">
+                  <span style="color:#BAB8BA;"> {{row.date}}</span>
+                  <div style="margin-top:8px;">
+                    <span class="dot"> {{row.notification_count}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" class="pagination-md" 
+            items-per-page="itemsPerPage"></pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--2nd Column  -------------------------------------------------------->
+    <div class="col-md-8">
+      <div class="row" style="padding:0px 15px 0px 15px;">
+        <div class="col-md-12" style="padding: 11px;border-bottom: 1px solid #00000021;">
+          <div>
+            <span> <b style="font-size:18px">Gold Coast</b></span> <br>
+            <span>From : Hali</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="height:79vh;">
+        <div class="col-md-12">
+
+          <!-- LEft DIV -->
+
+          <div class="row" style="padding-top:10px">
+            <div class="col-md-1" style="padding:15px 0px 10px 26px">
+              <div>
+                <img src="https://engineering.unl.edu/images/staff/Kayla_Person-small.jpg" alt="" class="mainImgRound">
+              </div>
+              <div style="margin-top:4px;margin-left:4px">
+                <span> 18:00 </span>
+              </div>
+            </div>
+            <div class="col-md-11" style="margin-left:-30px;padding:17px 10px 20px 10px ">
+              <div class="messages primaryMessage">
+                We have invited you at our office for visit
+              </div>
+            </div>
+          </div>
+
+          <!-- Side Div -->
+          <div class="row" style="padding:10px 20px;">
+
+            <div class="col-md-12" style="padding:17px 10px 20px 10px; display: flex;justify-content: flex-end;">
+              <div class="messages">
+                its like dream come true thank you
+              </div>
+            </div>
+          </div>
+
+<!------------------------ Let DIV ------------------------------------->
+
+
+          <div class="row" style="padding-top:10px">
+            <div class="col-md-1" style="padding:15px 0px 10px 26px">
+              <div>
+                <img src="https://engineering.unl.edu/images/staff/Kayla_Person-small.jpg" alt="" class="mainImgRound">
+              </div>
+              <div style="margin-top:4px;margin-left:4px">
+                <span> 18:00 </span>
+              </div>
+            </div>
+            <div class="col-md-11" style="margin-left:-30px;padding:17px 10px 20px 10px ">
+              <div class="messages primaryMessage">
+                Welcome
+              </div>
+            </div>
+          </div>
+
+          <!-- right -->
+          <div class="row" style="padding:10px 20px;">
+
+            <div class="col-md-12" style="padding:17px 10px 20px 10px; display: flex;justify-content: flex-end;">
+              <div class="messages">
+                its like dream come true thank you
+              </div>
+            </div>
+          </div>
+<!-- Left DIV -->
+          <div class="row" style="padding-top:10px">
+            <div class="col-md-1" style="padding:15px 0px 10px 26px">
+              <div>
+                <img src="https://engineering.unl.edu/images/staff/Kayla_Person-small.jpg" alt="" class="mainImgRound">
+              </div>
+              <div style="margin-top:4px;margin-left:4px">
+                <span> 18:00 </span>
+              </div>
+            </div>
+            <div class="col-md-11" style="margin-left:-30px;padding:17px 10px 20px 10px ">
+              <div class="messages primaryMessage">
+                We have invited you at our office for visit
+              </div>
+            </div>
+          </div>
+<!-- --------------------------------------------------------------- -->
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <i class="fa fa-smile-o mainSmiley" aria-hidden="true"></i>
+          <input type="text"
+            style="padding:5px 10px 5px 50px;height:70px;border-radius:5px;border:none;width:100%;box-shadow:0px 0px 3px #00000021;position: relative;top:0px;z-index: 1;border-radius: 5px;"
+            placeholder="type a message...">
+
+            <i class="fa fa-files-o files-main" aria-hidden="true"></i>
+            <span class="sendOption" style="border-radius: 50%;padding: 8px;background-color: #4294F3;"><i class="fa fa-paper-plane " aria-hidden="true"></i></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>

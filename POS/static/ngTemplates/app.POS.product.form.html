@@ -1,0 +1,504 @@
+
+<div ng-controller="businessManagement.products.form">
+  <!-- class="modal-header bg-red" class="modal-body"-->
+
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-md-4">
+
+      <h3 ng-if="mode == 'new'">Create a new Product</h3>
+      <h3 ng-if="mode == 'edit'">Edit product : {{product.name}}</h3>
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" ng-model="product.name">
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>MRP</label>
+            <input type="number" min="0" class="form-control" ng-model="product.price">
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Cost</label>
+            <input type="number" min="0" class="form-control" ng-model="product.cost">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- <div class="col-md-6">
+          <div class="form-group">
+            <label>In Stock.</label>
+            <input type="number" min="0" class="form-control" ng-model="product.inStock">
+          </div>
+
+        </div> -->
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>logistics</label>
+            <input type="number" min="0" class="form-control" ng-model="product.logistics">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Selling Price</label>
+            <!-- <span class="text-muted">(in %)</span> -->
+            <input type="number" class="form-control" min="0" ng-model="product.discount">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>SKU</label>
+            <input type="tel" class="form-control" ng-model="product.serialNo">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Serial Id</label>
+            <input type="text" class="form-control" ng-model="product.serialId">
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Minimum Threshold</label>
+            <input type="number" class="form-control" ng-model="product.startingTrashold">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Maximum Threshold</label>
+            <input type="number" class="form-control" ng-model="product.orderTrashold">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Reorder Threshold</label>
+            <input type="number" class="form-control" ng-model="product.reorderTrashold">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Gross Weight</label>
+            <input type="text" class="form-control" ng-model="product.grossWeight">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Unit Type</label>
+            <select class="form-control" ng-model="product.unit">
+              <option value="Ton">Ton</option>
+              <option value="Kilogram">Kilogram</option>
+              <option value="Gram">Gram</option>
+              <option value="Litre">Litre</option>
+              <option value="Millilitre">Millilitre</option>
+              <option value="Quantity">Quantity</option>
+              <option value="Size">Size</option>
+              <option value="Size and Color">Size and Color</option>
+
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>How Much</label>
+            <span class="text-muted" ng-if="product.unit">(in {{product.unit}})</span>
+            <input type="text" class="form-control" ng-model="product.howMuch">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Product Meta</label>
+            <input type="text" class="form-control" ng-model="product.productMeta" uib-typeahead="meta as meta.code for meta in searchTaxCode($viewValue)" ng-if="!showTaxCodeDetails">
+            <span ng-if="showTaxCodeDetails"> <button type="button" class="btn btn-default btn-sm" ng-click="product.productMeta = ''">
+                Edit <i class="fa fa-pencil"></i>
+              </button> <br> {{product.productMeta.description}} <br><strong>Code Type : </strong> {{product.productMeta.typ}} <br> <strong>Code : </strong> {{product.productMeta.code}} <br> <strong>Tax Rate :</strong>{{product.productMeta.taxRate}}</span>
+          </div>
+        </div>
+        <div class="col-md-6">
+        <div class="form-group">
+          <label>Alias</label>
+          <input type="text" class="form-control" ng-model="product.alias">
+        </div>
+      </div>
+      <div class="col-md-6">
+      <div class="form-group">
+        <span> <strong>Customizable </strong> <input type="checkbox" ng-model="product.customizable" ></span>
+
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="row">
+
+
+    <div class="col-md-6">
+    <div class="form-group">
+      <span> <strong>Delivery Time </strong>(in Days) <input type="number" class="form-control" ng-model="product.deliverytime" placeholder="Type Number of Days"></span>
+
+    </div>
+  </div>
+  <div class="col-md-6" ng-if="product.customizable">
+  <div class="form-group">
+    <span> <strong>Customizable Delivery Time </strong>(in Days) <input type="number" class="form-control" ng-model="product.customdeliverytime" placeholder="Type Number of Days"></span>
+
+  </div>
+</div>
+</div>
+</div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Display Picture</label>
+          <input type="file" name="pic" accept="image/*" file-model="product.displayPicture">
+        </div>
+      </div>
+      <div class="col-md-12">
+          <div class="form-group">
+          <label>Spacial Offer</label>
+          <input type="text" class="form-control" ng-model="product.specialOffer" placeholder="Special Offer">
+        </div>
+      </div>
+        <div class="col-md-12">
+        <div class="form-group">
+          <label>Description</label>
+          <textarea class="form-control custom-control" rows="3" ng-model="product.description"></textarea>
+        </div>
+      </div>
+    </div>
+      <div class="row">
+        <div class="col-md-4">
+          <label>Available Online </label>
+          <input type="checkbox" ng-model="product.savedProduct" style="padding-top:15px">
+        </div>
+        <div class="col-md-4" ng-if="product.savedProduct">
+            <input uib-typeahead="type as type.name for type in genericProductSearch($viewValue)" ng-model = "product.category" type="text" class="form-control"  placeholder="Search By Category Name">
+        </div>
+        <div class="col-md-4" ng-if="product.savedProduct">
+        <input type="text" class="form-control" ng-model="product.stockQty" placeholder="Add Stock">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-center" style="margin-top: 27px;">
+          <button type="button" class="btn btn-success" ng-click="save()">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+
+
+
+      <div class="row" ng-if="product.pk" style="padding:5px 20px">
+
+        <!-- <label>Secondary SKU</label>
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group">
+              <input type="text" class="form-control" ng-model="productVerientForm.sku">
+            </div>
+
+          </div>
+          <div class="col-md-4">
+
+            <div class="input-group">
+              <input type="text" class="form-control" ng-model="productVerientForm.unitPerpack" placeholder="No. of items per pack">
+
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-primary" ng-click="saveUnits()">Add</button>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+                <label>Secondary SKU</label>
+              <input type="text" class="form-control" ng-model="productVerientForm.sku" placeholder="product variant...">
+            </div>
+          </div>
+          <div class="col-md-4" style="padding-left:0px">
+            <div class="form-group">
+                  <p class="text-muted">Serial Id:</p>
+              <input type="text" class="form-control" ng-model="productVerientForm.serialId" placeholder="Serial Id">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <p class="text-muted">Unit Type</p>
+              <select class="form-control" ng-model="productVerientForm.unit">
+                <option value="Ton">Ton</option>
+                <option value="Kilogram">Kilogram</option>
+                <option value="Gram">Gram</option>
+                <option value="Litre">Litre</option>
+                <option value="Millilitre">Millilitre</option>
+                <option value="Quantity">Quantity</option>
+                <option value="Size">Size</option>
+                <option value="Size and Color">Size and Color</option>
+
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="padding-top:10px">
+          <div class="col-md-4">
+            <p class="text-muted" ng-if="productVerientForm.unit=='Quantity'">Items per pack</p>
+            <p class="text-muted" ng-if="productVerientForm.unit!='Quantity' && productVerientForm.unit=='Size' && productVerientForm.unit=='Size and Color' ">Multiple</p>
+            <p class="text-muted" ng-if="productVerientForm.unit=='Size' || productVerientForm.unit=='Size and Color' ">Size</p>
+              <p class="text-muted" ng-if="productVerientForm.unit=='Kilogram' || productVerientForm.unit=='Gram'|| productVerientForm.unit=='Millilitre'|| productVerientForm.unit=='Litre'|| productVerientForm.unit=='Ton' ">{{productVerientForm.unit}}</p>
+              <input type="text" class="form-control" ng-model="productVerientForm.unitPerpack" placeholder="{{productVerientForm.unit=='Size' || productVerientForm.unit=='Size and Color'? 'Size' : 'No. of items per pack' }}">
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+                <p class="text-muted">Price</p>
+              <input type="text" class="form-control" ng-model="productVerientForm.price" placeholder="price">
+            </div>
+          </div>
+          <div class="col-md-4">
+              <p class="text-muted">Selling Price</p>
+            <input  type="text" class="form-control" ng-model="productVerientForm.discount" placeholder="Discount">
+          </div>
+        </div>
+          <div class="row"  style="padding-top:10px">
+
+            <div class="col-md-4">
+              <p class="text-muted">Minimum Threshold</p>
+            <input  type="text" class="form-control" ng-model="productVerientForm.startingThreshold" placeholder=" Starting Threshold">
+            </div>
+            <div class="col-md-4" >
+              <p class="text-muted">Maximum Threshold</p>
+              <input  type="text" class="form-control" ng-model="productVerientForm.orderThreshold" placeholder="Order Threshold">
+            </div>
+            <div class="col-md-4" >
+                <p class="text-muted">Reorder Threshold</p>
+              <input  type="text" class="form-control" ng-model="productVerientForm.reOrderThreshold" placeholder=" Reorder Threshold">
+            </div>
+
+          </div>
+            <div class="row"  style="padding-top:10px">
+              <div class="col-md-6">
+                  <p class="text-muted">Special Offer</p>
+                  <input type="text" class="form-control" ng-model="productVerientForm.specialOffer" placeholder="Special Offer">
+              </div>
+              <div class="col-md-6" ng-if="productVerientForm.unit=='Size and Color'">
+                <p class="text-muted">Colors of your Product</p>
+                <input  type="text" class="form-control" ng-model="productVerientForm.prodDesc" placeholder="Colors of your Product">
+              </div>
+            </div>
+            <div class="row"  style="padding-top:10px">
+              <div class="col-md-6">
+                <p class="text-muted">Stock</p>
+                <input type="text" class="form-control" ng-model="productVerientForm.stock" placeholder="Stock">
+              </div>
+              <div class="col-md-6">
+                <p class="text-muted">Image</p>
+                <input type="file" name="pic" accept="image/*" file-model="productVerientForm.prodImage">
+              </div>
+            </div>
+        <div class="row"  style="padding-top:10px">
+          <div class="col-md-12" ng-if="productVerientForm.unit=='Size and Color' || productVerientForm.unit=='Size'">
+            <!-- <p class="text-muted" style="font-size:12px;" >Size: <span> 1 = XS </span>, <span>2 = S </span>, <span>3 = M </span>, <span>4 = XL </span>, <span>5 = XXL </span> </p> -->
+          </div>
+        </div>
+        <div class="row" style="padding-top:10px">
+          <div class="col-md-6">
+            <button type="button" class="btn btn-primary" ng-click="saveUnits()">Add</button>
+          </div>
+        </div>
+
+        <!-- <div class="row">
+          <div class="col-md-12" ng-if="product.unit!='Size and Color' && product.unit!='Size'">
+            <p>Preview: {{product.howMuch * productVerientForm.unitPerpack}} {{product.unit=='Quantity' ? 'pcs': product.unit}}</p>
+          </div>
+
+        </div> -->
+
+
+        <div class="row" style="margin-top: 20px;padding:5px 20px">
+          <div class="cards" style="border-left:4px solid #4192cd;box-shadow:0 2px 8px rgba(26,24,20,0.2);margin-top: 15px;" ng-repeat="data in productData">
+            <div class="row" style="padding: 15px;min-height:100px;" ng-mouseenter="hover = true;" ng-mouseleave="hover = false;">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-6">
+                    <p style="margin:0" ><strong>Secondary SKU:</strong>{{data.sku}}</p>
+                    <p style="margin:0"><strong>Serial Id : </strong>{{data.serialId}}</p>
+                    <p style="margin:0" ng-if="product.unit!='Size and Color' && product.unit!='Size' "><strong >Units / Pack:</strong>{{data.unitPerpack}} </p>
+                    <p style="margin:0" ng-if="product.unit=='Size and Color' || product.unit=='Size' "><strong >Size : </strong>{{data.unitPerpack }} <span ng-if="data.prodDesc"> - {{data.prodDesc}}</span></p>
+                    <p style="margin:0"><strong>Price : </strong>{{data.price}}</p>
+                    <p style="margin:0"><strong>Order Threshold : </strong>{{data.orderThreshold}}</p>
+                    <p style="margin:0"><strong>Re-Order Threshold  : </strong>{{data.reOrderThreshold}}</p>
+                    <p style="margin:0"><strong>Selling Price : </strong>{{data.discount}}</p>
+                    <p style="margin:0" ng-if="data.specialOffer"><strong>Offer : </strong>{{data.specialOffer}}</p>
+                  </div>
+                  <div class="col-md-6">
+                      <img class="img-circle" ng-if='data.prodImage' ng-src="{{data.prodImage}}" alt="product picture" style="height:50px;width:50px">
+                    <button type="button" mwl-confirm title="Confirm" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="deleteProduct(data.pk , $index)" confirm-button-type="danger" cancel-button-type="default"
+                      class="btn-danger btn-sm  pull-right" style="padding-bottom: 9px;"> <i class="fa fa-trash fa-lg"></i> </button>
+                      <button type="button"  class="btn-primary btn-sm  pull-right" style="padding-bottom: 9px;" ng-click="editSku(data.pk)"> <i class="fa fa-pencil fa-lg" ></i> </button>
+                  </div>
+                </div>
+                <!-- <p style="margin:0" ng-if="data.prodDesc">{{data.prodDesc}}</p> -->
+                <!-- <a href="{{data.attachment}}" target="_blank" class="btn btn-primary pull-right" > <i class="fa fa-download" ></i></a> -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12" style="padding:0px;margin-bottom:20px;margin-top:30px;">
+          <p> <strong>Bulk Order</strong> </p>
+          <div class="col-md-5" style="padding-left:0px;">
+
+            <input type="text" name="" class="form-control" value="" placeholder="Qty" style="width:100%;" ng-model="discount.qty">
+          </div>
+          <div class="col-md-5">
+            <input type="text" name="" class="form-control" value="" placeholder="Discount" style="width:100%;"  ng-model="discount.discount">
+          </div>
+          <div class="col-md-2">
+            <button type="button" class="btn-primary btn-sm" name="button" ng-click="sendDiscount()" style="border:none;padding:8px 10px;">Add</button>
+          </div>
+        </div>
+        <div class="col-md-12" style="padding:0px;margin-top:10px;" ng-repeat="i in discountArr track by $index">
+          <div class="col-md-10" style="padding-left:0px;">
+            <div class="" style="border:1px solid #ccc;width:100%;height:32px;border-radius:5px;" >
+              <div class="col-md-6" style="border-right:1px solid #ccc;padding:0px;height:32px;">
+
+                <span style="line-height:2;padding-left:10px;">Qty:{{i.qty}} </span>
+              </div>
+              <div class="col-md-6" style="padding:0px;height:32px;">
+
+                <span style="line-height:2;padding-left:10px;">Discount: {{i.discount}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-1"style="padding:0px;">
+            <button type="button" class="btn-primary btn-sm" name="button" style="border:none;padding:6px 10px;" ng-click="editDiscount(i.pk,$index)"><i class="fa fa-pencil" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="col-md-1"style="padding:0px;">
+            <button type="button" class="btn-primary btn-sm" name="button" ng-click="deleteDiscount(i.pk,$index)" style="border:none;padding:6px 10px;"><i class="fa fa-trash" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+
+
+
+
+
+
+
+
+      <!-- <div class="row" ng-if="multiStores">
+        <div class="col-md-12">
+          <label>Store</label>
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <input type="text" ng-model="storeDetail.store" class="form-control" uib-typeahead="s as s.name for s in storeStore($viewValue)" placeholder="Search and select">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="input-group">
+                <input type="text" class="form-control" ng-model="storeDetail.quantity" placeholder="No. of products">
+
+                <div class="input-group-btn">
+                  <button type="button" class="btn btn-primary" ng-click="savestore()">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 30px;padding:5px 20px">
+            <div class="cards" style="border-left:4px solid #4192cd;box-shadow:0 2px 8px rgba(26,24,20,0.2);margin-top:15px;" ng-repeat="c in product.storeQty">
+              <div class="row" style="padding:15px;font-size:17px">
+                <div class="col-md-10">
+                  <span><strong>Name : </strong> {{c.store.name}}</span><br/>
+                  <span><strong>Quantity : </strong> {{c.quantity}}</span>
+                </div>
+                <div class="col-md-2 text-right">
+                  <i class="fa fa-pencil fa-lg" ng-click="editStore($index)" style="cursor:pointer"></i><br>
+                  <i class="fa fa-trash fa-lg" style="cursor:pointer;margin-top:10px" mwl-confirm title="Confirm" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="deleteStore(c.pk , $index)" confirm-button-type="danger"
+                    cancel-button-type="default"></i>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div> -->
+
+
+    </div>
+
+    <div class="col-md-4" ng-if="product.pk">
+
+      <div class="row">
+        <!-- <div class="col-md-7">
+          <input type="text" ng-model="categoryForm.category" class="form-control" uib-typeahead="c as c.name for c in categorySearch($viewValue)" placeholder="Search and select">
+        </div>
+        <div class="col-md-3">
+          <input type="number" ng-model="categoryForm.qty" class="form-control">
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-primary" ng-click="addCategories()">Add <i class="fa fa-plus"></i></button>
+        </div>
+      </div>
+      <div class="row"> -->
+        <!-- <div class="col-md-7">
+          <span class="text-muted">Preview :{{categoryForm.qty | convertUnit: product.unit}}</span>
+        </div> -->
+        <!-- <div class=" col-md-3">
+         <span class="text-muted">( in {{product.unit}} )</span>
+        </div>
+      </div> -->
+      <div class="row" style="padding:5px 20px">
+        <div class="cards" style="border-left:4px solid #4192cd;box-shadow:0 2px 8px rgba(26,24,20,0.2);margin-top:15px;" ng-repeat="c in categoriesList">
+          <div class="row" style="padding:15px">
+            <div class="col-md-11">
+              <span><strong>Name : </strong> {{c.category.name}}</span><br /><br />
+              <span><strong>Quantity : </strong>  {{c.qty | convertUnit: c.unit}}</span>
+            </div>
+            <div class="col-md-1">
+              <i class="fa fa-pencil fa-lg" ng-click="editCategories($index)" style="cursor:pointer"></i>
+              <i class="fa fa-trash fa-lg" ng-click="removeCategories($index)" style="cursor:pointer;margin-top:30px"></i>
+            </div>
+            <!-- <button type="button" mwl-confirm title="Confirm" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="deleteProduct(data.pk , $index)" confirm-button-type="danger" cancel-button-type="default" class="btn-danger btn-sm  pull-right"
+            style="padding-bottom: 9px;"> <i class="fa fa-trash"></i> </button> -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<div class="row" ng-if="mode == 'edit'" style="border-top:1px solid #f2f2f2;margin-top:2em">
+  <div class="col-md-12" style="padding:20px">
+    <!-- <div ng-include="'/static/ngTemplates/app.ecommerce.vendor.form.listing.html'"></div> -->
+    <div products-Listing-Editor config-Obj="{{getConfig('pk' , product.pk)}}" ></div>
+  </div>
+</div>
+</div>

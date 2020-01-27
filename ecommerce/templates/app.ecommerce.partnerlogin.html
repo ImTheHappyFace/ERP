@@ -1,0 +1,229 @@
+
+
+{% load staticfiles%} {% load staticfiles %} {% load socialaccount %}
+
+<style media="screen">
+  .input-group-addon{
+    width:55px !important;
+  }
+</style>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" charset="utf-8">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" charset="utf-8">
+  <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" charset="utf-8">
+  <link rel="stylesheet" href="{% static 'css/signin.css' %}" charset="utf-8">
+</head>
+<style media="screen">
+  #newheader{
+    display:none;
+  }
+  html{
+    overflow-y:scroll;
+  }
+  body {
+    background-color: #F8FAFB;
+  }
+
+  .floating-label {
+    position: relative;
+  }
+
+  .floating-input {
+    font-size: 14px;
+    padding: 4px 4px;
+    display: block;
+    width: 100%;
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #757575;
+  }
+
+  label {
+    color: #999;
+    font-size: 14px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 70px;
+    top: 15px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+  }
+
+  .floating-input:focus~label,
+  .floating-input:not(:placeholder-shown)~label {
+    top: 10px;
+    font-size: 10px;
+    color: #grey;
+    ;
+  }
+
+  .pageheight {
+    margin-top: 5vh;
+    margin-bottom: 20vh;
+  }
+  .modal{
+    display:none !important
+  }
+  @media only screen and (max-width: 1600px) {
+    .pageheight {
+      margin-top: 5vh;
+      margin-bottom: 20vh;
+    }
+
+  }
+</style>
+
+<body>
+
+  {% if authStatus.status != 'default' %}
+  <div class="alert alert-{{authStatus.status}}">{{authStatus.message}}</div>
+  {% endif %}
+  <!-- {{data.name}} -->
+  <!-- {% verbatim %} -->
+  <!-- <p>{{me}}</p> -->
+    <!-- {% endverbatim %} -->
+  <div class="container-fluid pageheight">
+    <a href="/#/"> <img src="/static/images/SYSTUNIX_logo_dark.svg" alt="" style="height:60px;margin-bottom:5%;margin-left:5%;"></a>
+    <div class="col-md-12">
+      <div class="col-md-offset-1 col-md-7">
+        <div class="" style="">
+          <img src="/static/images/Preview2.svg" alt="" style="width:100%;height:55vh">
+        </div>
+      </div>
+      {% verbatim %}
+      <div class="col-md-3"  ng-controller="controller.ecommerce.setupstore">
+        <!-- <form method="post" class="" action="">{% csrf_token %} -->
+          <h1 style="margin-bottom:20px;">Let us know your details</h1>
+
+
+          <!-- <p>To keep connected with us please login with your personal information by email address and password <img src="/static/images/bell.svg" alt="" style="width:12px;"> </p> -->
+          <p style="color:red">{{msg}}</p>
+          <div class="floating-label input-group">
+            <span class="input-group-addon"><i class="fa fa-cart-plus" aria-hidden="true" style="font-size:25px;"></i></span>
+            <input  name="store" class="floating-input" ng-model="form.name" type="text" placeholder=" "
+              style="border:none;width:100%;height:50px;background-color:#ffffff;padding:20px 70px 0px 20px;background-size: 25px 25px;box-shadow: 0 0 2px 1px #efefef;">
+
+            <label>Enter the Store Name</label>
+          </div>
+          <br>
+          <div class="floating-label input-group">
+            <span class="input-group-addon"><i class="fa fa-mobile" aria-hidden="true" style="font-size:25px;"></i></span>
+            <input name="Mobnumber" class="floating-input" type="text" ng-model="form.mobile" placeholder=" "
+              style="border:none;width:100%;height:50px;background-color:#ffffff;padding:20px 70px 0px 20px;background-size: 25px 25px;box-shadow: 0 0 2px 1px #efefef;">
+
+            <label>Enter the Mobile number</label>
+          </div>
+          <br>
+          <div class="floating-label input-group">
+            <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true" style="font-size:25px;"></i></span>
+            <input name="email" class="floating-input" type="email" ng-model="form.email" placeholder=" "
+              style="border:none;width:100%;height:50px;background-color:#ffffff;padding:20px 70px 0px 20px;background-size: 25px 25px;box-shadow: 0 0 2px 1px #efefef;">
+
+            <label>Enter the Email Address</label>
+          </div>
+
+
+          <br>
+          <div class="floating-label input-group">
+            <span class="input-group-addon"><i  class="fa fa-map-marker" aria-hidden="true" style="font-size:25px;"></i></span>
+            <input name="Pincode" class="floating-input" type="text" ng-model="form.pincode" placeholder=" "
+              style="border:none;width:100%;height:50px;background-color:#ffffff;padding:20px 70px 0px 20px;background-size: 25px 25px;box-shadow: 0 0 2px 1px #efefef;">
+
+            <label>Enter the Pincode</label>
+          </div>
+          <br>
+          <div class="floating-label input-group">
+            <span class="input-group-addon"><i class="fa fa-id-card" aria-hidden="true" style="font-size:25px;"></i></span>
+            <input  name="GSTIN" class="floating-input" type="text" placeholder=" "
+              ng-model="form.gstin" style="border:none;width:100%;height:50px;background-color:#ffffff;padding:20px 70px 0px 20px;background-size: 25px 25px;box-shadow: 0 0 2px 1px #efefef;">
+
+            <label>Enter the GSTIN</label>
+          </div>
+          <br>
+          <div class="floating-label input-group">
+            <span class="input-group-addon"><i class="fa fa-id-card-o" aria-hidden="true" style="font-size:25px;"></i></span>
+            <input  name="CIN" class="floating-input" type="text" ng-model="form.cin" placeholder=" "
+              style="border:none;width:100%;height:50px;background-color:#ffffff;padding:20px 70px 0px 20px;background-size: 25px 25px;box-shadow: 0 0 2px 1px #efefef;">
+
+            <label>Enter the CIN</label>
+          </div>
+          <br>
+          <div class="floating-label ">
+            <!-- <span class="input-group-addon"><i class="fa fa-cart-plus" aria-hidden="true" style="font-size:25px;"></i></span> -->
+            <textarea name="name" rows="5" cols="50" ng-model="form.address" placeholder="Enter the Address" style="border:none;width:100%;background-color:#ffffff;padding:20px 70px 0px 20px;background-size: 25px 25px;box-shadow: 0 0 2px 1px #efefef;resize:none;"></textarea>
+
+
+            <!-- <label></label> -->
+          </div>
+          <br>
+          <div  style="display:flex">
+
+            <h4 style="margin-right:20px;">GSTIN ID</h4>
+            <input  name="GSTINimage" type="file" file-model="form.gstincert" >
+
+          </div>
+          <br>
+          <div  style="display:flex">
+
+            <h4 style="margin-right:20px;">Personnel ID</h4>
+            <input  name="personnel" type="file"  file-model="form.personelid">
+
+          </div>
+          <br>
+          <div class="flex-container" style="display:flex;margin-bottom:30px;">
+            <div class="">
+              <button type="submit" name="button" style="background-color:#3A8DFA;border:none;height:40px;border-radius:25px;color:#ffffff;width:130px;margin-right:20px;box-shadow: 0 0 2px 1px #efefef;" ng-click="save()">Submit</button>
+              <!-- <button style="margin-bottom:20px;"style="background-color:#3A8DFA;border:none;height:40px;border-radius:25px;color:#ffffff;width:130px;margin-right:20px;box-shadow: 0 0 2px 1px #efefef;" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button> -->
+
+            </div>
+
+          </div>
+          <!-- <p>Or you can join with</p>
+          <div class="flex-container" style="display:flex;">
+            <div class="">
+              <a href="{% provider_login_url "google" method="oauth2" %}"><img src="/static/images/google.svg" alt="" style="width:40px;height:40px;margin-right:20px;"></a>
+            </div>
+            <div class="">
+              <a href="{% provider_login_url "facebook" method="oauth2" %}"><img src="/static/images/facebook.svg" alt="" style="width:37px;height:37px;"></a>
+            </div>
+          </div> -->
+      </div>
+        {% endverbatim %}
+
+  <script type="text/javascript">
+    function setCookie(cname, cvalue, exdays) {
+      var d = new Date();
+      d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+      var expires = "expires=" + d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function getCookie(cname) {
+      var name = cname + "=";
+      var decodedCookie = decodeURIComponent(document.cookie);
+      var ca = decodedCookie.split(';');
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    }
+  </script>
+</body>
+
+</html>

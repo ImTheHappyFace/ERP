@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="container-fluid">
+    <div class="row">
+    <div class="col-md-4">
+      <div class="row" style="margin:50px 15px">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search Product Here ..."  uib-typeahead="c as c.product.name for c in listingSearch($viewValue)" name="product" ng-model="form.weeklyproduct" >
+          <div class="input-group-btn">
+            <button class="btn btn-default" type="submit" ng-click="addWeeklyProduct()">
+              Add <i class="fa fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      <div class="row"  style="margin-left: 15px">
+        <div class="col-md-3 card"  ng-repeat="p in weeklyList" style="margin:10px;height:5vh">
+            <div class="col-md-11" >
+          <span  style="padding:10px">  {{p.product.name}} <span>
+          </div>
+            <div class="col-md-1">
+           <span ng-click= "removeWeeklyProduct(p.pk,$index)"style="top:0px;right:0px"> <i class="fa fa-close fa-2x"></i></span>
+         </div>
+        </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="container-fluid" ng-controller="businessManagement.ecommerce.support.resolved.explore">
+  <div class="row" style="margin-top:30px">
+    <div class="col-md-9">
+    <h5><strong>email : </strong><span>{{data.request.email}}</h5></span>
+    <h5><strong>Mobile : </strong><span>{{data.request.mobile}}</h5></span>
+    <h5 ng-if="data.request.invoiceNo"><strong>Invoice No : </strong><span>{{data.request.invoiceNo}}</h5></span>
+    <h5 ng-if="data.request.subject"><strong>Subject : </strong><span>{{data.request.subject}}</h5></span>
+    <h5><strong>Message : </strong><span>{{data.request.message}}</h5></span>
+    <h5><strong>Status : </strong><span>{{data.request.status}}</h5></span>
+  </div>
+
+    <hr>
+  </div>
+
+</div>

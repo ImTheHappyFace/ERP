@@ -1,0 +1,32 @@
+<div class="row text-center" style="height:70px;border-top:0px;padding-top:22px;background-color:var(--themeColor)">
+  <div class="col-xs-2 col-xs-offset-1 text-center" ng-click="$state.go('account.cart')" ng-class="{activeTopTabAcnt: $state.is('account.cart')}" style="cursor:pointer;">
+    <!-- <div class="row" style="padding-bottom:10px;color: white;">
+      <i class="fa fa-shopping-cart"></i>
+    </div> -->
+    <span style="color: white;font-size:12px;"> Cart </span>
+  </div>
+  <div class="col-xs-2  text-center" ng-click="$state.go('account.orders')" ng-class="{activeTopTabAcnt: $state.is('account.orders')}" style="cursor:pointer;">
+    <!-- <div class="row" style="padding-bottom:10px;color: white;">
+      <i class="fa fa-truck"></i>
+    </div> -->
+    <span style="color: white; font-size:13px;"> Orders </span>
+  </div>
+  <div class="col-xs-2  text-center" ng-click="$state.go('account.settings')" ng-class="{activeTopTabAcnt: $state.is('account.settings')}" style="cursor:pointer;">
+    <!-- <div class="row" style="padding-bottom:10px;color: white;">
+      <i class="fa fa-wrench"></i>
+    </div> -->
+    <span style="color: white; font-size:13px;"> Settings </span>
+  </div>
+  <div class="col-xs-2  text-center" ng-click="$state.go('account.support')" ng-class="{activeTopTabAcnt: $state.is('account.support')}" style="cursor:pointer;">
+    <!-- <div class="row" style="padding-bottom:10px;color: white;">
+      <i class="fa fa-phone"></i>
+    </div> -->
+    <span style="color: white; font-size:13px;"> Support </span>
+  </div>
+  <div class="col-xs-2  text-center" ng-click="$state.go('account.saved')" ng-class="{activeTopTabAcnt: $state.is('account.saved')}" style="cursor:pointer;">
+    <!-- <div class="row" style="padding-bottom:10px;color: white;">
+      <i class="fa fa-heart"></i>
+    </div> -->
+    <span style="color: white; font-size:13px;"> Saved </span>
+  </div>
+</div>

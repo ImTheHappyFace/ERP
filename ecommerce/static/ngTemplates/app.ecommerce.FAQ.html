@@ -1,0 +1,29 @@
+<div class="modal-header text-center" style="font-size:19px">
+  <div class="row">
+    <div class="col-md-1">
+      <i ng-click="close()" class="fa fa-close fa-lg"></i>
+    </div>
+
+  </div>
+</div>
+<div class="row modal-body">
+  <div class="container-fluid">
+    <div class="col-md-12 col-xs-12" >
+      <h3>Top Queries</h3>
+      <hr>
+      <div class="row">
+      <div class="col-md-12">
+        <input type="text" class="form-control" placeholder="Search" ng-model="fAQue">
+      </div>
+      <div class="col-md-12">
+      <div class="row" ng-repeat="q in fAQ | filter:fAQue" style="padding-top:15px;font-size:18px;padding-left:15px">
+        <span style="cursor:pointer" ng-click="collapsed($index)" ><strong>{{q.ques}}</strong></span>
+        <div ng-if="$index==ind">
+          <div ng-bind-html="q.ans"></div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  </div>
+</div>

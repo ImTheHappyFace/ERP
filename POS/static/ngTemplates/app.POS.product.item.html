@@ -1,0 +1,41 @@
+
+<div class="col-md-4" >
+  <div class="cards" style="border:0.5px solid rgb(106, 90, 205);box-shadow:0 2px 8px rgba(26,24,20,0.2);margin-bottom: 25px;height:20vh">
+    <div class="row" syle="padding: 7px;" ng-mouseenter="hover = true;" ng-mouseleave="hover = false;">
+      <div class="col-md-3" style="padding-right:0px;">
+        <img ng-src="{{data.dp}}" onerror="this.src='/static/images/ecommerce.jpg'" style="width: 100%;">
+      </div>
+      <div class="col-md-8" style="margin-top:10px;">
+
+        <div class="row" style="padding-left:10px;">
+            <span style="font-size: 18px;"> <strong>{{data.name}} {{posProductDel}}</strong> </span> <span style="font-size: 18px;" ng-if="data.skuUnitpack"> Pack of {{data.skuUnitpack}} </span>
+        </div>
+        <div class="row">
+          <div class="col-md-7" style="padding-right:0px;">
+            <span><strong>MRP : </strong>{{data.price}}</span><br>
+            <span><strong>SKU : </strong>{{data.serialNo}}</span><br>
+            <span><strong>Discount : </strong>{{data.discount}}%</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1 text-left" ng-if="hover" style="padding-top:30px;">
+        <div class="row">
+          <span><i class="fa fa-info" style="color: rgb(106, 90, 205);font-size: 20px;cursor:pointer;" ng-click="rowActionClicked('info')"></i>
+          </span>
+        </div>
+        <div class="row" style="margin-top:10px;">
+          <span><i class="fa fa-pencil" style="color: rgb(106, 90, 205);font-size: 20px;cursor:pointer;" ng-click="rowActionClicked('edit')"></i>
+          </span>
+        </div>
+        <div class="row" style="margin-top:10px;" ng-if="data.productOption">
+          <span><i class="fa fa-trash" style="color: rgb(106, 90, 205);font-size: 20px;cursor:pointer;"  ng-click="rowActionClicked('delete')"></i>
+          </span>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+
+    </div>
+  </div>
+</div>

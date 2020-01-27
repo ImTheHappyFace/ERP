@@ -1,0 +1,23 @@
+
+<div class="modal-header text-center">
+    <h5 class="modal-title" id="modal-title">Discussion Details</h5>
+</div>
+<div class="modal-body" id="modal-body">
+  <p> <strong>Expected Delivery:</strong>  </p>
+  <div class="flex-container">
+    <div class="" style="margin-right:10px;">
+      <button type="button" name="button" ng-click="open()" class="btn btn-dark" style="background-color:var(--themeColor);"><i class="glyphicon glyphicon-calendar" style="color:#fff;"></i></button>
+    </div>
+    <div class="">
+      <input type="text" class="form-control" show-weeks="false" min-date="mindate" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="data.date" placeholder="Pick a Date from calendar" is-open="popup.opened" />
+    </div>
+  </div>
+  <br>
+  <p><strong>Comment:</strong></p>
+  <textarea name="name" rows="3" cols="52" placeholder="Type Here" style="resize: none;" ng-model="data.comment"></textarea>
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()" style="margin:auto;">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="close()" style="margin:auto;">Cancel</button>
+</div>

@@ -1,0 +1,221 @@
+<div >
+<style media="screen">
+
+.overon {
+  transition: box-shadow 200ms;
+  left: 10%;
+  border-radius: 5px;
+  width: 80% !important;
+  background:transparent;
+  position: absolute;
+  top: 10px;
+  width: 100%;
+  height: 275px;
+
+}
+
+.overon:hover {
+  box-shadow: -3px 0px 8px 6px rgba(0, 0, 0, 0.09);
+  background: transparent;
+  z-index: 9999999999999999999;
+}
+
+.overon>.btn {
+  display: none;
+}
+
+.overon:hover .btn {
+  display: inline;
+
+}
+
+.overon:hover .colorchoice {
+  display: inline !important;
+
+}
+
+.overon>.fa {
+  display: none;
+}
+
+.overon:hover .fa {
+  display: inline;
+
+}
+.wishlist_new {
+  display: none;
+  animation: fadeIn ease 0.5s;
+-webkit-animation: fadeIn ease 0.5s;
+-moz-animation: fadeIn ease 0.5s;
+-o-animation: fadeIn ease 0.5s;
+-ms-animation: fadeIn ease 0.5s;
+transform: translate(30%,-35%);
+}
+.overon:hover .wishlist_new {
+  display: block;
+
+}
+
+.overon .cart_btn {
+  display: none;
+}
+
+.overon:hover .showValue{
+    display: inline;
+}
+
+
+.overon:hover .cart_btn{
+  display: inline;
+
+}
+
+
+.overon .showValue{
+  display:none
+}
+.pricetag{
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  -o-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+  color: white;
+}
+.overon:hover .pricetag{
+  transform: translate(-35%,-35%);
+}
+@media only screen and (max-width:480px) {
+  .overon {
+    box-shadow: -3px 0px 8px 6px rgba(0, 0, 0, 0.09);
+    background: transparent;
+    z-index: 9999999999999999999;
+    transition: box-shadow 200ms;
+    left: 10%;
+    border-radius: 5px;
+    width: 80% !important;
+    background:transparent;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: 275px;
+  }
+
+  .overon>.btn {
+    display: inline;
+  }
+  .overon .btn {
+    display: inline;
+
+  }
+  .overon .fa {
+    display: inline;
+
+  }
+  .overon .wishlist_new {
+    display: block;
+
+  }
+  .overon .cart_btn {
+    display: inline;
+  }
+
+  .overon .showValue{
+      display: inline;
+  }
+  .overon .cart_btn{
+    display: inline;
+
+  }
+  .overon .showValue{
+    display:inline
+  }
+  .overon .pricetag{
+    transform: translate(-35%,-35%);
+  }
+}
+
+</style>
+
+
+
+<div class="" ng-click="openDetails(list.pk,list.product.name.split(' ').join('-'))"  style="height:auto">
+ <div class="text-center mediaformobilenext_specificpage">
+    <img ng-src="{{imgData}}" alt="" style="width:130px;height: 140px;margin:auto;margin-top: 40px;">
+    <!-- <span> <strike><i class="fa {{currency}}"></i>{{(list.product.price).toFixed(2)}}</strike></span>
+    <span ng-if="list.product.price>list.product.discount&&showPrice"> <i class="fa {{currency}}"></i>{{list.product.discount.toFixed(2)}}</span> -->
+<div class="col-md-12" style="margin-top:10px;padding-left:40px;padding-right:40px;">
+  <span style="font-weight:500;font-size:16px;color:black;padding-right:10px;"><i class="fa {{currency}}"></i>{{list.product.discount}}</span>
+  <span ng-if="list.product.price>list.product.discount&&showPrice" style="font-size:12px;"><strike> <i class="fa {{currency}}"></i>{{(list.product.price)}}</strike></span>
+  <p style="overflow: hidden;white-space: nowrap;text-overflow:ellipsis;font-weight:400;color:black;">{{list.product.name }}</p>
+</div>
+  </div>
+  <div class="overon text-center">
+    <div class="specificcssmainmobile" style="height:200px;margin-top:40px;">
+      <div class="col-md-12">
+
+        <div class="col-md-6" style="padding-left:10px;">
+          <span class="pull-left text-center pricetag" ng-if="list.product.discount" style="width: 37px;height: 37px;background: var(--themeColor);border-radius: 50%;display: inline-block;padding-top:9px;font-size:10px;">-{{((list.product.price-list.product.discount)/list.product.price)*100 | number:0}}%</span>
+          <!-- <span class="pull-left text-center pricetag" ng-if="!list.product.discount" style="width: 37px;height: 37px;background: var(--themeColor);border-radius: 50%;display: inline-block;padding-top:5px;">new</span> -->
+        </div>
+        <div class="col-md-6" ng-if="me.pk&&isHeart" style="padding-right:10px;" ng-click="wishlist();$event.stopPropagation();">
+          <span class="wishlist_new pull-right" style="cursor:pointer;"> <i class="fa fa-heart" style="color:red" ng-if="list.added_saved>0 && me.pk"> </i> <i class="fa fa-heart" ng-if="list.added_saved==0 && me.pk"> </i> </span>
+        </div>
+
+      </div>
+
+    </div>
+    <!-- <div class="colorchoice" style="display:none;"> -->
+      <!-- <span style="width: 20px;height: 20px;;background-color: #c9c8c9;border-radius: 50%;display: inline-block;"> </span>
+      <span style=" width: 20px;height: 20px;;background-color: black;border-radius: 50%;display: inline-block;"> </span>
+      <span style="width: 20px;height: 20px;;background-color: #c9c8c9;border-radius: 50%;display: inline-block;"> </span> -->
+    <!-- </div> <br> -->
+    <button class="btn" type="button" name="button" style="bottom: 0px; background-color:var(--themeColor);border: none;color:white;width: 100%;height:50px;border-radius:0px 0px 5px 5px!important;"> Add to cart</button>
+
+    <!-- <div ng-if="me.pk && selectedObj.inStock>0">
+      <button ng-if="list.added_cart==0&&me.pk&&selectedObj.inStock>0"  ng-click="addToCart();$event.stopPropagation();"  class="btn cart_btn" type="button" name="button" style="bottom: 0px; background-color:#0E8CE4;border: none;color:white;width: 100%;height:50px;border-radius:0px 0px 5px 5px!important;margin-top:15px;" > Add to cart</button>
+      <div class="row showValue" style="padding:0px 0px;" ng-if="list.added_cart>0&&me.pk&&selectedObj.inStock>0">
+        <div class="col-xs-2" style="padding:0px;">
+          <button type="button" class="btn" ng-if="list.added_cart>0&&me.pk" ng-click="decrement();$event.stopPropagation()" style="bottom: 0px; background-color:#ffffff;border: none;color:#000000;height:45px;padding:6px 12px!important">
+            <i class="fa fa-minus" ></i>
+          </button>
+        </div>
+        <div class="col-xs-8" style="padding:0px;">
+          <button type="button" name="button" class="inCartBtn" ng-click="$event.stopPropagation()" style="bottom: 0px;background: var(--themeColor);border: none;color:white;height:45px;">
+            {{list.added_cart}} in Cart
+          </button>
+        </div>
+        <div class="col-xs-2" style="padding:0px;">
+          <button type="button" class="btn" ng-click="increment();$event.stopPropagation()" style="bottom: 0px; background-color:#ffffff;border: none;color:#000000;height:45px;padding:6px 12px!important">
+            <i class="fa fa-plus" ></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div ng-if="selectedObj.inStock<=0" class="cart_btn">
+        <h5 style="color:red"> Out Of Stock </h5>
+    </div> -->
+
+    <!-- <div ng-if="!me.pk && selectedObj.inStock>0">
+      <button ng-if="list.added_cart==0&&!me.pk&&selectedObj.inStock>0"  ng-click="createCookieDetail();$event.stopPropagation();"  class="btn cart_btn" type="button" name="button" style="bottom: 0px; background-color:#0E8CE4;border: none;color:white;width: 100%;height:50px;border-radius:0px 0px 5px 5px!important;margin-top:15px;" > Add to cart</button>
+      <div class="row showValue" style="padding:0px 0px;" ng-if="list.added_cart>0 && !me.pk && selectedObj.inStock>0">
+        <div class="col-xs-2" style="padding:0px;">
+          <button type="button" class="btn" ng-if="list.added_cart>0&&!me.pk" ng-click="decrementCookie();$event.stopPropagation()" style="bottom: 0px; background-color:#ffffff;border: none;color:#000000;height:45px;padding:6px 12px!important">
+            <i class="fa fa-minus" ></i>
+          </button>
+        </div>
+        <div class="col-xs-8" style="padding:0px;">
+          <button type="button" name="button" class="inCartBtn" ng-click="$event.stopPropagation()" style="bottom: 0px; background-color:#0E8CE4;border: none;color:white;height:45px;">
+            {{list.added_cart}} in Cart
+          </button>
+        </div>
+        <div class="col-xs-2" style="padding:0px;">
+          <button type="button" class="btn" ng-click="incrementCookie();$event.stopPropagation()" style="bottom: 0px; background-color:#ffffff;border: none;color:#000000;height:45px;padding:6px 12px!important">
+            <i class="fa fa-plus" ></i>
+          </button>
+        </div>
+      </div>
+    </div> -->
+
+
+  </div>
+</div>

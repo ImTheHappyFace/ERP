@@ -1,0 +1,12 @@
+<div class="col-md-3" >
+  <div  class="row" style="border:1px solid black;padding:10px;margin-left:15px;margin-bottom:15px;cursor:pointer" ng-click="rowActionClicked('edit')" >
+    <div class="card-body text-center">
+        <div class="col-md-11">
+      <h4 ><strong>{{data.title | humanize}}</strong></h4>
+    </div>
+    <div class="col-md-1  text-right">
+      <i class="fa fa-trash fa-2x" ng-click="$event.stopPropagation();" style="cursor:pointer;color:red" mwl-confirm title="Confirm" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="rowActionClicked('delete')" confirm-button-type="default" cancel-button-type="default"></i>
+    </div>
+  </div>
+  </div>
+</div>

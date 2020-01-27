@@ -1,0 +1,25 @@
+
+
+<div class="container-fluid hidden-sm hidden-xs" style="margin:0px;">
+  <div class="col-md-10 col-md-offset-1 bg-white" style="display:block;position:relative;min-height:760px;padding-left:0px;{{topLevelMenu?'margin-top:5vh':''}}">
+    <!-- <div class="col-md-2 " style="position:absolute; height:100%;background-color:var(--themeColor)">
+      <div ui-view="menu"></div>
+    </div> -->
+    <div class="col-md-12">
+      <div class="container-fluid" style="margin-top:30px;">
+        <div ui-view></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid hidden-lg hidden-md " style="margin-top:0px;margin-bottom:20px;padding-left:0px;padding-right:0px;margin-right: 0px;{{topLevelMenu?'margin-top:4.9vh':''}}">
+  <div class="col-md-12 " style="padding-left:0px;padding-right:0px;{{isTopMenu?'margin-top:-24px':'padding-top:0px'}} "><br/>
+    <div ui-view="topMenu" style="background-color:var(--themeColor)"></div>
+    <div class="col-md-10 col-md-offset-2">
+      <div class="container-fluid" style="margin-top:30px;">
+        <div ui-view></div>
+      </div>
+    </div>
+  </div>
+</div>

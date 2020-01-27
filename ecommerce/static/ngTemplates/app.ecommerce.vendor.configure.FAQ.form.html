@@ -1,0 +1,28 @@
+<div class="row" ng-controller="businessManagement.ecommerce.configure.fAQ.form" style="margin:20px 15px">
+  <span class="text-center"><h4>{{msg}} Question</h4></span>
+  <div class="form-group">
+    <label>Category Name :</label>
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Search Category Here ..."  uib-typeahead="c as c.name for c in parentSearch($viewValue)"  ng-model="data.parent" >
+      <div class="input-group-btn">
+        <button class="btn btn-primary" type="submit" ng-click="addCategory(categoryEdit)" ng-if="!categoryEdit">
+          Create <i class="fa fa-plus"></i>
+        </button>
+        <button class="btn btn-primary" type="submit" ng-click="addCategory(categoryEdit)" ng-if="categoryEdit">
+          Edit <i class="fa fa-plus"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Question</label>
+    <textarea class="form-control" rows="2" cols="80" ng-model="data.ques"></textarea>
+  </div>
+  <div class="form-group" >
+    <label>Answer</label>
+    <textarea class="form-control" ui-tinymce="tinymceOptions"  ng-model="data.ans"></textarea>
+  </div>
+  <div class="btn btn-success col-md-4 col-md-offset-4" style="margin-top:40px;font-size:19px" ng-click="saveFAQ()">
+    Save
+  </div>
+</div>

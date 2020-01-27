@@ -1,0 +1,158 @@
+
+<!-- <div class=" bg-white " style="position:relative;min-height:92vh;">
+  <breadcrumb></breadcrumb>
+  <div class="row" ng-if="multiStores">
+    <div class="col-md-4">
+      <div class="container-fluid">
+        <h3> <label>Store: </label> {{currentStore.name}} - {{currentStore.pincode}}</h3>
+      </div>
+    </div>
+    <div class="col-md-offset-4 col-md-4">
+      <div class="container-fluid">
+        <button type="button" class="btn btn-primary pull-right" ng-click="selectStore(currentStore.pk)">Change</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row ">
+      <div class="col-md-7 text-right">
+
+        <div class="input-group">
+          <input type='text' ng-model='searchText' class="form-control" placeholder="Search a Product " ng-enter="enterFun()" />
+          <span class="input-group-addon" ng-click="refresh()" style="cursor:pointer; background-color:#fff;" ><i class="fa fa-refresh"></i></span>
+          <span class="input-group-addon" ng-click="prev()" style="cursor:{{offset!=0?'pointer;background-color:#fff;':'not-allowed;background-color:#eee'}}" ><i class="fa fa-arrow-left"></i>Prev</span>
+          <span class="input-group-addon" ng-click="next()" style="cursor:pointer; background-color:#fff;" >Next <i class="fa fa-arrow-right"></i></span>
+        </div>
+      </div>
+
+      <div class="col-md-5" style="padding:0px;">
+        <div class="btn-group">
+          <button type="button" class="btn btn-default" ng-click="topButtonsClick('New')"><i class="fa fa-plus"></i> New </button>
+          <button type="button" class="btn btn-default" ng-click="topButtonsClick('Reorder')"><i class="fa fa-shopping-cart"></i> Reorder</button>
+          <button type="button" class="btn btn-default" ng-click="topButtonsClick('stockReport')"><i class="fa fa-file"></i> Stock Report</button>
+          <button type="button" class="btn btn-default" ng-click="topButtonsClick('reorderingReport')"><i class="fa fa-file"></i> Reordering Report</button>
+          <button type="button" class="btn btn-default" ng-click="topButtonsClick('bulkUpload')"><i class="fa fa-upload" ></i> Bulk Upload</button>
+
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="container-fluid" style="margin-top:15px;">
+    <div class="card" style="padding:0px;cursor:pointer">
+      <div class="row container-fluid" ng-click="rowActionClicked('view')" style="padding:30px;">
+        <div class="col-md-12 text-left" style="border-left:3px solid rgb(247, 98, 43)">
+
+          <div class="col-md-6">
+            <h4><strong>{{data.name}}</strong></h4>
+          </div>
+          <div class="col-md-6" style="padding-top:20px;">
+            <div class="col-md-5">
+              <span style="font-size:14px"><strong> Category: </strong>{{data.category.name}} </span>
+            </div>
+            <div class="col-md-5">
+              <span style="font-size:14px"><strong>Description: </strong>{{data.description}}</span>
+            </div>
+            <div class="col-md-2 text-right">
+              <i class="fa fa-pencil fa-2x" style="cursor:pointer; color:#2583ce;" ng-click="$event.stopPropagation(); rowActionClicked('edit')"></i> &nbsp;&nbsp;
+              <!-- <i class="fa fa-info fa-2x" style="cursor:pointer; color:#2583ce;" ng-click="$event.stopPropagation(); openProductInfo(pi.productPk)"></i> -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="row container-fluid" ng-if="data.open">
+        <div class="container-fluid">
+          <hr>
+        </div>
+        <div class="col-md-offset-2 col-md-8">
+          <table class="table table-striped" style="margin-top:20px;">
+            <th>
+              Serial No.
+            </th>
+            <th>
+              Price
+            </th>
+            <th>
+              Quantity
+            </th>
+            <th>
+              <!-- Save -->
+            </th>
+            <tr ng-repeat="f in data.variant">
+              <td>
+                <span ng-if="f.productVariant__serialId!=null">{{f.sku}}</span>
+                <span ng-if="f.productVariant__serialId==null">{{f.sku}}</span>
+              </td>
+              <td>
+                <span>{{f.price}}</span>
+              </td>
+              <td>
+                <span>
+                  <input type="text" class="form-control" placeholder="" ng-model='f.stock'>
+                </span>
+              </td>
+              <td>
+                <div class="btn-group" ng-controller="businessManagement.listing">
+                  <button class="btn btn-primary" ng-click="saveProdQty(f.id,f.stock)">Save</button>
+                  <button type="button" class="btn btn-danger" mwl-confirm title="Approve" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="deleteProdvar(data.pk , f.id , $index)" confirm-button-type="default" cancel-button-type="default">Delete </button>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="col-md-12" ng-mouseenter="hover = true;" ng-mouseleave="hover = false;" ng-repeat="data in productData">
+  <div class="cards" style="border:0.5px solid rgb(106, 90, 205);box-shadow:0 2px 8px rgba(26,24,20,0.2);margin-bottom: 25px;height:20vh;padding:15px 0px;">
+    <div class="col-md-11">
+        <span style="font-size: 18px;"><strong>Category: {{data.category.name}}</strong> </span><br>
+        <span style="font-size: 18px;"><strong>Product: {{data.name}}</strong> </span><br>
+        <span style="font-size: 18px;"><strong>Description: {{data.description}}</strong> </span>
+    </div>
+    <div class="col-md-1 text-left" ng-if="hover" style="padding-top:40px;">
+      <div class="row">
+        <span><i class="fa fa-info" style="color: rgb(106, 90, 205);font-size: 20px;cursor:pointer;" ng-click="rowActionClicked('info')"></i>
+        </span>
+      </div>
+      <div class="row" style="margin-top:10px;">
+        <span><i class="fa fa-pencil" style="color: rgb(106, 90, 205);font-size: 20px;cursor:pointer;" ng-click="rowActionClicked('edit')"></i>
+        </span>
+      </div>
+      <div class="row" style="margin-top:10px;" ng-if="data.productOption">
+        <span><i class="fa fa-trash" style="color: rgb(106, 90, 205);font-size: 20px;cursor:pointer;"  ng-click="rowActionClicked('delete')"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+</div> -->

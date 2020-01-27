@@ -1,0 +1,5 @@
+<div  style="margin-top:20px;">
+
+<ul ng-repeat="child in childData.child" class="categoriesSubItems"style="position:relative;font-size:12px;" ng-click="$state.go('categories' , {name : child.alias.split(' ').join('_')})" ><li>{{child.name}}</li></ul>
+</div>
+ <h2>expand</h2>

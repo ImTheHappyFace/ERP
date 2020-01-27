@@ -1,0 +1,196 @@
+
+<div class="row" style="margin:0px;overflow-x: hidden;">
+  <!-- <div class="col-md-12 text-center" ng-if="loader">
+    <img ng-if = "!noProducts" style=" height:10vh;" class="img" src="/static/images/ZNeT.gif">
+    <h1 ng-if = "!noProducts" class="text-center text-muted">Loading...</h1>
+  </div> -->
+  <div class="col-md-10 col-md-offset-1 hidden-xs hidden-sm" style="padding-right:10px;padding-left:10px;padding-top:0px;padding-bottom:20px" ng-if="categoryScroll&&isCategory">
+    <ng-owl-carousel class="owl-theme" owl-items="genericProducts" owl-properties="categoryProperties" owl-ready="ready($api)">
+      <div ng-repeat="g in genericProducts| limitTo:5" style="padding:10px;">
+        <div class="anim-in-out anim-zoom-out">
+          <div class="container-fluid" style="cursor:pointer;" ng-click="$state.go('categories' , {name : g.alias.split(' ').join('_')})">
+            <div class="row">
+              <div class=" card bg-white text-center" style="width: 100%;padding-bottom:0px;overflow:hidden;">
+                <img style="width: 100%;" class="img" ng-src="{{g.visual}}" onerror="this.src='/static/images/ecommerce.jpg'">
+                <!-- <img style="width: 100%;" class="img" src="/static/images/ecommerce.jpg" ng-if="g.visual==none"> -->
+              </div>
+            </div>
+            <div class="row" style="padding-top:5px;">
+              <h5 class="text-center" style="margin:0px;">{{g.name}}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-owl-carousel>
+  </div>
+  <div class="col-md-10 col-md-offset-1 hidden-xs hidden-sm" style="padding-right:10px;padding-left:10px;padding-top:0px;padding-bottom:20px" ng-if="!categoryScroll&&isCategory">
+    <div class="col-md-ank" ng-repeat="g in genericProducts| limitTo:5" style="padding:10px;">
+      <div class="anim-in-out anim-zoom-out">
+        <div class="container-fluid" style="cursor:pointer;" ng-click="$state.go('categories' , {name : g.alias.split(' ').join('_')})">
+          <div class="row">
+            <div class=" card bg-white text-center" style="width: 100%;padding-bottom:0px;overflow:hidden;">
+              <img style="width: 100%;" class="img" ng-src="{{g.visual}}" onerror="this.src='/static/images/ecommerce.jpg'">
+              <!-- <img style="width: 100%;" class="img" src="/static/images/ecommerce.jpg" ng-if="g.visual==none"> -->
+            </div>
+          </div>
+          <div class="row" style="padding-top:5px;">
+            <h5 class="text-center" style="margin:0px;">{{g.name}}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="col-xs-12 col-sm-12 hidden-md hidden-lg" style="padding:0px;" ng-if="isCategory">
+    <!-- <h4>Categories</h4> -->
+    <div ng-repeat="g in genericProducts| limitTo:6" style="padding:0px; ">
+      <div class="col-xs-6 col-sm-6">
+        <div class="container-fluid" style="cursor:pointer;padding-right:5px;padding-left:5px" ng-click="$state.go('categories' , {name : g.alias.split(' ').join('_')})">
+          <div class="row">
+            <div class=" card bg-white text-center" style="width: 100%;padding-bottom:0px;">
+              <div style="padding-right:0px;padding-left:0px;overflow:hidden;height:200px;background: url('{{g.visual}}') no-repeat center center;background-size: cover;">
+              </div>
+              <div style="padding-right:0px;padding-left:0px;overflow:hidden;height:200px;background: url('/static/images/ecommerce.jpg') no-repeat center center;background-size: cover;" ng-if="g.visual==null">
+              </div>
+            </div>
+          </div>
+          <div class="row" style="padding-top:5px; padding-bottom:20px;">
+            <h5 class="text-center" style="margin:0px;">{{g.name}}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="row" style="margin:0px;" ng-show="popularProducts.length>0">
+  <div class=" col-md-offset-1  col-md-10 hidden-xs hidden-sm" style="padding-right:10px;padding-left:10px;padding-top:20px;padding-bottom:20px" >
+    <h4 style="padding-left:12px;"><b>Popular Deals </b></h4>
+    <hr  style="height:1px;border:none;color:var(--themeColor);background-color:var(--themeColor);margin-top:5px!important"/>
+    <ng-owl-carousel class="owl-theme" owl-items="popularProducts" owl-properties="popularProperties" owl-ready="ready($api)">
+      <div ng-repeat=" l in popularProducts" >
+        <div class="col-md-12">
+        <product-card list="l" add-cart="addToCart"></product-card>
+      </div>
+    </div>
+    </ng-owl-carousel>
+    <!-- <div class="col-md-12" style="padding-left:0px;position:absolute;top:35vh;z-index:9;">
+      <button class="previous round text-center" style="background-color:white;color:#808080;position:absolute;font-size:30px;width:50px;border:0px white; box-shadow: 0px 15px 20px rgba(4, 14, 14, 0.4);height:50px;border-radius:50px 50px 50px 50px;" ng-click="changeProduct('previous')"> <strong> &#8249; </strong>
+      </button>
+      <button class="next round text-center" style="background-color: white ;color: #808080;position:absolute;right: 0;font-size:30px;padding-right:10px;border:0px white;box-shadow: 0px 15px 20px rgba(4, 14, 14, 0.4);height:50px;width:50px;border-radius:50px 50px 50px 50px;margin-right: 20px;"
+        ng-click="changeProduct('next')">  <strong> &#8250; </strong>
+      </button>
+    </div> -->
+      <hr  style="height:1px;border:none;color:var(--themeColor);background-color:var(--themeColor);margin-top:5px!important"/>
+  </div>
+</div>
+<div class="row" style="margin:0px;" ng-if="popularProducts.length>0">
+  <div class="col-xs-12  col-sm-12 hidden-md hidden-lg" style="padding-right:10px;padding-left:10px;padding-top:20px;padding-bottom:20px" >
+    <h4 style="padding-left:12px;">Popular Deals </h4>
+    <hr  style="height:1px;border:none;color:var(--themeColor);background-color:var(--themeColor);"/>
+    <ng-owl-carousel class="owl-theme" owl-items="popularProducts" owl-properties="popularmobileProperties" owl-ready="ready($api)">
+      <div class="col-md-12" ng-repeat=" l in popularProducts">
+        <product-card list="l" add-cart="addToCart"></product-card>
+      </div>
+    </ng-owl-carousel>
+      <hr  style="height:1px;border:none;color:var(--themeColor);background-color:var(--themeColor);"/>
+  </div>
+</div>
+<div class="row" style="margin:0px">
+  <div class=" col-md-10 col-md-offset-1  hidden-xs hidden-sm">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-3" ng-repeat=" l in listingProductsData1">
+            <product-card list="l" add-cart="addToCart"></product-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-10 col-sm-10 col-xs-offset-1  hidden-md hidden-lg">
+    <div class="row">
+      <div class=" col-xs-12 col-sm-6" ng-repeat="l in listingProductsData1">
+        <product-card list="l" add-cart="addToCart"></product-card>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" style="margin:0px">
+  <div class="col-md-offset-1 col-md-10 hidden-xs hidden-sm" style="padding-left:20px;padding-right:40px;">
+    <div class="row" ng-if="subSlide.banners.length > 0 && secondBanner">
+      <div style="margin-bottom:10px;;margin-left:10px;padding-left:0px;padding-right:0px;overflow:hidden;padding:0px;" class="col-md-12 text-center  hidden-xs hidden-sm">
+        <img class="anim-in-out anim-fade" data-anim-speed="100" style="width:100%;cursor:pointer;" ng-src="{{subSlide.img}}" ng-click="$state.go('pages' , {title : subSlide.title.split(' ').join('-').toLowerCase()})" />
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-offset-1 col-sm-offset-1 col-xs-10 col-sm-10 hidden-lg hidden-md" style="padding-right:20px;padding-left:20px">
+    <div class="row" ng-if="subSlideMobile.banners.length > 0 && secondBanner">
+      <div ng-if="$state.is('ecommerce')" style="position:relative;height:45vh;margin-bottom:20px;width:100%;display:border-box;overflow:hidden;padding-left:0px;padding-right:0px" class="card col-sm-12 col-xs-12 hidden-md hidden-lg">
+        <img class="anim-in-out anim-fade" data-anim-speed="100" style="width:100%;cursor:pointer;height:45vh" ng-src="{{subSlideMobile.img}}" ng-click="$state.go('pages' , {title : subSlideMobile.title.split(' ').join('-').toLowerCase()})" />
+      </div>
+    </div>
+    </iv>
+  </div>
+</div>
+
+<div class="row" style="margin:0px">
+  <div class="col-md-10 col-md-offset-1 hidden-xs hidden-sm">
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-3" ng-repeat=" l in listingProductsData2">
+            <product-card list="l" add-cart="addToCart"></product-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-10 col-sm-10 col-xs-offset-1 hidden-md hidden-lg">
+    <div class="row">
+      <div class=" col-xs-12 col-sm-6" ng-repeat="l in listingProductsData2">
+        <product-card list="l" add-cart="addToCart"></product-card>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid text-center" style="padding:15px;">
+  <button type="button" class="btn btn-default" ng-click="showMore()">Show More</button>
+</div>
+
+
+
+
+<div class="row" style="margin:0px;" ng-if="me != null">
+  <div class="col-md-offset-1 col-md-10 hidden-xs hidden-sm" style="padding:20px; padding-top:0px;">
+    <div style="padding:10px;" class="row">
+      <h4><b>Recently Viewed</b></h4>
+        <hr  style="height:1px;border:none;color:var(--themeColor);background-color:var(--themeColor);margin-top:5px!important"/>
+      <!-- <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-3" ng-repeat=" l in recentlyViewed">
+              <product-card list="l" add-cart="addToCart"></product-card>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <ng-owl-carousel class="owl-theme" owl-items="recentlyViewed" owl-properties="popularProperties" owl-ready="ready($api)">
+        <div ng-repeat=" l in recentlyViewed" >
+          <div class="col-md-12">
+          <product-card list="l" add-cart="addToCart"></product-card>
+        </div>
+      </div>
+      </ng-owl-carousel>
+    </div>
+  </div>
+</div>

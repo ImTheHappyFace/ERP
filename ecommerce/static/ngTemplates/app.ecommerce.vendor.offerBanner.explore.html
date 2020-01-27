@@ -1,0 +1,26 @@
+<div class="" ng-controller = "businessManagement.ecommerce.configure.offerBanner.explore" style="font-size:20px;margin-top:30px">
+  <div class="col-md-4">
+    <div class="container-fluid" >
+      <h3><strong>{{data.title}}</strong></h3>
+      <strong>SubTitle : </strong> {{data.subtitle}} <br>
+      <strong>Created : </strong> {{data.created | date : 'dd-MMM-yyyy: hh:mm:ss a'}}<br>
+      <strong>User : </strong> {{data.user | getName}}<br>
+      <strong>Active : </strong> <i class="fa {{data.active?'fa-check-square-o':'fa-times-circle-o'}} fa-lg" style="color:{{data.active?'green':'red'}}"></i><br><hr>
+      <strong>For Desktop</strong><br>
+      <img ng-src="{{data.image}}" alt="Banner Image" width="100%"><br><hr>
+      <strong>For Mobile</strong><br>
+      <img ng-src="{{data.imagePortrait}}" alt="Banner Image" width="100%">
+    </div>
+  </div>
+  <div class="col-md-8" style="border-left:1px solid #eeeeee">
+    <div class="row container-fluid">
+      <span class="text-center"><h2>Page Details</h2></span>
+      <span><h3><strong>Title : </strong>{{data.page.title}}</h3><h4<strong>Url : </strong>{{data.page.pageurl}}</4></span>
+      <hr>
+      <div class="container-fluid" ng-bind-html = "data.page.body" style="margin-top:20px">
+      </div>
+    </div>
+  </div>
+
+
+</div>

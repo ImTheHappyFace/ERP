@@ -1,0 +1,34 @@
+
+<div class="col-md-4">
+  <div class="cards"  style="{{data.available==true?'border:0.5px solid green':'border:0.5px solid #f2f2f2'}};box-shadow:0 2px 8px rgba(26,24,20,0.2);margin-bottom: 25px;">
+    <div style="">
+      <div class="row"  >
+        <div class="col-md-3" style="padding-top:5px;position: relative;" ng-if="data.image!=null">
+          <img src="{{data.image}}"  style="width:100%;height:100px;position: absolute;top:-50%;transform: translateY(35%)"/>
+        </div>
+        <div class="col-md-1" style="" >
+        </div>
+        <div class="col-md-{{data.image!=null?5:8}}" style="padding: 12px;">
+          <span><strong># {{data.pk}}</strong></span><br>
+          <h3 style="padding-bottom: 0px;margin-bottom: 0px;"><strong>{{data.name}}</strong></h3>
+          <h4 style="padding-bottom: 0px;margin-top: 10px">Coins : {{data.coins}}</h4>
+          <!-- <span><strong>Coins : </strong>{{data.coins}}</span><br> -->
+          <!-- <span><strong>Available : </strong>{{data.available}}</span><br> -->
+        </div>
+        <div class="col-md-3 text-right"  style="">
+          <div class="" style="margin-top:10px;padding-right:28px">
+            <span><i class="fa fa-pencil" style="color: blue;font-size: 20px;cursor:pointer;" ng-click="rowActionClicked('edit')"></i>
+            </span>
+          </div>
+
+        </div>
+      </div>
+      <div class="row" style="margin-top:10px;padding-right: 28px;padding-bottom:12px">
+        <div class="col-md-12 text-right">
+          <span><i class="fa fa-trash" style="color: red;font-size: 20px;cursor:pointer;"  mwl-confirm title="Confirm" message="Are you sure?" confirm-text="Yes" cancel-text="No" on-confirm="rowActionClicked('delete')"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

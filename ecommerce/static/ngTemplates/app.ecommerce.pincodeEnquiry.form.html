@@ -1,0 +1,40 @@
+<div class="modal-header text-center" style="font-size:19px">
+  <div class="row">
+
+  <div class="col-md-12"  ng-if="!stores">
+  Check for Availability of Store nearby you!
+</div>
+<div class="col-md-12" ng-if="stores.length>0">
+Checking For Available Stores near you!!!
+</div>
+<div class="col-md-12" ng-if="stores.length==0">
+Sorry!! We Are not Functioning in your Area..<br/>
+</div>
+
+</div>
+</div>
+<div class="row modal-body">
+  <div class="col-md-12" ng-if="showSpinner">
+    <img src="/static/images/multistoreSpinner.gif" alt="Spinner" width="100%" height="500px">
+  </div>
+  <div class="col-md-12" ng-if="!stores || stores.length==0">
+    <form>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="form-group">
+          <input type="number" class="form-control" ng-model="form.pincode" placeholder="Enter your Pincode" >
+          <p class="warning" ng-if="stores.length==0">Try With Different Pincode...</p>
+        </div>
+      </div>
+
+    </div>
+    <div class="row text-center">
+      <div class="col-md-12" >
+        <button type="submit" class="btn btn-primary" ng-click="checkPincode()">Check</button>
+      </div>
+    </div>
+  </form>
+    </div>
+
+
+</div>

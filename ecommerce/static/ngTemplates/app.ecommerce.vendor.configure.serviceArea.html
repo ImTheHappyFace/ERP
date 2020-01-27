@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="container-fluid">
+    <div class="col-md-5" style="margin-top:50px">
+      <!-- <div ng-include="'/static/ngTemplates/app.ecommerce.vendor.configure.FAQ.form.html'"></div> -->
+      <div class="row">
+      <select multiple class="col-md-8 pull-right" style="height:50vh;">
+        <option  ng-repeat="p in pincodelist" value="p.pincodes">{{p.pincodes}} </option>
+      </select>
+    </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row" style="margin:50px 15px">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Add Pincode Here ..." name="pincodes" ng-model="form.pincodes" ng-pattern="/^[0-9]/" >
+          <div class="input-group-btn">
+            <button class="btn btn-default" type="submit" ng-click="addPincode()">
+              Add <i class="fa fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,100 @@
+<div class="row">
+  <div class=" col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 col-sm-12 col-xs-12" style="background-color:#f8f8f8;">
+    <div class=" col-lg-12 col-md-12 hidden-xs hidden-sm " style="padding-top:2vh">
+      <!-- #6BD7E4 efa834-->
+    </div>
+    <div class="col-sm-12 col-xs-12 hidden-lg hidden-md" style="padding-top:15vh">
+    </div>
+    <div class="  col-md-12  col-lg-10 col-lg-offset-1  col-sm-12  col-xs-12  " style="background-color:white;border-radius:10px;margin-top:50px;margin-bottom:50px;">
+      <div class="row text-center" style="height:10vh;">
+        <div class="col-md-12  col-sm-12 col-xs-12 col-lg-12">
+          <h3 style="color:#efa834"> Thank You!</h3>
+        </div>
+      </div>
+
+      <div class="row" style="background-color:#f8f8f8;">
+        <!-- DAF0FE -->
+        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12" style="margin-top:0px;">
+          <img src="static/images/h.png" alt="" width="100%" style="height:43vh">
+          <div class="row col-md-12  text-center">
+
+            <!-- <ul style="list-style:none;">
+              <li style="display:inline-block;padding-right:10px;"><a href="/"><img src="static/images/facebook.svg" alt="" style="width:3vh;"></a></li>
+              <li style="display:inline-block;padding-right:10px;"><a href="/"><img src="static/images/twitter.svg" alt="" style="width:3vh;"></a></li>
+              <li style="display:inline-block;padding-right:10px;"><a href="/"><img src="static/images/google-plus.svg" alt="" style="width:3vh;"></a></li>
+            </ul> -->
+          </div>
+        </div>
+
+        <div class="col-md-6  col-sm-12 col-xs-12 col-lg-6" style="line-height:11px;float:right;margin-top:0px;height:">
+          <div class="text-center">
+            <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12" style="color:white;position:absolute;font-size:25px;padding: 5% 0;"> Your Order Details</div>
+            <img src="static/images/y.png" alt="" style="height:6vh;width:100%;">
+
+          </div>
+          <div style="margin-top:30px;">
+            <p><strong>Your order # is:{{order.pk}}</strong></p>
+          </div>
+          <div style="margin-top:30px;margin-bottom:30px;">
+            <p><strong>SHIPPING ADDRESS</strong></p>
+            <p>{{order.street}}</p>
+            <p>{{order.landMark}}</p>
+            <p>{{order.city}}</p>
+            <p>{{order.state}}</p>
+            <p>{{order.pincode}}</p>
+            <p>{{order.country}}</p>
+            <p>{{order.mobileNo}}</p>
+          </div>
+          <div class="table-responsive">
+
+            <table class="table w-auto">
+              <thead>
+                <tr>
+                  <th class="col-md-6 col-lg-6 col-sm-6 col-xs-12" style="border-bottom:none;">ORDER SUMMARY</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="i in orderq">
+                  <td class="col-md-2"><strong>{{i.product.product.name}}</strong>
+                  <td class="col-md-1 text-center">Quantity:{{i.qty}}</td>
+                  <td class="col-md-2 text-center" ng-if="!isStoreGlobal">{{i.gstAmount}}</td>
+                  <td class="text-right"><span style='font-size:12px;'>&#8377;</span>{{i.totalAmount}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-12 col-sm-12 col-xs-12 pull-right " style="background-color:#EDEDED;border:1px solid #b3b3b3;line-height:22px;">
+            <table class="pull-right text-right">
+              <tbody>
+                <tr>
+                  <td style="padding-right:20px">Subtotal: </td>
+                  <td><span style='font-size:12px;'>&#8377;</span>{{order.totalAmount}} </td>
+                </tr>
+                <tr>
+                  <td style="padding-right:20px">Shipping & Handling: </td>
+                  <td><span style='font-size:12px;'>&#8377;</span>{{order.shippingCharges}} </td>
+                </tr>
+                <tr>
+                  <td style="padding-right:20px">Tax: </td>
+                  <td><span style='font-size:12px;'>&#8377;</span>{{order.totalGst}} </td>
+                </tr>
+                <tr>
+                  <td style="padding-right:20px"><strong>Grand Total:</strong> </td>
+                  <td><span style='font-size:12px;'>&#8377;</span>{{order.totalAmount}} </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <hr style="color:black;margin-bottom:0px;border-top:1px solid #c3c3c3;">
+          <!-- 2196f3 -->
+        </div>
+        <div class="col-md-6 col-md-offset-3 text-center">
+          <a href="/" class="btn btn-primary" role="button" onmouseover="this.style.background = '#efa834'" onmouseout="this.style.background='#efa834'" style="margin:15px auto;padding:10px;background-color:#efa834">Continue Shopping</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>

@@ -1,0 +1,73 @@
+<div class="row" ng-controller="controller.ecommerce.account.default">
+  <div class="col-md-7 col-xs-12">
+    <div class="form-group">
+      <div class="col-xs-6" style="padding:0 5px 0 0">
+        <label for="" style="margin:0px"><strong>First Name</strong></label>
+        <input id="firstName" ng-model="detailsForm.firstName" type="text" class="form-control" placeholder="Enter First Name" ng-disabled="!editMode">
+      </div>
+      <div class="col-xs-6" style="padding:0 0 0 5px">
+        <label for="" style="margin:0px"><strong>Last Name</strong></label>
+        <input ng-model="detailsForm.lastName" type="text" class="form-control" id="" placeholder="Enter Last Name" ng-disabled="!editMode">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-6" style="padding:15px 5px 0 0">
+        <label for="" style="margin:0px"><strong>Email Id</strong></label>
+        <input ng-model="detailsForm.email" type="text" class="form-control" id="" placeholder="Enter Email" ng-disabled="!editMode">
+      </div>
+      <div class="col-xs-6" style="padding:15px 0 0 5px">
+        <label for="" style="margin:0px"><strong>Phone No.</strong></label>
+        <input ng-model="detailsForm.mobile" type="text" class="form-control" id="" placeholder="Mobile No" ng-disabled="!editMode">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-6" style="padding:15px 5px 0 0">
+        <label for="" style="margin:0px"><strong>Old Password</strong></label>
+        <input ng-model="detailsForm.oldPassword" type="password" class="form-control" id="" placeholder="Old Password" ng-disabled="!editMode">
+      </div>
+      <div class="col-xs-6" style="padding:15px 0 0 5px">
+        <label for="" style="margin:0px"><strong>New Password</strong></label>
+        <input ng-model="detailsForm.newPassword" type="password" class="form-control" id="" placeholder="New Password" ng-disabled="!editMode">
+      </div>
+    </div>
+    <div ng-if="isGst" class="form-group">
+      <div class="col-xs-6" style="padding:15px 5px 0 0">
+        <label for="" style="margin:0px"><strong>GST</strong></label>
+        <input ng-model="detailsForm.gst" type="text" class="form-control" id="" placeholder="Enter GST" ng-disabled="!editMode">
+      </div>
+      <div class="col-xs-6" style="padding:15px 5px 0 0">
+        <label for="" style="margin:0px"><strong>Company</strong></label>
+        <input ng-model="detailsForm.company" type="text" class="form-control" id="" placeholder="Enter Company" ng-disabled="!editMode">
+      </div>
+    </div>
+    <div class="form-group">
+      <button ng-if="editMode" type="button" class="btn btn-primary" ng-click="save()" style="margin-top:15px;">
+        Save
+      </button>
+      <button ng-if="!editMode" type="button" class="btn btn-primary" ng-click="edit()" style="margin-top:15px;">
+        Edit
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="row" style="padding-top:20px;">
+  <div class="col-md-4">
+    <div class="card text-center" style="width:70%; margin: 0 15% 15px 15%;">
+      <p style="text-align:center; background-color:#e0e0e0; font-size:20px; margin:0px;"><b> In Cart</b></p>
+      <p style="text-align:center; font-size:30px; font-weight:700; margin:0px;"> {{inCart.length}}</p>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card text-center" style="width:70%; margin:0 15% 15px 15%;">
+      <p style="text-align:center; background-color:#e0e0e0; font-size:20px; margin:0px;"><b> In Whishlist</b></p>
+      <p style="text-align:center; font-size:30px; font-weight:700; margin:0px;"> {{inFavourite.length}}</p>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card text-center" style="width:70%; margin: 0 15% 15px 15%;">
+      <p style="text-align:center; background-color:#e0e0e0; font-size:20px; margin:0px;"><b> In Process</b></p>
+      <p style="text-align:center; font-size:30px; font-weight:700; margin:0px;"> {{inInvoice.length}}</p>
+    </div>
+  </div>
+</div>

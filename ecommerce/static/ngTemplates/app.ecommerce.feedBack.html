@@ -1,0 +1,52 @@
+
+<div class="modal-header text-center" style="font-size:19px">
+  <div class="row">
+    <div class="col-md-1">
+      <i ng-click="close()" class="fa fa-close fa-lg"></i>
+    </div>
+    <div class="col-md-11">
+      Send us your feedback / message / complaint or query!
+    </div>
+  </div>
+</div>
+<div class="row modal-body">
+  <div class="col-md-12">
+    <form>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-xs-12 col-sm-12 text-center">
+          <div class="form-group">
+            <input type="email" ng-model="feedback.email" class="form-control" placeholder="Email address">
+          </div>
+        </div>
+        </div>
+        <div class="row" ng-if="!me">
+        <div class="col-md-6 col-md-offset-3 col-xs-12 col-sm-12 text-center">
+          <div class="form-group">
+            <input type="number" ng-model="feedback.mobile" class="form-control" placeholder="Mobile number">
+          </div>
+        </div>
+      </div>
+       <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-xs-12 col-sm-12 text-center">
+          <div class="form-group">
+            <input type="text" ng-model="feedback.subject" class="form-control" placeholder="Subject">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-xs-12 col-sm-12 text-center">
+          <div class="form-group">
+            <textarea rows="2" ng-model="feedback.message" class="form-control" placeholder="Message/feedback"> </textarea>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class="row text-center">
+    <div class="col-md-12 col-xs-12 col-sm-12">
+      <button type="submit" class="btn btn-primary" ng-click="sendFeedback()">Send</button>
+    </div>
+  </div>
+</div>
+</form>
+</div>
+</div>

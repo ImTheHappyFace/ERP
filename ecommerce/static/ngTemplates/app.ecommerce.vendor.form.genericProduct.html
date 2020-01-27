@@ -1,0 +1,42 @@
+<div class="form-group">
+  <label> Parent </label>
+  <input uib-typeahead="g as g.name for g in parentSearch($viewValue)" class="form-control" type="text" ng-model ="form.parent" placeholder="Search By Generic Products Name">
+</div>
+<div class="form-group">
+  <label> Name</label>
+  <input ng-model="form.name" type="text" class="form-control" placeholder="Name of this product ">
+</div>
+<div class="form-group">
+  <label> Property Fields</label>
+  <tags-input ng-model="form.fields" add-on-paste="true" add-From-Autocomplete-Only="true" display-property="name">
+    <auto-complete source="getFieldsSuggestions($query)" load-on-down-arrow="true"></auto-complete>
+  </tags-input>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    <div class="form-group">
+      <label> Min Cost</label>
+      <input ng-model="form.minCost" type="number" class="form-control" placeholder="Starting price for this product">
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <input ng-model="form.restricted" type="checkbox">
+      <label> Restricted ?</label>
+    </div>
+  </div>
+</div>
+
+
+<div class="form-group">
+  <label> Visual</label>
+  <input type="file" file-model="form.visual">
+</div>
+<div class="form-group">
+  <label> Banner </label>
+  <input type="file" file-model="form.bannerImage">
+</div>
+<div class="form-group">
+  <label>Mobile Banner </label>
+  <input type="file" file-model="form.mobileBanner">
+</div>

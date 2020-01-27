@@ -1,0 +1,42 @@
+<div  class="categoryDropDown1  hidden-md hidden-lg" style="margin-top:130px;max-height:80vh;overflow-x:hidden;overflow-y:scroll;padding-top:50px" >
+
+      <div ng-repeat="c in categoriesList" class="categoriesItems "  ng-click="$state.go( 'categories' , {name : c.alias.split(' ').join('_')})" >
+        <div class="categoryItemName.$index" style="font-size:18px; content: "+";">
+          <div class="row">
+            <div class="col-xs-3" style="border-right:1px solid black;padding-right:0px">
+              <img ng-src="{{c.img}}" style="width: 100%; padding:7px;" alt="">
+            </div>
+            <div class="col-xs-6">
+              {{c.name}}
+              </div>
+              <div class="col-xs-3">
+                <span ng-if="c.child.length>0&&$index!=indx" style="font-size:18px;padding-right:10px" class="categoryItemArrow" ng-click="selectedChild($index);$event.stopPropagation();"><i class="fa  fa-arrow-down fa-2x"></i></span>
+                <span ng-if="c.child.length>0&&$index==indx" style=";font-size:18px;padding-right:10px" class="categoryItemArrow" ng-click="selectedClose();$event.stopPropagation();"><i class="fa  fa-arrow-up fa-2x"></i></span>
+
+              </div>
+              <!-- <ul ng-if="$index==indx">
+                <li ng-repeat="child in childData.child" style="font-size:18px" ng-click="$state.go('categories' , {name : child.alias.split(' ').join('_')});$event.stopPropagation();">{{child.name}}</li>
+              </ul> -->
+
+      </div>
+      <div ng-if="c.child.length>0&&$index==indx">
+      <div class="row"  ng-repeat="child in c.child">
+        <hr/>
+        <div class="col-xs-3" style="padding-right:0px">
+          <img ng-src="{{child.img}}" style="width: 100%; padding:7px;" alt="">
+        </div>
+        <div class=" col-xs-9">
+          <div  style="font-size:18px" ng-click="$state.go('categories' , {name : child.alias.split(' ').join('_')});$event.stopPropagation();">{{child.name}}</div>
+        </div>
+      </div>
+      </div>
+      </div>
+      <hr ng-if="!$last" />
+  </div>
+</div>
+
+<!-- <div class="leftSubCatDiv" style="background:white !important;">
+  <div style="text-align:left;padding-bottom:5px;min-height:60vh;border:1px solid var(--themeColor);border-left:none;position:relative; border-left:1px solid #e0e0e0; border-radius: 0px 5px 5px 0px;">
+    <p ng-repeat="child in childData.child" class="categoriesSubItems" ng-click="$state.go('categories' , {name : child.alias.split(' ').join('_')})" >{{child.name}}</p>
+  </div>
+</div> -->

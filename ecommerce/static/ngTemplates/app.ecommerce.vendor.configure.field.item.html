@@ -1,0 +1,25 @@
+<div class="col-md-3">
+  <div class="card card-cascade">
+    <div class="card-body text-center">
+      <h4 class="" style="padding:20px;"><strong>{{data.name}}</strong></h4>
+    </div>
+    <div class="container-fluid">
+      <strong>Field Type : </strong> {{data.fieldType | humanize}} <br>
+      <strong>Unit : </strong> {{data.unit.length > 0 ? data.unit : 'None'}}<br>
+      <strong>Default Value : </strong> {{data.default.length > 0 ? data.default : 'None'}}<br>
+      <strong>Help Text : </strong> {{data.helpText.length > 0 ? data.helpText : 'None'}}<br>
+      <strong>Choices : </strong> {{data.data.length > 0 ? data.data : 'None'}}<br>
+    </div>
+    <div class="row" style="margin:10px 15px;margin-bottom:5px">
+      <div class="col-md-4">
+      <i class="fa fa-pencil fa-lg" style="cursor:pointer" ng-click="rowActionClicked('edit',data)"></i>
+    </div>
+      <div class="col-md-4 text-center">
+        <i class="fa fa-trash fa-lg" style="cursor:pointer" mwl-confirm title="Approve" message="Are you sure?" confirm-text="Yes <i class='fa fa-check'></i>" cancel-text="No" on-confirm="rowActionClicked('delete')" confirm-button-type="default" cancel-button-type="default"></i>
+      </div>
+        <div class="col-md-4">
+      <i class="fa fa-info fa-lg pull-right" style="cursor:pointer" ng-click="rowActionClicked('info')"></i>
+    </div>
+    </div>
+  </div>
+</div>

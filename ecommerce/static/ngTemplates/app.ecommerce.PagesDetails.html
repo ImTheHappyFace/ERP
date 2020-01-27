@@ -1,0 +1,46 @@
+<div class="container-fluid" id="genericPage" ng-if="typ=='page'" >
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1 card bg-white">
+      <div class="row container-fluid" id="topelement" ng-bind-html="pageData.body" style="margin-top:20px;">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid" ng-if="typ=='blog'">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1 bg-white">
+      <div class="col-xs-12">
+        <span class="btn btn-primary btn-sm" ng-click="$state.go('blog' , {title : 'Blog'.split(' ').join('-').toLowerCase()})" style="margin-top:30px"><i class="fa fa-arrow-left"></i> Go Back</span>
+      </div>
+      <div class="col-xs-12 text-left">
+        <h2 style="font-size:22px;" class="text-primary"> {{blogData.title}}</h2>By <span ng-repeat="u in blogData.users">{{u | getName}}</span><span style="margin-left: 5px;"> | </span><span style="margin-left: 5px;">{{blogData.created | date : 'MMM. dd, yyyy, HH:MM a'}}</span>
+      </div>
+      <div class="col-xs-12" style="margin-top:15px;">
+        <span ng-bind-html="blogData.header"></span>
+        <hr>
+      </div>
+      <div class="col-xs-12">
+        <span ng-bind-html="blogData.source"></span>
+      </div>
+      <div class="col-xs-12" ng-if="blogData.suggestedProducts.length>0">
+        <hr>
+        <div class="row hidden-xs hidden-sm">
+          <h4>Suggested Products</h4>
+          <div class="col-md-3" ng-repeat=" l in blogData.suggestedProducts">
+            <product-card list="l" add-cart="addToCart"></product-card>
+          </div>
+        </div>
+        <div class="row hidden-md hidden-lg" style="padding:30px; padding-top:0px;">
+          <h4 class="text-center">Suggested Products</h4>
+          <div class=" col-xs-12 col-sm-6" ng-repeat="l in blogData.suggestedProducts">
+            <product-card list="l" add-cart="addToCart"></product-card>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+</div>

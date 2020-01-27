@@ -1,0 +1,30 @@
+<div class="shaddowed card bg-white " style="position:relative;min-height:92vh;">
+  <div class="container-fluid" style="padding:0px;">
+    <breadcrumb></breadcrumb>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <uib-tabset style="margin-left: 15px;">
+            <uib-tab active="searchTabActive">
+              <uib-tab-heading>
+                <i class="fa fa-list-ul"></i> In Process
+              </uib-tab-heading>
+              <div class="col-md-12" style="padding-left:0px">
+                <generic-Table data="data.processData" config-Obj="{{processConfig}}" callback-Fn="processTableActionInvoice"></generic-Table>
+              </div>
+            </uib-tab>
+            <uib-tab>
+              <uib-tab-heading>
+                <i class="fa fa-list-ul"></i> Completed
+              </uib-tab-heading>
+              <div class="col-md-12" style="padding-left:0px">
+                <generic-Table data="data.completedData" config-Obj="{{completedConfig}}" callback-Fn="completedTableActionInvoice"></generic-Table>
+              </div>
+            </uib-tab>
+            </uib-tab>
+          </uib-tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
